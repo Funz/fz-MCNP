@@ -1,0 +1,11 @@
+{
+    "id": "MCNP",
+    "varprefix": "%",
+    "formulaprefix": "@",
+    "delim": "()",
+    "commentline": "C ",
+    "output": {
+        "mean_keff": "grep 'the final estimated combined' outp | head -n 1 | awk '{match($0, /keff = ([0-9.]+)/, arr); print arr[1]}'",
+        "sigma_keff": "grep 'the final estimated combined' outp | head -n 1 | awk '{match($0, /standard deviation of ([0-9.]+)/, arr); print arr[1]}'"
+    }
+}
