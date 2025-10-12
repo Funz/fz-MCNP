@@ -1,0 +1,7 @@
+{
+    "uri": "sh://",
+    "n": 1,
+    "models": {
+        "MCNP": "bash .fz/calculators/MCNP.sh"
+    }
+}
