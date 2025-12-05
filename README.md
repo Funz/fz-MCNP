@@ -46,9 +46,9 @@ This plugin enables parametric studies with MCNP using the [fz framework](https:
 
 ### Example: Godiva Critical Reactor Study
 
-The repository includes example files in `examples/MCNP/` demonstrating a parametric study of a Godiva-type critical reactor.
+The repository includes example files in `examples/` demonstrating a parametric study of a Godiva-type critical reactor.
 
-**Input file (`examples/MCNP/godiva.inp`):**
+**Input file (`examples/godiva.inp`):**
 ```
 Godiva-type critical reactor and kcode example
 c skip 10 and run a total of 110 keff cycles with 1000 neutrons per cycle
@@ -62,7 +62,7 @@ c skip 10 and run a total of 110 keff cycles with 1000 neutrons per cycle
  m1    92235 -93.71  92238 -5.27  92234 -1.02  $ define u with weight fractions
 ```
 
-**Python script to run parametric study (`examples/MCNP/example_godiva.py`):**
+**Python script to run parametric study (`examples/example_godiva.py`):**
 ```python
 import fz
 import os
@@ -77,7 +77,7 @@ input_variables = {
 
 # Run parametric study
 results = fz.fzr(
-    input_path="examples/MCNP/godiva.inp",
+    input_path="examples/godiva.inp",
     input_variables=input_variables,
     model="MCNP",
     calculators="localhost_MCNP",
@@ -144,7 +144,7 @@ Run MCNP on a remote server via SSH:
 import fz
 
 results = fz.fzr(
-    "examples/MCNP/godiva.inp",
+    "examples/godiva.inp",
     {"r": [8.5, 8.741, 9.0]},
     "MCNP",
     calculators="ssh://user@hpc.example.com/bash /path/to/fz-mcnp/.fz/calculators/MCNP.sh",
@@ -159,7 +159,7 @@ import fz
 
 # First run
 results1 = fz.fzr(
-    "examples/MCNP/godiva.inp",
+    "examples/godiva.inp",
     {"r": [8.5, 8.741, 9.0]},
     "MCNP",
     calculators="localhost_MCNP",
@@ -168,7 +168,7 @@ results1 = fz.fzr(
 
 # Second run with additional values - reuses previous results
 results2 = fz.fzr(
-    "examples/MCNP/godiva.inp",
+    "examples/godiva.inp",
     {"r": [8.5, 8.741, 9.0, 9.5, 10.0]},  # Added 9.5 and 10.0
     "MCNP",
     calculators=[
@@ -188,7 +188,7 @@ import fz
 
 # Use multiple calculator instances for parallel execution
 results = fz.fzr(
-    "examples/MCNP/godiva.inp",
+    "examples/godiva.inp",
     {"r": list(range(8, 11, 0.1))},  # Many parameter values
     "MCNP",
     calculators=["localhost_MCNP"] * 4,  # 4 parallel workers

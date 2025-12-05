@@ -37,7 +37,7 @@ def main():
     # Check if input file exists
     if not os.path.exists(input_file):
         print(f"Error: Input file '{input_file}' not found.")
-        print("Please run this script from the examples/MCNP directory.")
+        print("Please run this script from the examples directory.")
         sys.exit(1)
     
     print("=" * 60)

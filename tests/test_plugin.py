@@ -102,8 +102,8 @@ def test_example_files():
     print("Testing example files...")
     
     examples = [
-        "examples/MCNP/godiva.inp",
-        "examples/MCNP/example_godiva.py"
+        "examples/godiva.inp",
+        "examples/example_godiva.py"
     ]
     
     for example_file in examples:
@@ -124,7 +124,7 @@ def test_with_fz():
         
         # Test parsing input file
         print("  Testing fz.fzi() on godiva.inp...", end=" ")
-        variables = fz.fzi("examples/MCNP/godiva.inp", "MCNP")
+        variables = fz.fzi("examples/godiva.inp", "MCNP")
         assert "r" in variables, "Variable 'r' not found in parsed input"
         print("✓")
         
@@ -132,7 +132,7 @@ def test_with_fz():
         print("  Testing fz.fzc() compilation...", end=" ")
         with tempfile.TemporaryDirectory() as tmpdir:
             fz.fzc(
-                "examples/MCNP/godiva.inp",
+                "examples/godiva.inp",
                 {"r": 8.741},
                 "MCNP",
                 output_dir=tmpdir
