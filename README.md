@@ -40,15 +40,15 @@ This plugin enables parametric studies with MCNP using the [fz framework](https:
 3. The plugin is ready to use! The `.fz` directory contains:
    - `.fz/models/MCNP.json` - Model definition
    - `.fz/calculators/MCNP.sh` - Calculation script
-   - `.fz/calculators/Localhost_MCNP.json` - Calculator configuration
+   - `.fz/calculators/localhost_MCNP.json` - Calculator configuration
 
 ## Usage
 
 ### Example: Godiva Critical Reactor Study
 
-The repository includes a sample input file `godiva.inp` demonstrating a parametric study of a Godiva-type critical reactor.
+The repository includes example files in `examples/` demonstrating a parametric study of a Godiva-type critical reactor.
 
-**Input file (`godiva.inp`):**
+**Input file (`examples/godiva.inp`):**
 ```
 Godiva-type critical reactor and kcode example
 c skip 10 and run a total of 110 keff cycles with 1000 neutrons per cycle
@@ -62,7 +62,7 @@ c skip 10 and run a total of 110 keff cycles with 1000 neutrons per cycle
  m1    92235 -93.71  92238 -5.27  92234 -1.02  $ define u with weight fractions
 ```
 
-**Python script to run parametric study:**
+**Python script to run parametric study (`examples/example_godiva.py`):**
 ```python
 import fz
 import os
@@ -77,10 +77,10 @@ input_variables = {
 
 # Run parametric study
 results = fz.fzr(
-    input_path="godiva.inp",
+    input_path="examples/godiva.inp",
     input_variables=input_variables,
     model="MCNP",
-    calculators="Localhost_MCNP",
+    calculators="localhost_MCNP",
     results_dir="results"
 )
 
@@ -92,9 +92,9 @@ print(f"\nCompleted {len(results)} calculations")
 **Expected output:**
 ```
      r  mean_keff  sigma_keff  status     calculator
-0  8.5     0.9850      0.0012    done  Localhost_MCNP
-1  8.741   0.9995      0.0006    done  Localhost_MCNP
-2  9.0     1.0145      0.0008    done  Localhost_MCNP
+0  8.5     0.9850      0.0012    done  localhost_MCNP
+1  8.741   0.9995      0.0006    done  localhost_MCNP
+2  9.0     1.0145      0.0008    done  localhost_MCNP
 
 Completed 3 calculations
 ```
@@ -144,7 +144,7 @@ Run MCNP on a remote server via SSH:
 import fz
 
 results = fz.fzr(
-    "godiva.inp",
+    "examples/godiva.inp",
     {"r": [8.5, 8.741, 9.0]},
     "MCNP",
     calculators="ssh://user@hpc.example.com/bash /path/to/fz-mcnp/.fz/calculators/MCNP.sh",
@@ -159,21 +159,21 @@ import fz
 
 # First run
 results1 = fz.fzr(
-    "godiva.inp",
+    "examples/godiva.inp",
     {"r": [8.5, 8.741, 9.0]},
     "MCNP",
-    calculators="Localhost_MCNP",
+    calculators="localhost_MCNP",
     results_dir="run1"
 )
 
 # Second run with additional values - reuses previous results
 results2 = fz.fzr(
-    "godiva.inp",
+    "examples/godiva.inp",
     {"r": [8.5, 8.741, 9.0, 9.5, 10.0]},  # Added 9.5 and 10.0
     "MCNP",
     calculators=[
         "cache://run1",          # Check cache first
-        "Localhost_MCNP"         # Only run new cases
+        "localhost_MCNP"         # Only run new cases
     ],
     results_dir="run2"
 )
@@ -188,10 +188,10 @@ import fz
 
 # Use multiple calculator instances for parallel execution
 results = fz.fzr(
-    "godiva.inp",
+    "examples/godiva.inp",
     {"r": list(range(8, 11, 0.1))},  # Many parameter values
     "MCNP",
-    calculators=["Localhost_MCNP"] * 4,  # 4 parallel workers
+    calculators=["localhost_MCNP"] * 4,  # 4 parallel workers
     results_dir="parallel_results"
 )
 ```

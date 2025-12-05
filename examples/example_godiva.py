@@ -30,13 +30,14 @@ def main():
         os.environ['MCNP_PATH'] = '/Applications/MCNP6'
         print("(You will need to update this for actual calculations)\n")
     
-    # Define the input file
-    input_file = "godiva.inp"
+    # Define the input file (in the same directory as this script)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    input_file = os.path.join(script_dir, "godiva.inp")
     
     # Check if input file exists
     if not os.path.exists(input_file):
         print(f"Error: Input file '{input_file}' not found.")
-        print("Please run this script from the fz-mcnp directory.")
+        print("Please run this script from the examples directory.")
         sys.exit(1)
     
     print("=" * 60)
@@ -64,7 +65,7 @@ def main():
             input_path=input_file,
             input_variables=input_variables,
             model="MCNP",
-            calculators="Localhost_MCNP",
+            calculators="localhost_MCNP",
             results_dir="results"
         )
         
