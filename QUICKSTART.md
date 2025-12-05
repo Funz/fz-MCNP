@@ -68,9 +68,9 @@ Results:
 ============================================================
 
      r  mean_keff  sigma_keff  status     calculator
-0  8.5     0.9850      0.0012    done  Localhost_MCNP
-1  8.741   0.9995      0.0006    done  Localhost_MCNP
-2  9.0     1.0145      0.0008    done  Localhost_MCNP
+0  8.5     0.9850      0.0012    done  localhost_MCNP
+1  8.741   0.9995      0.0006    done  localhost_MCNP
+2  9.0     1.0145      0.0008    done  localhost_MCNP
 
 ------------------------------------------------------------
 Total calculations: 3
@@ -106,7 +106,7 @@ results = fz.fzr(
         "r": [8.0, 8.5, 9.0, 9.5]  # Parameter values to study
     },
     model="MCNP",                  # Use MCNP model
-    calculators="Localhost_MCNP",  # Use local calculator
+    calculators="localhost_MCNP",  # Use local calculator
     results_dir="my_results"       # Where to store results
 )
 
@@ -169,7 +169,7 @@ results = fz.fzr(
         "cycles": [110, 510, 1010]        # Total cycles
     },
     "MCNP",
-    calculators="Localhost_MCNP",
+    calculators="localhost_MCNP",
     results_dir="multi_param_study"
 )
 

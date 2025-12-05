@@ -92,7 +92,7 @@ When requesting a feature:
    
    # Validate JSON files
    python -m json.tool .fz/models/MCNP.json
-   python -m json.tool .fz/calculators/Localhost_MCNP.json
+   python -m json.tool .fz/calculators/localhost_MCNP.json
    
    # Check shell script syntax
    bash -n .fz/calculators/MCNP.sh

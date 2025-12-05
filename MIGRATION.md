@@ -24,7 +24,7 @@ fz-mcnp/
 ├── .fz/
 │   ├── calculators/
 │   │   ├── MCNP.sh                 # Calculator script
-│   │   └── Localhost_MCNP.json     # Calculator configuration
+│   │   └── localhost_MCNP.json     # Calculator configuration
 │   └── models/
 │       └── MCNP.json               # Model definition
 ├── .gitignore
@@ -111,7 +111,7 @@ if [ -f "PID" ]; then rm -f "PID"; fi
 }
 ```
 
-This allows using the calculator by name: `calculators="Localhost_MCNP"`
+This allows using the calculator by name: `calculators="localhost_MCNP"`
 
 ## Feature Mapping
 
@@ -172,7 +172,7 @@ results = fz.fzr(
     "godiva.inp",
     {"r": 8.741},
     "MCNP",
-    calculators="Localhost_MCNP"
+    calculators="localhost_MCNP"
 )
 keff = results['mean_keff'][0]
 ```
@@ -182,7 +182,7 @@ keff = results['mean_keff'][0]
 - [x] Port MCNP.ioplugin to MCNP.json model
 - [x] Convert output parsing to shell commands
 - [x] Enhance MCNP.sh calculator script
-- [x] Create Localhost_MCNP.json calculator config
+- [x] Create localhost_MCNP.json calculator config
 - [x] Migrate godiva sample file
 - [x] Create comprehensive README
 - [x] Add Python example script
@@ -203,9 +203,9 @@ To test the migrated plugin:
 Expected output structure:
 ```
      r  mean_keff  sigma_keff  status     calculator
-0  8.5     0.9850      0.0012    done  Localhost_MCNP
-1  8.741   0.9995      0.0006    done  Localhost_MCNP
-2  9.0     1.0145      0.0008    done  Localhost_MCNP
+0  8.5     0.9850      0.0012    done  localhost_MCNP
+1  8.741   0.9995      0.0006    done  localhost_MCNP
+2  9.0     1.0145      0.0008    done  localhost_MCNP
 ```
 
 ## Future Enhancements
