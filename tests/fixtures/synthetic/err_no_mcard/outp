@@ -1,0 +1,13 @@
+          Code Name & Version = MCNP6, 6.3.0
+1mcnp     version 6.3.0                                                  probid =  10/02/26 10:00:00
+ i=case.i  o=outp
+         1-       Jezebel - bare delta-phase Pu sphere
+         2-       1   1  4.02901E-02  -1     imp:n=1
+         3-       2   0                1     imp:n=0
+         4-
+         5-       1   so   6.3849
+         6-
+         7-       mode  n
+         8-
+  warning.  no cross-section tables are called for in this problem.
+  fatal error.  no m card for material no. 1

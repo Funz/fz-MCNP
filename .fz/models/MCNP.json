@@ -1,11 +1,17 @@
 {
     "id": "MCNP",
     "varprefix": "%",
+    "var_delim": "()",
     "formulaprefix": "@",
-    "delim": "()",
+    "formula_delim": "{}",
     "commentline": "C ",
     "output": {
-        "mean_keff": "grep 'the final estimated combined' outp | head -n 1 | awk '{match($0, /keff = ([0-9.]+)/, arr); print arr[1]}'",
-        "sigma_keff": "grep 'the final estimated combined' outp | head -n 1 | awk '{match($0, /standard deviation of ([0-9.]+)/, arr); print arr[1]}'"
+        "mcnp_status": "f=outp; [ -f outp ] || f=out.txt; if [ ! -f \"$f\" ]; then echo 'NO OUTPUT'; else LC_ALL=C awk 'function clean(s){gsub(/[ \\t]+/,\" \",s); sub(/^ /,\"\",s); sub(/ $/,\"\",s); return s} /^ *fatal error\\./ && fe==\"\" {s=$0; sub(/^ *fatal error\\. */,\"\",s); fe=clean(s)} /^ *bad trouble/ && bt==\"\" {s=$0; sub(/^ *bad trouble in */,\"\",s); bw=clean(s); if((getline l)>0) bt=clean(l); if(bt==\"\") bt=bw; else bt=bt \" (\" bw \")\"} /^ *run terminated because/ && tb==\"\" {s=$0; sub(/^.*run terminated because */,\"\",s); tb=clean(s)} /^ *run terminated when/ {ok=1} END{if(fe!=\"\") print \"FATAL ERROR: \" fe; else if(bt!=\"\") print \"BAD TROUBLE: \" bt; else if(tb!=\"\") print \"ABNORMAL END: run terminated because \" tb; else if(ok) print \"NORMAL END\"; else if(FILENAME==\"outp\") print \"NO END BANNER\"; else print \"NO OUTPUT\"}' \"$f\"; fi",
+        "mean_keff": "LC_ALL=C awk '/final estimated combined collision\\/absorption\\/track-length keff =/{for(i=2;i<NF;i++) if($i==\"=\" && $(i-1)==\"keff\"){v=$(i+1)}} END{if(v!=\"\") print v}' outp",
+        "sigma_keff": "LC_ALL=C awk '/final estimated combined collision\\/absorption\\/track-length keff =/{for(i=2;i<NF;i++) if($i==\"of\" && $(i-1)==\"deviation\"){v=$(i+1)}} END{if(v!=\"\") print v}' outp",
+        "dkeff": "LC_ALL=C awk -v c=2 '/perturbation +k\\(trk ln\\) +std\\. dev\\./{split(\"\",m); n=0; t=1; next} t && $1~/^[0-9]+$/ && NF>=3 {m[$1]=$(c); n++; next} t && n>0 {t=0} END{o=\"\"; for(k=1;k in m;k++) o=o (o==\"\"?\"\":\", \") \"\\\"\" k \"\\\": \" m[k]; print \"{\" o \"}\"}' outp",
+        "sigma_dkeff": "LC_ALL=C awk -v c=3 '/perturbation +k\\(trk ln\\) +std\\. dev\\./{split(\"\",m); n=0; t=1; next} t && $1~/^[0-9]+$/ && NF>=3 {m[$1]=$(c); n++; next} t && n>0 {t=0} END{o=\"\"; for(k=1;k in m;k++) o=o (o==\"\"?\"\":\", \") \"\\\"\" k \"\\\": \" m[k]; print \"{\" o \"}\"}' outp",
+        "tally": "if [ -f mctal ]; then LC_ALL=C awk -v c=1 '/^tally /{t=$2; v=0; next} /^vals/{v=(t!=\"\"); next} /^tfc/{if(v){r[t]=(c==1?a:b); o[++n]=t}; v=0; next} /^[a-z]/{v=0} v{for(i=1;i<NF;i+=2){a=$i; b=$(i+1)}} END{s=\"\"; for(j=1;j<=n;j++) s=s (s==\"\"?\"\":\", \") \"\\\"\" o[j] \"\\\": \" r[o[j]]; print \"{\" s \"}\"}' mctal; else echo '{}'; fi",
+        "tally_relerr": "if [ -f mctal ]; then LC_ALL=C awk -v c=2 '/^tally /{t=$2; v=0; next} /^vals/{v=(t!=\"\"); next} /^tfc/{if(v){r[t]=(c==1?a:b); o[++n]=t}; v=0; next} /^[a-z]/{v=0} v{for(i=1;i<NF;i+=2){a=$i; b=$(i+1)}} END{s=\"\"; for(j=1;j<=n;j++) s=s (s==\"\"?\"\":\", \") \"\\\"\" o[j] \"\\\": \" r[o[j]]; print \"{\" s \"}\"}' mctal; else echo '{}'; fi"
     }
 }

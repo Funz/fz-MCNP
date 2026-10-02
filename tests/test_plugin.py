@@ -24,7 +24,10 @@ def test_model_files():
         ".fz/models/MCNP.json"
     ]
     
-    required_fields = ["id", "varprefix", "delim", "commentline", "output"]
+    required_fields = ["id", "varprefix", "var_delim", "formulaprefix", "formula_delim",
+                       "commentline", "output"]
+    expected_outputs = ["mcnp_status", "mean_keff", "sigma_keff", "dkeff", "sigma_dkeff",
+                        "tally", "tally_relerr"]
     
     for model_file in models:
         print(f"  Checking {model_file}...", end=" ")
@@ -42,6 +45,11 @@ def test_model_files():
         
         # Check output section has at least one variable
         assert len(model["output"]) > 0, f"No output variables in {model_file}"
+        for name in expected_outputs:
+            assert name in model["output"], f"Missing output variable '{name}'"
+        # gawk-only match(s, re, arr) fails with mawk (Debian/Ubuntu) and BSD awk (macOS)
+        for name, cmd in model["output"].items():
+            assert "match(" not in cmd, f"Output '{name}' uses gawk-only match()"
         
         print("✓")
     
@@ -151,6 +159,9 @@ def test_with_fz():
                 content = f.read()
                 assert "8.741" in content, "Variable r not substituted"
                 assert "%(r)" not in content, "Variable marker %(r) still present"
+                assert "@{" not in content, "Formula not evaluated"
+                mass = 18.74 * 4.0 / 3.0 * 3.141592653589793 * 8.741 ** 3
+                assert f"{mass:.0f}" in content, "Formula (sphere mass) not evaluated"
         print("✓")
         
         print("  fz integration tests passed!\n")

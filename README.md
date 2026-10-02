@@ -1,271 +1,182 @@
-# fz-mcnp
+# fz-MCNP
 
-FZ plugin for MCNP (Monte Carlo N-Particle Transport Code) calculations.
-
-This plugin enables parametric studies with MCNP using the [fz framework](https://github.com/Funz/fz).
+[fz](https://github.com/Funz/fz) plugin for MCNP6 (Monte Carlo N-Particle transport code):
+parametric criticality (`KCODE`) and fixed-source studies.
 
 ## Features
 
-* **Input File Support**: Standard MCNP input files
-* **Variable Syntax**: `%(...)` for parameters (e.g., `%(r)` for radius)
-* **Formula Syntax**: `@{...}` for calculated expressions
-* **Comment Character**: `C ` (note: includes trailing space)
-* **Output Parsing**: Automatic extraction of `mean_keff` and `sigma_keff` from MCNP output
+- Variable substitution and formulas in MCNP input files
+- Extraction of the run status (with the first MCNP error message), keff and its standard
+  deviation, `PERT` keff changes, and tally results from `MCTAL`
+- Success decided from the MCNP output (`outp`), not from the executable exit code
 
-## Installation
+### Input
 
-### Prerequisites
+- **File types**: any MCNP input; the input file is the first file named `*.inp`, `*.i`,
+  `*.mcnp` or `*.mcn`, else the first file that is not an MCNP output (inputs without
+  extension, like `godiva`, are accepted). Other files are passed along as resources.
+- **Parameter syntax** (same as the Java Funz `plugin-MCNP`):
+  - variables: `%(name)`, with optional default `%(name~8.74)` or range `%(name~[8.5,9.0])`
+  - formulas: `@{expression}`, e.g. `@{round(18.74*4/3*3.141592653589793*%(r)**3)}`
+  - fz context lines: `C @: <python code>` (capital `C` followed by a blank: `commentline` is
+    `"C "`, and the match is case-sensitive; a lowercase `c @:` line is a plain MCNP comment)
+- `%`, `@`, `{}` have no meaning in MCNP; `$` (MCNP comment) and `#` (cell complement) are
+  deliberately not used.
 
-1. **MCNP Installation**: You must have MCNP installed on your system
-2. **Python 3.7+**: Required for the fz framework
-3. **fz framework**: Install from [github.com/Funz/fz](https://github.com/Funz/fz)
+Keep MCNP line rules in mind when substituting values: lines are limited to 128 columns, and
+a formula result is written with full precision (e.g. `8.778051321790539`).
 
-### Setup
+#### Example input (`examples/godiva.inp`)
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/Funz/fz-mcnp.git
-   cd fz-mcnp
-   ```
-
-2. Set the MCNP_PATH environment variable:
-   ```bash
-   # On Linux/Mac:
-   export MCNP_PATH="/path/to/your/MCNP6"
-   
-   # On Windows:
-   set MCNP_PATH=C:\path\to\your\MCNP6
-   ```
-
-3. The plugin is ready to use! The `.fz` directory contains:
-   - `.fz/models/MCNP.json` - Model definition
-   - `.fz/calculators/MCNP.sh` - Calculation script
-   - `.fz/calculators/localhost_MCNP.json` - Calculator configuration
-
-## Usage
-
-### Example: Godiva Critical Reactor Study
-
-The repository includes example files in `examples/` demonstrating a parametric study of a Godiva-type critical reactor.
-
-**Input file (`examples/godiva.inp`):**
 ```
 Godiva-type critical reactor and kcode example
-c skip 10 and run a total of 110 keff cycles with 1000 neutrons per cycle
+c 10000 neutrons per cycle, skip 30 cycles and run a total of 130 keff cycles
+c sphere mass (g): @{round(18.74*4/3*3.141592653589793*%(r)**3)}
  1    1  -18.74  -1  imp:n=1   $ enriched uranium sphere (godiva)
  2    0           1  imp:n=0   $ all space outside the sphere
 
  1    so %(r)                 $ radius of the godiva sphere
 
- kcode 1000 1.0 10 1010         $ kcode defines a criticality calculation
+ kcode 10000 1.0 30 130        $ kcode defines a criticality calculation
  ksrc  0 0 0                   $ initial keff spatial dist is point at origin
  m1    92235 -93.71  92238 -5.27  92234 -1.02  $ define u with weight fractions
 ```
 
-**Python script to run parametric study (`examples/example_godiva.py`):**
-```python
-import fz
-import os
+ZAIDs without library suffix take the first table listed in `xsdir`, which depends on the
+installation; give explicit suffixes (e.g. `92235.00c` with MCNP 6.3 / ENDF/B-VIII.0) for
+production studies.
 
-# Set MCNP_PATH if not already set
-os.environ['MCNP_PATH'] = '/Applications/MCNP6'  # Adjust for your installation
+### Output
 
-# Define parameter values
-input_variables = {
-    "r": [8.5, 8.741, 9.0]  # Three different sphere radii
-}
+Files read: `outp` (MCNP is run with `o=outp`), `mctal` (written only with `PRDMP j j 1`),
+and fz's `out.txt` (MCNP terminal output) when `outp` is missing.
 
-# Run parametric study
-results = fz.fzr(
-    input_path="examples/godiva.inp",
-    input_variables=input_variables,
-    model="MCNP",
-    calculators="localhost_MCNP",
-    results_dir="results"
-)
+| Variable | Content |
+|---|---|
+| `mcnp_status` | `NORMAL END`, `FATAL ERROR: <first fatal error>`, `BAD TROUBLE: <reason> (subroutine ...)`, `ABNORMAL END: run terminated because <reason>` (e.g. lost particles), `NO END BANNER` (interrupted run), `NO OUTPUT` |
+| `mean_keff`, `sigma_keff` | final combined collision/absorption/track-length keff and its standard deviation (`KCODE` only) |
+| `dkeff`, `sigma_dkeff` | keff change of each `PERTn` card (track-length estimator) and its standard deviation, flattened by fz into `dkeff_1`, `dkeff_2`, ... (absent without `PERT`) |
+| `tally`, `tally_relerr` | for each tally of `mctal`, the last value of its `vals` block (the total bin when the tally has one) and its relative error, flattened into `tally_4`, `tally_relerr_4`, ... (absent without `mctal`) |
 
-# Display results
-print(results)
-print(f"\nCompleted {len(results)} calculations")
+Example (real MCNP 6.1 output, `tests/fixtures/mcnp6.1/ok_godiva/outp`):
+
+```
+ | the final estimated combined collision/absorption/track-length keff = 1.00248 with an estimated standard deviation of 0.00062   |
 ```
 
-**Expected output:**
-```
-     r  mean_keff  sigma_keff  status     calculator
-0  8.5     0.9850      0.0012    done  localhost_MCNP
-1  8.741   0.9995      0.0006    done  localhost_MCNP
-2  9.0     1.0145      0.0008    done  localhost_MCNP
+gives `mean_keff` = 1.00248, `sigma_keff` = 0.00062. For a fixed-source run, `mean_keff`
+and `sigma_keff` are empty (fz reports them in `_output_error`).
 
-Completed 3 calculations
-```
+The `PERT` table and `MCTAL` formats are taken from the MCNP 6.3 documentation, not yet from
+real runs: see [tests/mcnp_probe](tests/mcnp_probe/README.md).
 
-### Input File Syntax
+## Installation
 
-#### Variables
-Use `%(variable_name)` to define parameters:
-```
- 1    so %(radius)                $ sphere radius
- kcode %(neutrons) 1.0 10 %(cycles)  $ neutron count and cycles
-```
+1. Install fz: `pip install git+https://github.com/Funz/fz.git`
+2. Install the plugin:
+   ```python
+   import fz
+   fz.install("MCNP")
+   ```
+3. Make MCNP available to the calculator script (`.fz/calculators/MCNP.sh`):
 
-#### Formulas
-Use `@{expression}` for calculated values:
-```
-c Calculate volume from radius
-c @{volume = 4.0/3.0 * 3.14159 * %(radius)**3}
-c Volume: @{volume} cm^3
-```
+| Variable | Default | Role |
+|---|---|---|
+| `MCNP_CMD` | `mcnp6` on `PATH`, else `$MCNP_PATH/MCNP_CODE/bin/mcnp6`, else `$MCNP_PATH/bin/mcnp6` | MCNP executable |
+| `MCNP_PATH` | none | installation directory (layout of the Java plugin: `MCNP_CODE/`, `MCNP_DATA/`) |
+| `DATAPATH` | kept if set, else `$MCNP_PATH/MCNP_DATA` if it exists | directory holding `xsdir` |
+| `MCNP_TASKS` | none | number of threads (`tasks N`) |
+| `MCNP_OPTS` | none | extra command-line options, appended as given |
 
-#### Comments
-MCNP comments start with `C ` (capital C followed by space):
-```
-C This is a comment line in MCNP format
-c This is also a valid comment (lowercase c)
-```
+The script runs `mcnp6 i=<input> o=outp [tasks N] [MCNP_OPTS]` in the case directory,
+removes a previous `outp`/`mctal` first (MCNP would otherwise write `outq`/`mctam`), and
+sets `ulimit -s unlimited` when allowed. Exit codes: 0 normal end, 1 no input file,
+2 usage, 4 executable not found, 5 no `outp`, 6 abnormal end (message on stderr),
+7 `outp` without end banner. With `MCNP_OPTS=fatal` (transport despite fatal errors) the
+case is still reported as failed.
 
-### Output Files
-
-MCNP produces several output files:
-- `outp` - Main output file containing results
-- `runtpe` - Binary run tape file
-- `srctp` - Source tape file
-
-The plugin automatically extracts:
-- **mean_keff**: Final estimated combined k-effective value
-- **sigma_keff**: Standard deviation of k-effective
-
-## Advanced Usage
-
-### Using with Remote Calculators
-
-Run MCNP on a remote server via SSH:
+## Usage
 
 ```python
 import fz
 
 results = fz.fzr(
     "examples/godiva.inp",
-    {"r": [8.5, 8.741, 9.0]},
+    {"r": [8.5, 8.7407, 9.0]},       # sphere radius (cm)
     "MCNP",
-    calculators="ssh://user@hpc.example.com/bash /path/to/fz-mcnp/.fz/calculators/MCNP.sh",
-    results_dir="remote_results"
+    calculators="localhost_MCNP",    # optional: found automatically
+    results_dir="results",
 )
+print(results[["r", "status", "mcnp_status", "mean_keff", "sigma_keff"]])
 ```
 
-### Using Cache for Reusing Results
+Same with the CLI:
 
-```python
-import fz
-
-# First run
-results1 = fz.fzr(
-    "examples/godiva.inp",
-    {"r": [8.5, 8.741, 9.0]},
-    "MCNP",
-    calculators="localhost_MCNP",
-    results_dir="run1"
-)
-
-# Second run with additional values - reuses previous results
-results2 = fz.fzr(
-    "examples/godiva.inp",
-    {"r": [8.5, 8.741, 9.0, 9.5, 10.0]},  # Added 9.5 and 10.0
-    "MCNP",
-    calculators=[
-        "cache://run1",          # Check cache first
-        "localhost_MCNP"         # Only run new cases
-    ],
-    results_dir="run2"
-)
+```bash
+fzr --input_path examples/godiva.inp --model MCNP \
+    --input_variables '{"r": [8.5, 8.7407, 9.0]}' --results_dir results --format json
 ```
 
-### Parallel Execution
+Other entry points: `fz.fzi("examples/godiva.inp", "MCNP")` (variables),
+`fz.fzc(..., output_dir="compiled")` (compiled inputs), `fz.fzo("results/*", "MCNP")`
+(re-parse outputs), [examples/example_godiva.py](examples/example_godiva.py) and
+[example_usage.ipynb](example_usage.ipynb).
 
-Run multiple MCNP calculations in parallel:
+Remote execution: give an `ssh://` or `slurm://` calculator running
+`bash .fz/calculators/MCNP.sh` on a host where MCNP is installed (see the
+[fz calculators documentation](https://github.com/Funz/fz/blob/main/doc/calculators.md));
+results can be reused with a `cache://<previous results dir>` calculator placed first.
 
-```python
-import fz
+## Repository layout
 
-# Use multiple calculator instances for parallel execution
-results = fz.fzr(
-    "examples/godiva.inp",
-    {"r": list(range(8, 11, 0.1))},  # Many parameter values
-    "MCNP",
-    calculators=["localhost_MCNP"] * 4,  # 4 parallel workers
-    results_dir="parallel_results"
-)
+```
+fz-MCNP/
+├── .fz/
+│   ├── models/MCNP.json                # syntax and output extraction
+│   └── calculators/
+│       ├── MCNP.sh                     # runs mcnp6, checks outp
+│       └── localhost_MCNP.json         # local calculator alias
+├── examples/
+│   ├── godiva.inp                      # parameterized Godiva input
+│   └── example_godiva.py
+├── tests/
+│   ├── test_plugin.py                  # structure, fzi/fzc
+│   ├── test_calculator.py              # MCNP.sh with a fake mcnp6
+│   ├── test_outputs.py                 # output extraction on reference outputs
+│   ├── test_fz_e2e.py                  # fzr end to end with a fake mcnp6
+│   ├── fixtures/                       # real MCNP 6.1 output + synthetic outputs
+│   └── mcnp_probe/                     # datasets to run with a real MCNP
+└── example_usage.ipynb
 ```
 
-## Model Configuration
+## Tests
 
-The MCNP model is defined in `.fz/models/MCNP.json`:
-
-```json
-{
-    "id": "MCNP",
-    "varprefix": "%",
-    "formulaprefix": "@",
-    "delim": "()",
-    "commentline": "C ",
-    "output": {
-        "mean_keff": "grep 'the final estimated combined' outp | head -n 1 | awk '{match($0, /keff = ([0-9.]+)/, arr); print arr[1]}'",
-        "sigma_keff": "grep 'the final estimated combined' outp | head -n 1 | awk '{match($0, /standard deviation of ([0-9.]+)/, arr); print arr[1]}'"
-    }
-}
+```bash
+pip install pytest
+pytest tests/                        # no MCNP needed
+python tests/test_plugin.py          # structure checks only
 ```
 
-You can customize this configuration to extract additional outputs from MCNP.
+With a real MCNP: `tests/mcnp_probe/run_probe.sh` (one dataset per hypothesis on the
+plugin and on MCNP behaviour) and `tests/mcnp_probe/run_fz_e2e.py` (fzr on `godiva.inp`).
 
 ## Troubleshooting
 
-### MCNP not found
-**Error**: `MCNP executable not found`
-
-**Solution**: Set the `MCNP_PATH` environment variable:
-```bash
-export MCNP_PATH="/path/to/your/MCNP6"
-```
-
-### Stack size issues
-**Error**: MCNP crashes with stack-related errors
-
-**Solution**: The script automatically sets `ulimit -s unlimited`, but if issues persist, manually set it before running:
-```bash
-ulimit -s unlimited
-python your_script.py
-```
-
-### Output parsing fails
-**Error**: `mean_keff` or `sigma_keff` returns None
-
-**Solution**: Check that your MCNP input file contains a `kcode` card for criticality calculations. The output parser looks for lines containing "the final estimated combined".
-
-## Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Test your changes with actual MCNP calculations
-4. Submit a pull request
+| Symptom | Cause / fix |
+|---|---|
+| `MCNP executable not found` (exit 4) | set `MCNP_CMD`, or put `mcnp6` on `PATH`, or set `MCNP_PATH` |
+| `mcnp_status` = `BAD TROUBLE: data file xsdir... does not exist` | set `DATAPATH` to the directory holding `xsdir` |
+| `FATAL ERROR: cross-section tables missing for zaid = ...` | ZAID/library not in your `xsdir` (natural elements have no ENDF/B-VII.1/VIII.0 table: use isotopes) |
+| `FATAL ERROR: no m card for material ...` while the `M` card exists | a blank line inside the data block ends it: use `c` comment lines instead |
+| `ABNORMAL END: run terminated because 10 particles got lost.` | geometry gap or overlap |
+| `mean_keff` empty with `NORMAL END` | no `KCODE` (fixed source), or no active cycle |
 
 ## License
 
-This plugin follows the same license as the fz framework (BSD 3-Clause).
+BSD 3-Clause, as the fz framework.
 
-## Related Links
+## Related links
 
-- [fz framework](https://github.com/Funz/fz) - Main parametric computing framework
-- [Original MCNP plugin](https://github.com/Funz/plugin-MCNP) - Legacy plugin for reference
-- [MCNP Documentation](https://mcnp.lanl.gov/) - Official MCNP documentation
-
-## Citation
-
-If you use this plugin in your research, please cite:
-
-```bibtex
-@software{fz_mcnp,
-  title = {fz-mcnp: MCNP Plugin for FZ Parametric Computing Framework},
-  year = {2025},
-  url = {https://github.com/Funz/fz-mcnp}
-}
-```
+- [fz](https://github.com/Funz/fz) — parametric computing framework
+- [plugin-MCNP](https://github.com/Funz/plugin-MCNP) — legacy Java Funz plugin
+- [MCNP](https://mcnp.lanl.gov/) — official MCNP site

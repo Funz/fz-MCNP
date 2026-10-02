@@ -1,0 +1,5 @@
+          Code Name & Version = MCNP6, 6.3.0
+1mcnp     version 6.3.0                                                  probid =  10/02/26 10:00:00
+ i=case.i  o=outp
+         1-       Co-60 point source inside a 5 cm lead spherical shell
+      run terminated when  1000000 particle histories were done.

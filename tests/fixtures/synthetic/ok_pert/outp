@@ -1,0 +1,16 @@
+          Code Name & Version = MCNP6, 6.3.0
+1mcnp     version 6.3.0                                                  probid =  10/02/26 10:00:00
+ i=case.i  o=outp
+         1-       Jezebel - bare delta-phase Pu sphere
+        12-       pert1:n  cell=1  rho=5.05308E-02
+      run terminated when     250 kcode cycles were done.
+ | the final estimated combined collision/absorption/track-length keff = 0.998611 with an estimated standard deviation of 0.001769 |
+ | the estimated 68, 95, & 99 percent keff confidence intervals are 0.99683 to 1.00040, 0.99503 to 1.00220, and 0.99381 to 1.00342 |
+ =     the following output gives the predicted changes in keff (track length estimator) for the perturbations.
+          perturbation      k(trk ln)   std. dev.
+                   1          0.00830     0.00010
+                   2         -0.00840     0.00010
+                   3         -0.00031     0.00064
+
+  warning.  cross terms are not calculated, may be important
+      run terminated when     250 kcode cycles were done.
