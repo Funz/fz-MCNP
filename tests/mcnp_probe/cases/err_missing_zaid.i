@@ -1,6 +1,6 @@
 Godiva probe - bare HEU sphere
 c Hypothese: H6 table de sections efficaces absente
-c Attendu: fatal error. cross-section tables missing for zaid = 92235.99c + bad trouble ixsdir
+c Attendu: fatal error. cross-section tables missing for zaid = 92235.99c + bad trouble (ixsdir ou rhoden)
  1    1  -18.74  -1  imp:n=1   $ enriched uranium sphere (godiva)
  2    0           1  imp:n=0   $ all space outside the sphere
 

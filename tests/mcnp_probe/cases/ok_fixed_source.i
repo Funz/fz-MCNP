@@ -11,7 +11,7 @@ c Attendu: 'run terminated when ... particle histories were done'; mctal tally 2
  3   so   100
 
  mode  p
- m1    82000 1
+ m1    82000.84p 1                  $ photon data are elemental (skill v0.2, example D)
  sdef  pos=0 0 0  par=p  erg=d1
  si1   L  1.1732  1.3325
  sp1      1       1

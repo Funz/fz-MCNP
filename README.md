@@ -70,6 +70,17 @@ and `sigma_keff` are empty (fz reports them in `_output_error`).
 The `PERT` table and `MCTAL` formats are taken from the MCNP 6.3 documentation, not yet from
 real runs: see [tests/mcnp_probe](tests/mcnp_probe/README.md).
 
+### What `NORMAL END` does not tell
+
+`mcnp_status` = `NORMAL END` with a keff and a small σ does not prove that the fission source
+converged. According to the MCNP synthetic notice (skill v0.2): with loosely coupled units and
+`KSRC` points in one unit only, MCNP 6.3 returned k = 0.928 instead of 0.993 while the entropy
+check passed; a `KSRC` point in a non-fissile cell of non-zero importance is not rejected. In a
+parametric study, check that `KSRC` points (or the `SDEF` volume) lie inside **every** fissile unit
+for **all** sampled values of the variables (e.g. points written with formulas of the geometric
+variables), give `HSRC` over the whole fissile region, and look at print table 126 (activity in
+each cell) of a few cases.
+
 ## Installation
 
 1. Install fz: `pip install git+https://github.com/Funz/fz.git`

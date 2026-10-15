@@ -4,8 +4,8 @@ Jeux de données courts (Godiva, 5 000 à 10 000 neutrons/cycle ; une source fix
 destinés à être lancés avec un MCNP réel. Les sorties servent à :
 
 - trancher les hypothèses sur lesquelles reposent `MCNP.sh` et l'extraction des sorties de `MCNP.json` ;
-- confirmer les affirmations des skills MCNP (`input-MCNP.md`, `output-MCNP.md`, `error-MCNP.md`,
-  messages annoncés comme reproduits avec MCNP 6.3.0, sans sortie jointe) ;
+- confirmer les affirmations de la notice synthétique MCNP (skill v0.2 : `input-MCNP.md`, `output-MCNP.md`,
+  `error-MCNP.md` ; messages annoncés comme reproduits avec MCNP 6.3.0, sans sortie jointe) ;
 - remplacer les fichiers de référence synthétiques (`tests/fixtures/synthetic/`) par des sorties réelles.
 
 ## Lancement
@@ -60,7 +60,7 @@ valeurs extraites par le modèle `MCNP.json` (si fz est installé).
 | H3 | Fin normale : `run terminated when ...` dans `outp` (texte en source fixe : `... particle histories were done.`) | `ok_*` |
 | H4 | Code retour de `mcnp6` : 0 en fin normale ; valeur en erreur fatale / bad trouble / particules perdues (non utilisé par le plugin tant que non établi) | tous |
 | H5 | Format `  fatal error.  <message>` en début de ligne dans `outp` ; message après la ligne d'entrée fautive | `err_no_mcard`, `err_hash_comment` |
-| H6 | Format `bad trouble in subroutine <s> of <module>` suivi de la raison sur la ligne suivante, dans `outp` | `err_missing_blank`, `err_ksrc_outside`, `err_missing_zaid` |
+| H6 | Format `bad trouble in subroutine <s> of <module>` suivi de la raison sur la ligne suivante, dans `outp` ; sous-programme pour une table absente (`ixsdir` ou `rhoden`, skill v0.2) | `err_missing_blank`, `err_ksrc_outside`, `err_missing_zaid` |
 | H7 | Arrêt sur particules perdues : `run terminated because  10 particles got lost.` + `no final keff estimate` | `err_lost` |
 | H8 | Tableau PERT : en-tête `perturbation  k(trk ln)  std. dev.` puis une ligne `<n> <dk> <sigma>` par perturbation (signe, notation, colonnes supplémentaires éventuelles) | `ok_pert` |
 | H9 | MCTAL : blocs `tally n`, `vals` (couples moyenne / erreur relative, 4 par ligne), `tfc` ; dernier couple = bin total | `ok_tally_kcode`, `ok_fixed_source` |
@@ -72,9 +72,25 @@ valeurs extraites par le modèle `MCNP.json` (si fz est installé).
 | H17 | `kct <= ikz` : erreur fatale ou fin sans keff | `err_kct_le_ikz` |
 | H18 | `DATAPATH` invalide : message (`data file xsdir... does not exist`) dans `outp` ou seulement sur la sortie standard ; `outp` produit ou non | `env_bad_datapath` |
 | H19 | Ligne de plus de 128 colonnes : `bad trouble ... input file data beyond column 128` | `err_line_128` |
+| H20 | Point `KSRC` dans une cellule non fissile d'importance non nulle : non rejeté (skill v0.2), fin normale ; keff final récupéré ou biaisé par rapport à la référence | `var_ksrc_nonfissile`, `var_ksrc_fuel` |
+| H21 | ZAID inexistant (Z et A inversés, `24028.00c`, skill v0.2) : `cross-section tables missing` + `bad trouble in subroutine rhoden` ; ordre des deux messages dans `outp` | `err_zaid_z_a` |
 
 La première ligne de commentaire de chaque cas (`c Hypothese` / `c Attendu`) rappelle l'objet du test.
 Un résultat contraire à « Attendu » est une information, pas un échec : il corrige l'hypothèse.
+
+## Apports de la notice synthétique MCNP v0.2
+
+- Inchangé par rapport à la version utilisée pour écrire le plugin : formats de sortie (bannière de fin,
+  ligne keff, tableau PERT, MCTAL, `outp` → `outq`), messages `fatal error` / `bad trouble` déjà repris.
+- Nouveau, sans effet sur l'extraction mais sur l'interprétation des résultats : une fin normale avec un
+  keff et un σ plausibles **ne prouve pas** que la source a convergé. Unités faiblement couplées avec `KSRC`
+  dans une seule unité : k = 0,928 au lieu de 0,993 (vérifié MCNP 6.3 selon la notice), contrôle d'entropie
+  « passed ». Un point `KSRC` dans une cellule non fissile n'est pas rejeté (H20). Le plugin ne détecte pas
+  ces cas : `mcnp_status` reste `NORMAL END`.
+- Nouveau : ZAID inexistant → `bad trouble in subroutine rhoden` (H21) ; `this cell has no surfaces` imprimé
+  **avant** l'écho de la carte fautive (sans effet : le statut reprend le texte du message, pas sa position) ;
+  `lost particle in newcel - zero lattice element hit` (réseaux) ; tableau des isotopes : `82000` n'a pas de
+  table neutron `.00c`/`.80c`, d'où `82000.84p` (photons) dans `ok_fixed_source`.
 
 ## Non couvert
 
