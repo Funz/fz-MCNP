@@ -1,0 +1,23 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+          [LANL copyright line removed]
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+ mcnp6 ver=6.3.0, ld=01/26/23  10/15/26 11:52:35                   
+Source version = release/6.3-55762725c4
+  comment.  Physics models disabled.
+  kcode 5000 1.0 20 70                                                
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+ comment. using random number generator  1, initial seed = 19073486328125      
+ 
+  comment.  total fission nubar data are being used.
+  fatal error.   cross-section tables missing for zaid = 24028.00c
+ Expire parameter is atomic weight of  24028 is zero.
+
+ bad trouble in subroutine rhoden of imcn                             
+
+ atomic weight of  24028 is zero.

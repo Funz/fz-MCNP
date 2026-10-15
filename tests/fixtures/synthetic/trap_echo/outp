@@ -1,0 +1,8 @@
+          Code Name & Version = MCNP6, 6.3.0
+1mcnp     version 6.3.0                                                  probid =  10/02/26 10:00:00
+ i=case.i  o=outp
+         1-       Trap: fatal error. bad trouble in the title, run terminated because nothing
+         2-       c fatal error.  this comment must not be read as an error
+         3-       c bad trouble in subroutine none
+      run terminated when     130 kcode cycles were done.
+ | the final estimated combined collision/absorption/track-length keff = 1.00248 with an estimated standard deviation of 0.00062   |

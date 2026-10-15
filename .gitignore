@@ -36,3 +36,7 @@ build/
 dist/
 *.egg-info/
 
+
+# MCNP probe results (tests/mcnp_probe)
+tests/mcnp_probe/results-*
+!tests/fixtures/**/outp

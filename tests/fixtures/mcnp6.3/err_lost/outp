@@ -1,0 +1,671 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+  [LANL copyright and export-control notice removed]
+  
+1mcnp6 version 6.3.0 ld=01/26/23                     10/15/26 11:52:33 
+ *************************************************************************                 probid =  10/15/26 11:52:33 
+Source version = release/6.3-55762725c4
+ i=err_lost.i o=outp tasks 8 xsdir=xsdir71
+
+ 
+  comment.  Physics models disabled.
+         1-       Godiva probe - lost particles
+         2-       c Hypothese: H7 format de l'arret sur particules perdues
+         3-       c Attendu: 'run terminated because  10 particles got lost.' + no final keff estimate
+         4-        1    1  -18.74  -1  imp:n=1   $ enriched uranium sphere (godiva)
+         5-        2    0           2  imp:n=0   $ outside world bounded by the wrong sphere: gap
+         6-       
+         7-        1    so 8.7407
+         8-        2    so 9.5
+         9-       
+        10-        kcode 5000 1.0 20 70
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+        11-        ksrc  0 0 0
+        12-        m1    92235 -93.71  92238 -5.27  92234 -1.02
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =       19073486328125 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+ 
+  comment.  total fission nubar data are being used.
+ 
+  warning.    1 materials had unnormalized fractions. print table 40.
+1cells                                                                                                  print table 60
+
+                               atom        gram                                            neutron                                     
+              cell      mat   density     density     volume       mass            pieces importance                                   
+
+        1        1        1  4.79838E-02 1.87400E+01 2.79722E+03 5.24200E+04           1  1.0000E+00                                   
+        2        2        0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00           0  0.0000E+00                                   
+
+ total                                               2.79722E+03 5.24200E+04
+ 
+  comment.  threading will be used when possible in portions of mcnp6.
+ 
+  comment.  threading will be used for n/p/e table physics.
+ 
+  comment.  threading will generally not be used for model physics.
+
+         2 warning messages so far.
+1cross-section tables                                                                                   print table 100
+     XSDIR used: /path/to/MCNP_DATA/xsdir/xsdir71
+
+     table    length
+
+                        tables from file 71/293.6/922340_71.02c                                          
+
+  92234.02c  346624  922340  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9225      09/17/13
+                     Energy range:   1.00000E-11  to  3.00000E+01 MeV.
+                     probability tables used from 1.5000E-03 to 1.0000E-01 mev.
+
+                        tables from file 71/293.6/922350_71.02c                                          
+
+  92235.02c  680795  922350  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9228      09/17/13
+                     Energy range:   1.00000E-11  to  2.00000E+01 MeV.
+                     probability tables used from 2.2500E-03 to 2.5000E-02 mev.
+
+                        tables from file 71/293.6/922380_71.02c                                          
+
+  92238.02c 1318483  922380  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9237      09/17/13
+                     Energy range:   1.00000E-11  to  3.00000E+01 MeV.
+                     probability tables used from 2.0000E-02 to 1.4903E-01 mev.
+
+  total     2345902
+
+1particles and energy limits                                                                            print table 101
+
+                         particle      maximum       smallest      largest       always        always
+                         cutoff        particle      table         table         use table     use model
+   particle type         energy        energy        maximum       maximum       below         above
+
+    1  n    neutron     0.0000E+00    1.0000E+36    2.0000E+01    3.0000E+01    1.0000E+36    1.0000E+36
+ 
+  comment.  setting up hash-based fast table search for xsec tables
+
+ ------------------------------------------------------------------------------------------
+ =====> Set up arrays for hash-based fast table search for xsec data
+
+    number of hash bins   =     8192
+    min hash table energy =  1.00000E-11
+    max hash table energy =  3.00000E+01
+
+           nuclide      ne      emin        emax     ave_bins  min_bins  max_bins
+           92234.02c   25480 1.00000E-11 3.00000E+01       3.1       0.0     153.0
+           92235.02c   76525 1.00000E-11 2.00000E+01       9.3       0.0     185.0
+           92238.02c  157754 1.00000E-11 3.00000E+01      19.3       0.0     409.0
+
+ ------------------------------------------------------------------------------------------
+
+
+ ***********************************************************************************************************************
+
+ dump no.    1 on file runtpe.h5     nps =           0     coll =              0     ctm =        0.00   nrn =          
+       0
+
+ source distribution written to file srctp        cycle=     0
+
+         2 warning messages so far.
+1     event log for lost particle no.   1          nps =           2        ijk =      130407176137285
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00  8.952-01 -4.447-01 -2.944-02 4.904+00 1.000+00   particle= neutron       2                   
+    sur    1  6.139+00 -6.058+00  1.421+00  6.847-01 -6.833-01  2.536-01 4.900+00 7.370-01   surf=     1             21                  
+1   lost particle no. 1     no cell found in subroutine newcel     history no. 2
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          6.13853E+00   -6.05803E+00    1.42077E+00
+ u,v,w direction cosines:    6.84710E-01   -6.83273E-01    2.53596E-01
+ energy = 4.89999E+00    weight = 7.37012E-01    time = 2.89378E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 4.93240E+00
+ the distance to collision from the last event is 8.12263E+00
+ the number of neutron  collisions so far in this history is 2.
+
+
+
+
+
+
+1     event log for lost particle no.   2          nps =           1        ijk =        6647299061401
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00  5.085-01  4.733-01  7.193-01 2.209+00 1.000+00   particle= neutron       2                   
+    sur    1  7.434+00  4.383+00  1.386+00  2.341-01  9.658-01 -1.113-01 2.146+00 6.701-01   surf=     1             29                  
+1   lost particle no. 2     no cell found in subroutine newcel     history no. 1
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          7.43408E+00    4.38345E+00    1.38555E+00
+ u,v,w direction cosines:    2.34105E-01    9.65822E-01   -1.11276E-01
+ energy = 2.14592E+00    weight = 6.70137E-01    time = 4.96112E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 2.72611E+00
+ the distance to collision from the last event is 3.66066E+00
+ the number of neutron  collisions so far in this history is 2.
+
+
+
+
+
+
+1     event log for lost particle no.   3          nps =           5        ijk =        9871150267817
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00  5.861-01  1.496-01 -7.963-01 1.902+00 1.000+00   particle= neutron       4                   
+    sur    1  4.861+00  3.830-01 -7.254+00  4.949-01 -1.217-01 -8.604-01 1.902+00 8.100-01   surf=     1             14                  
+1   lost particle no. 3     no cell found in subroutine newcel     history no. 5
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          4.86080E+00    3.83006E-01   -7.25436E+00
+ u,v,w direction cosines:    4.94862E-01   -1.21680E-01   -8.60410E-01
+ energy = 1.90158E+00    weight = 8.09992E-01    time = 4.63690E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 3.45903E+00
+ the distance to collision from the last event is 4.52027E+00
+ the number of neutron  collisions so far in this history is 1.
+
+
+
+
+
+
+1     event log for lost particle no.   4          nps =           3        ijk =      274972369747969
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -6.184-01 -4.495-01  6.446-01 3.809-01 1.000+00   particle= neutron       4                   
+    sur    1 -4.479-01 -7.329+00 -4.741+00  1.580-01 -4.311-01 -8.884-01 1.403-01 3.015-01   surf=     1             130                 
+1   lost particle no. 4     no cell found in subroutine newcel     history no. 3
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:         -4.47930E-01   -7.32922E+00   -4.74149E+00
+ u,v,w direction cosines:    1.57960E-01   -4.31116E-01   -8.88362E-01
+ energy = 1.40320E-01    weight = 3.01495E-01    time = 3.50050E+00
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 1.26023E+00
+ the distance to collision from the last event is 4.80769E+00
+ the number of neutron  collisions so far in this history is 12.
+
+
+
+
+
+
+1     event log for lost particle no.   5          nps =           7        ijk =       76231363328401
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -7.068-02  3.263-02 -9.970-01 4.750-01 1.000+00   particle= neutron       2                   
+    sur    1  6.161+00  6.111+00 -1.046+00  5.851-01  2.503-01  7.713-01 4.016-01 3.505-01   surf=     1             74                  
+1   lost particle no. 5     no cell found in subroutine newcel     history no. 7
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          6.16128E+00    6.11096E+00   -1.04625E+00
+ u,v,w direction cosines:    5.85150E-01    2.50278E-01    7.71337E-01
+ energy = 4.01561E-01    weight = 3.50474E-01    time = 1.31761E+00
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 7.51042E-01
+ the distance to collision from the last event is 3.83605E+00
+ the number of neutron  collisions so far in this history is 7.
+
+
+
+
+
+
+1     event log for lost particle no.   6          nps =           4        ijk =      229271553349773
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00  9.710-01 -5.665-02 -2.323-01 1.331+00 1.000+00   particle= neutron       2                   
+    sur    1 -4.268+00 -7.613+00 -4.816-01 -5.503-01 -6.206-01 -5.586-01 1.231-01 3.519-01   surf=     1             204                 
+1   lost particle no. 6     no cell found in subroutine newcel     history no. 4
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:         -4.26779E+00   -7.61275E+00   -4.81591E-01
+ u,v,w direction cosines:   -5.50280E-01   -6.20618E-01   -5.58592E-01
+ energy = 1.23122E-01    weight = 3.51935E-01    time = 4.17033E+00
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 2.12352E+00
+ the distance to collision from the last event is 3.45092E+00
+ the number of neutron  collisions so far in this history is 18.
+
+
+
+
+
+
+1     event log for lost particle no.   7          nps =           9        ijk =      236453160537529
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -2.368-01  9.215-01 -3.079-01 7.453-02 1.000+00   particle= neutron       2                   
+    sur    1 -3.419+00  4.153+00 -6.890+00 -3.086-02  1.361-02 -9.994-01 7.180-02 4.627-01   surf=     1             58                  
+1   lost particle no. 7     no cell found in subroutine newcel     history no. 9
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:         -3.41871E+00    4.15283E+00   -6.88957E+00
+ u,v,w direction cosines:   -3.08569E-02    1.36076E-02   -9.99431E-01
+ energy = 7.18042E-02    weight = 4.62722E-01    time = 3.24115E+00
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 3.89365E+00
+ the distance to collision from the last event is 4.83619E+00
+ the number of neutron  collisions so far in this history is 4.
+
+
+
+
+
+
+1     event log for lost particle no.   8          nps =           8        ijk =      144449298336989
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -3.915-01  4.664-01 -7.932-01 4.136+00 1.000+00   particle= neutron       2                   
+    sur    1 -4.413+00  3.715+00 -6.567+00  1.546-01  4.173-01 -8.955-01 7.805-01 5.183-01   surf=     1             42                  
+1   lost particle no. 8     no cell found in subroutine newcel     history no. 8
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:         -4.41307E+00    3.71494E+00   -6.56688E+00
+ u,v,w direction cosines:    1.54581E-01    4.17323E-01   -8.95514E-01
+ energy = 7.80510E-01    weight = 5.18252E-01    time = 4.93801E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 1.83422E-01
+ the distance to collision from the last event is 6.87570E+00
+ the number of neutron  collisions so far in this history is 4.
+
+
+
+
+
+
+1     event log for lost particle no.   9          nps =          10        ijk =       65012547725029
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00  1.946-01 -3.204-01  9.271-01 3.128+00 1.000+00   particle= neutron       2                   
+    sur    1  5.635+00 -5.852+00 -3.226+00  6.458-01 -7.328-01 -2.142-01 2.412-01 3.533-01   surf=     1             77                  
+1   lost particle no. 9     no cell found in subroutine newcel     history no. 10
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          5.63455E+00   -5.85196E+00   -3.22587E+00
+ u,v,w direction cosines:    6.45823E-01   -7.32838E-01   -2.14152E-01
+ energy = 2.41237E-01    weight = 3.53283E-01    time = 1.99232E+00
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 6.32888E+00
+ the distance to collision from the last event is 1.03610E+01
+ the number of neutron  collisions so far in this history is 6.
+
+
+
+
+
+
+1     event log for lost particle no.  10          nps =          12        ijk =      148359214513709
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -8.398-01 -4.129-01  3.524-01 1.395+00 1.000+00   particle= neutron       2                   
+    sur    1  7.136+00 -5.028+00 -4.444-01  7.011-01 -5.002-01  5.083-01 1.223+00 5.187-01   surf=     1             39                  
+1   lost particle no. 10     no cell found in subroutine newcel     history no. 12
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          7.13621E+00   -5.02762E+00   -4.44353E-01
+ u,v,w direction cosines:    7.01058E-01   -5.00157E-01    5.08292E-01
+ energy = 1.22283E+00    weight = 5.18680E-01    time = 7.84450E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 6.13591E+00
+ the distance to collision from the last event is 6.17400E+00
+ the number of neutron  collisions so far in this history is 3.
+
+
+
+
+
+
+1     event log for lost particle no.  11          nps =          14        ijk =      265047540679861
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -2.489-01 -5.118-01 -8.222-01 1.101+00 1.000+00   particle= neutron       2                   
+    sur    1  5.700+00 -4.996+00 -4.353+00  8.418-01 -5.396-01 -1.383-02 9.569-01 4.285-01   surf=     1             58                  
+1   lost particle no. 11     no cell found in subroutine newcel     history no. 14
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          5.70020E+00   -4.99620E+00   -4.35265E+00
+ u,v,w direction cosines:    8.41795E-01   -5.39620E-01   -1.38305E-02
+ energy = 9.56947E-01    weight = 4.28489E-01    time = 7.82453E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 3.48465E+00
+ the distance to collision from the last event is 4.90401E+00
+ the number of neutron  collisions so far in this history is 4.
+
+
+
+
+
+
+1     event log for lost particle no.  12          nps =          15        ijk =        9426752491441
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -2.959-01  2.119-01  9.314-01 1.951+00 1.000+00   particle= neutron       4                   
+    sur    1 -3.382+00  2.524-01  8.056+00 -7.100-01 -6.634-01  2.363-01 1.891+00 5.324-01   surf=     1             35                  
+1   lost particle no. 12     no cell found in subroutine newcel     history no. 15
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:         -3.38180E+00    2.52430E-01    8.05603E+00
+ u,v,w direction cosines:   -7.09950E-01   -6.63424E-01    2.36303E-01
+ energy = 1.89060E+00    weight = 5.32387E-01    time = 5.16409E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 1.83239E+00
+ the distance to collision from the last event is 3.72904E+00
+ the number of neutron  collisions so far in this history is 3.
+
+
+
+
+
+
+1     event log for lost particle no.  13          nps =          16        ijk =      151716794498173
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00  1.395-01 -9.829-01  1.202-01 2.186+00 1.000+00   particle= neutron       4                   
+    sur    1  4.208+00 -3.887+00  6.602+00  5.645-01  6.803-01  4.675-01 9.873-01 6.473-01   surf=     1             45                  
+1   lost particle no. 13     no cell found in subroutine newcel     history no. 16
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          4.20778E+00   -3.88677E+00    6.60208E+00
+ u,v,w direction cosines:    5.64489E-01    6.80313E-01    4.67468E-01
+ energy = 9.87329E-01    weight = 6.47287E-01    time = 7.96291E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 1.12856E-01
+ the distance to collision from the last event is 4.95788E+00
+ the number of neutron  collisions so far in this history is 3.
+
+
+
+
+
+
+1     event log for lost particle no.  14          nps =          18        ijk =      184001225389957
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -6.580-01  5.320-01 -5.329-01 1.865+00 1.000+00   particle= neutron       2                   
+    sur    1 -5.251+00  4.013+00 -5.720+00 -7.160-01  6.544-01 -2.430-01 5.605-03 5.000-01   surf=     1             78                  
+1   lost particle no. 14     no cell found in subroutine newcel     history no. 18
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:         -5.25096E+00    4.01319E+00   -5.72028E+00
+ u,v,w direction cosines:   -7.16041E-01    6.54397E-01   -2.43002E-01
+ energy = 5.60525E-03    weight = 5.00000E-01    time = 1.66762E+00
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 7.10583E-01
+ the distance to collision from the last event is 9.29005E-01
+ the number of neutron  collisions so far in this history is 6.
+
+
+
+
+
+
+1     event log for lost particle no.  15          nps =          19        ijk =      137616398470209
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -9.903-01 -1.380-01  1.353-02 1.229+00 1.000+00   particle= neutron       2                   
+    sur    1 -8.465+00  2.173+00  1.184-01 -9.429-01  3.188-01  9.595-02 1.221+00 6.471-01   surf=     1             21                  
+1   lost particle no. 15     no cell found in subroutine newcel     history no. 19
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:         -8.46541E+00    2.17319E+00    1.18396E-01
+ u,v,w direction cosines:   -9.42942E-01    3.18831E-01    9.59512E-02
+ energy = 1.22066E+00    weight = 6.47052E-01    time = 6.24601E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 3.71521E+00
+ the distance to collision from the last event is 4.32559E+00
+ the number of neutron  collisions so far in this history is 2.
+
+
+
+
+
+
+1     event log for lost particle no.  16          nps =          20        ijk =      199527651350477
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00  7.462-01  4.859-01 -4.551-01 1.229+00 1.000+00   particle= neutron       2                   
+    sur    1  6.021+00  5.710+00 -2.748+00  6.037-01  7.873-01 -1.253-01 1.227+00 6.470-01   surf=     1             21                  
+1   lost particle no. 16     no cell found in subroutine newcel     history no. 20
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          6.02073E+00    5.70962E+00   -2.74789E+00
+ u,v,w direction cosines:    6.03672E-01    7.87327E-01   -1.25283E-01
+ energy = 1.22725E+00    weight = 6.46977E-01    time = 5.88115E-01
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 4.32434E+00
+ the distance to collision from the last event is 6.25815E+00
+ the number of neutron  collisions so far in this history is 2.
+
+
+
+
+
+
+1     event log for lost particle no.  17          nps =          21        ijk =      159131926320105
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  0.000+00  0.000+00  0.000+00 -1.977-01  9.797-01  3.360-02 1.305+00 1.000+00   particle= neutron       2                   
+    sur    1  2.983+00  6.710+00 -4.741+00  3.271-01  5.495-01 -7.688-01 4.864-01 6.468-01   surf=     1             25                  
+1   lost particle no. 17     no cell found in subroutine newcel     history no. 21
+
+ the neutron  currently being tracked has reached surface         1  ; there
+ appears to be no cell on the other side of the surface from cell 1
+ at that point.
+
+ the neutron  is in cell 1.
+
+ x,y,z coordinates:          2.98332E+00    6.71003E+00   -4.74080E+00
+ u,v,w direction cosines:    3.27092E-01    5.49537E-01   -7.68779E-01
+ energy = 4.86434E-01    weight = 6.46819E-01    time = 1.13764E+00
+sqrt(x**2+y**2+z**2) = 8.74070E+00
+ the distance to surface         1   from the last event is 8.86619E+00
+ the distance to collision from the last event is 9.52207E+00
+ the number of neutron  collisions so far in this history is 2.
+
+
+
+
+
+
+1problem summary                                                                                                           
+
+      run terminated because  17 particles got lost.
++                                                                                                    10/15/26 11:52:34 
+
+ =====>      30.08 M histories/hr    (based on wall-clock time in mcrun)
+
+
+      Godiva probe - lost particles     probid =  10/15/26 11:52:33 
+
+ neutron creation    tracks      weight        energy            neutron loss        tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source                  38    1.8095E+00    1.7289E+00          escape                   0    0.            0.        
+ nucl. interaction        0    0.            0.                  energy cutoff            0    0.            0.        
+ particle decay           0    0.            0.                  time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    1.2925E-01    9.9253E-03          weight cutoff            4    4.2297E-02    6.0264E-03
+ e or t importance        0    0.            0.                  e or t importance        0    0.            0.        
+ dxtran                   0    0.            0.                  dxtran                   0    0.            0.        
+ forced collisions        0    0.            0.                  forced collisions        0    0.            0.        
+ exp. transform           0    0.            0.                  exp. transform           0    0.            0.        
+ upscattering             0    0.            0.                  downscattering           0    0.            4.6433E-01
+ photonuclear             0    0.            0.                  capture                  0    1.1690E-01    3.7115E-02
+ (n,xn)                   0    0.            0.                  loss to (n,xn)           0    0.            0.        
+ prompt fission           0    0.            0.                  loss to fission          0    9.1072E-01    6.0341E-01
+ delayed fission          0    0.            0.                  nucl. interaction        0    0.            0.        
+ prompt photofis          0    0.            0.                  particle decay           0    0.            0.        
+ tabular boundary         0    0.            0.                  tabular boundary         0    0.            0.        
+ tabular sampling         0    0.            0.                  elastic scatter          0    0.            0.        
+     total               38    1.9388E+00    1.7388E+00              total                4    1.0699E+00    1.1109E+00
+
+   number of neutrons banked                       0        average time of (shakes)              cutoffs
+   neutron tracks per source particle     1.8095E+00          escape            0.0000E+00          tco   1.0000E+33
+   neutron collisions per source particle 1.9524E+00          capture           9.4555E-01          eco   0.0000E+00
+   total neutron collisions                       41          capture or escape 9.4555E-01          wc1  -5.0000E-01
+   net multiplication              1.0000E+00 0.0000          any termination   7.2662E-01          wc2  -2.5000E-01
+
+ computer time so far in this run     0.05 minutes            maximum number ever in bank         0
+ computer time in mcrun               0.00 minutes            bank overflows to backup file       0
+ source particles per minute            1.2600E+03
+ random numbers generated                     1435            most random numbers used was         204 in history           4
+
+ range of sampled source weights = 1.0000E+00 to 1.0000E+00
+
+     17 particles got lost.
+  warning.         17 particles got lost
+
+ number of histories processed by each thread
+           2           3           2           3           3           3           2           3
+1neutron  activity in each cell                                                                         print table 126
+
+                       tracks     population   collisions   collisions     number        flux        average      average
+              cell    entering                               * weight     weighted     weighted   track weight   track mfp
+                                                          (per history)    energy       energy     (relative)      (cm)
+
+        1        1          38           38          203    6.2468E+00   8.0575E-01   1.3435E+00   6.6238E-01   2.6669E+00
+
+           total            38           38          203    6.2468E+00
+1keff results for: Godiva probe - lost particles                                                        probid =  10/15/26 11:52:33 
+
+ 
+  warning.  no final keff estimate made because no active cycles run.
+
+ the initial fission neutron source distribution used the   1 source points that were input on the ksrc card.
+ the criticality problem was scheduled to skip  20 cycles and run a total of   70 cycles with nominally     5000 neutrons per cycle.
+ this problem has run   0 inactive cycles with       21 neutron histories and    0 active cycles with           0 neutron histories.
+
+
+ this calculation did not finish because only    0 of the requested   70 keff cycles were completed.
+ all cells with fissionable material were sampled and had fission neutron source points.
+
+
+1individual and average keff estimator results by cycle
+
+  keff     neutron    keff estimators by cycle           average keff estimators and deviations                average k(c/a/t)
+ cycle   histories   k(coll)  k(abs)  k(track)     k(coll)  st dev    k(abs)  st dev   k(track) st dev    k(c/a/t)  st dev    fom
+
+
+ ***********************************************************************************************************************
+
+ dump no.    2 on file runtpe.h5     nps =          21     coll =             41     ctm =        0.00   nrn =          
+    1435
+
+         4 warning messages so far.
+
+
+ run terminated because  17 particles got lost.
+
+ computer time =    0.05 minutes
+
+ mcnp6 version 6.3.0 01/26/23                     10/15/26 11:52:34                     probid =  10/15/26 11:52:33 

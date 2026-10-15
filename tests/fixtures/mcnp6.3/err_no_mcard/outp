@@ -1,0 +1,176 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+  [LANL copyright and export-control notice removed]
+  
+1mcnp6 version 6.3.0 ld=01/26/23                     10/15/26 11:52:35 
+ *************************************************************************                 probid =  10/15/26 11:52:35 
+Source version = release/6.3-55762725c4
+ i=err_no_mcard.i o=outp tasks 8 xsdir=xsdir71
+
+ 
+  comment.  Physics models disabled.
+         1-       Godiva probe - blank line inside the data block
+         2-       c Hypothese: H5 format des erreurs fatales; code retour en erreur fatale (H4)
+         3-       c Attendu: fatal error. no m card for material no. 1
+         4-        1    1  -18.74  -1  imp:n=1   $ enriched uranium sphere (godiva)
+  fatal error.  no m card for material no. 1
+         5-        2    0           1  imp:n=0   $ all space outside the sphere
+         6-       
+         7-        1    so 8.7407
+         8-       
+         9-        kcode 5000 1.0 20 70
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+        10-        ksrc  0 0 0
+        11-       
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =       19073486328125 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+ 
+  comment.  total fission nubar data are being used.
+1     initial source from ksrc card.                                                                    print table 90
+
+ original number of points                             1
+    points not in any cell                       0
+    points in cells of zero importance           0
+    points in void cells                         0
+    points in ambiguous cells                    0
+ total points rejected                                 0
+ points remaining                                      1
+ points after expansion or contraction              5000
+ nominal source size                                5000
+
+ initial guess for k(eff.)                      1.000000
+
+ cycles to skip before tallying                       20
+
+ number of keff cycles that can be stored           2500
+
+ 
+  warning.  no cross-section tables are called for in this problem.
+1cell volumes and masses                                                                                print table 50
+
+              cell     atom          gram         input       calculated                            reason volume
+                      density       density       volume        volume         mass       pieces    not calculated
+
+        1        1 -1.87400E+01   0.00000E+00   0.00000E+00   2.79722E+03   0.00000E+00      1                      
+        2        2  0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00   0.00000E+00      0      infinite        
+1surface areas                                                                                          print table 50
+
+           surface      input      calculated    reason area
+                        area          area       not calculated
+
+        1        1      0.00000E+00   9.60069E+02                   
+1cells                                                                                                  print table 60
+
+                               atom        gram                                            neutron                                     
+              cell      mat   density     density     volume       mass            pieces importance                                   
+
+        1        1        0 -1.87400E+01 0.00000E+00 2.79722E+03 0.00000E+00           1  1.0000E+00                                   
+        2        2        0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00           0  0.0000E+00                                   
+
+ total                                               2.79722E+03 0.00000E+00
+1surfaces                                                                                               print table 70
+
+           surface        trans  type   surface coefficients
+
+        1        1                so    8.7407000E+00
+ 
+  comment.  threading will be used when possible in portions of mcnp6.
+ 
+  comment.  threading will be used for n/p/e table physics.
+ 
+  comment.  threading will generally not be used for model physics.
+
+         2 warning messages so far.
+
+          1 fatal error so far.
+1physical constants                                                                                     print table 98
+
+
+       name                    value     description
+
+ huge_float      1.0000000000000E+36     infinity
+        pie      3.1415926535898E+00     pi
+      euler      5.7721566490153E-01     euler constant
+     avogad      6.0220434469282E+23     avogadro number (molecules/mole)
+      aneut      1.0086649670000E+00     neutron mass (amu)
+      avgdn      5.9703109000000E-01     avogadro number/neutron mass (1.e-24*molecules/mole/amu)
+      slite      2.9979250000000E+02     speed of light (cm/shake)
+     planck      4.1357320000000E-13     planck constant (mev shake)
+      fscon      1.3703930000000E+02     inverse fine structure constant h*c/(2*pi*e**2)
+
+ particle masses:   ipt       mass (mev)           particle      anti-particle
+
+                      1    9.3958000000000E+02     neutron        5   Aneutron
+                      3    5.1100800000000E-01     electron       8   positron
+                      4    1.0565835700000E+02     mu_minus      16   mu_plus 
+                      9    9.3827199800000E+02     proton        19   Aproton 
+                     10    1.1156830000000E+03     lambda0       25   Alambda0
+                     11    1.1893700000000E+03     sigma+        26   Asigma+ 
+                     12    1.1974490000000E+03     sigma-        27   Asigma- 
+                     13    1.3148300000000E+03     xi0           28   Axi0    
+                     14    1.3213100000000E+03     xi_minus      29   xi_plus 
+                     15    1.6724500000000E+03     omega-        30   Aomega- 
+                     20    1.3957018000000E+02     pi_plus       35   pi_minus
+                     21    1.3497660000000E+02     pi_zero 
+                     22    4.9367700000000E+02     k_plus        36   k_minus 
+                     23    4.9767200000000E+02     k0_short
+                     24    4.9767200000000E+02     k0_long 
+                     31    1.8756127600000E+03     deuteron
+                     32    2.8089208600000E+03     triton  
+                     33    2.8083913200000E+03     helion  
+                     34    3.7273790400000E+03     alpha   
+
+
+ fission q-values:     nuclide    q(mev)   nuclide    q(mev)
+                         90232    171.91     91233    175.57
+                         92233    180.84     92234    179.45
+                         92235    180.88     92236    179.50
+                         92237    180.40     92238    181.31
+                         92239    180.40     92240    180.40
+                         93237    183.67     94238    186.65
+                         94239    189.44     94240    186.36
+                         94241    188.99     94242    185.98
+                         94243    187.48     95241    190.83
+                         95242    190.54     95243    190.25
+                         96242    190.49     96244    190.49
+                         other    180.00
+
+ parallel options:
+
+     omp
+
+     default datapath: /path/to/MCNP_DATA/xsdir
+                       DATAPATH must be set by user
+
+ the following conditional compilation symbols were defined:
+
+     LINUX
+     OMP_ENABLED
+     PLOT
+     UNIX
+     XLIB
+
+         2 warning messages so far.
+
+          1 fatal error so far.
+
+
+ run terminated because of fatal errors.
+
+ computer time =    0.00 minutes
+
+ mcnp6 version 6.3.0 01/26/23                     10/15/26 11:52:35                     probid =  10/15/26 11:52:35 

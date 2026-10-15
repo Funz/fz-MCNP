@@ -1,11 +1,17 @@
 {
     "id": "MCNP",
     "varprefix": "%",
+    "var_delim": "()",
     "formulaprefix": "@",
-    "delim": "()",
+    "formula_delim": "{}",
     "commentline": "C ",
     "output": {
-        "mean_keff": "grep 'the final estimated combined' outp | head -n 1 | awk '{match($0, /keff = ([0-9.]+)/, arr); print arr[1]}'",
-        "sigma_keff": "grep 'the final estimated combined' outp | head -n 1 | awk '{match($0, /standard deviation of ([0-9.]+)/, arr); print arr[1]}'"
+        "mcnp_status": "python://(lambda re, read, grep, base_dir: (lambda f: 'NO OUTPUT' if f is None else (lambda t, c: ('FATAL ERROR: ' + c(m.group(1)) if (m := re.search(r'^ *fatal error\\.(.*)$', t, re.M)) else 'BAD TROUBLE: ' + (c(m.group(3)) + ' (' + c(m.group(1)) + (', ' + c(m.group(2)) if m.group(2) else '') + ')' if m.group(3) else c(m.group(1))) if (m := re.search(r'^ *bad trouble in ([^\\n]*)\\n\\s*(?:(source particle no\\.[^\\n]*)\\n\\s*)?([^\\n]*\\S)?', t, re.M)) else 'ABNORMAL END: run terminated because ' + c(m.group(1)) if (m := re.search(r'^ *run terminated because(.*)$', t, re.M)) else 'NO KEFF: ' + c(m.group(1)) if (m := re.search(r'^ *warning\\. +(no final keff estimate.*)$', t, re.M)) else 'NORMAL END' if re.search(r'^ *run terminated when', t, re.M) else ('NO END BANNER' if f == 'outp' else 'NO OUTPUT')))(read(f), (lambda s: ' '.join(s.split()))))(next((f for f in ('outp', 'out.txt') if (base_dir / f).is_file()), None)))(re, lambda p, _read=read: _read(p).replace('\\r\\n', '\\n').replace('\\r', '\\n'), grep, base_dir)",
+        "mean_keff": "python://(lambda re, read, grep, base_dir: (lambda v: v[-1] if v else None)(grep(r'final estimated combined collision/absorption/track-length keff = (\\S+) with an estimated standard deviation of (\\S+)', 'outp', group=1, all=True) if (base_dir / 'outp').is_file() else []))(re, lambda p, _read=read: _read(p).replace('\\r\\n', '\\n').replace('\\r', '\\n'), grep, base_dir)",
+        "sigma_keff": "python://(lambda re, read, grep, base_dir: (lambda v: v[-1] if v else None)(grep(r'final estimated combined collision/absorption/track-length keff = (\\S+) with an estimated standard deviation of (\\S+)', 'outp', group=2, all=True) if (base_dir / 'outp').is_file() else []))(re, lambda p, _read=read: _read(p).replace('\\r\\n', '\\n').replace('\\r', '\\n'), grep, base_dir)",
+        "dkeff": "python://(lambda re, read, grep, base_dir: (lambda b: {m.group(1): float(m.group(2)) for m in re.finditer(r'^ *(\\d+) +(\\S+) +(\\S+)', b.group(1), re.M)} if b else {})(re.match(r'[^\\n]*((?:\\n *\\d+ +\\S+ +\\S+ *(?=\\n|$))+)', (lambda t: t[t.rfind('perturbation'):] if re.search(r'perturbation +k\\(trk ln\\) +std\\. dev\\.', t) else '')(read('outp') if (base_dir / 'outp').is_file() else ''))))(re, lambda p, _read=read: _read(p).replace('\\r\\n', '\\n').replace('\\r', '\\n'), grep, base_dir)",
+        "sigma_dkeff": "python://(lambda re, read, grep, base_dir: (lambda b: {m.group(1): float(m.group(3)) for m in re.finditer(r'^ *(\\d+) +(\\S+) +(\\S+)', b.group(1), re.M)} if b else {})(re.match(r'[^\\n]*((?:\\n *\\d+ +\\S+ +\\S+ *(?=\\n|$))+)', (lambda t: t[t.rfind('perturbation'):] if re.search(r'perturbation +k\\(trk ln\\) +std\\. dev\\.', t) else '')(read('outp') if (base_dir / 'outp').is_file() else ''))))(re, lambda p, _read=read: _read(p).replace('\\r\\n', '\\n').replace('\\r', '\\n'), grep, base_dir)",
+        "tally": "python://(lambda re, read, grep, base_dir: {m.group(1): float(m.group(2).split()[-2]) for m in re.finditer(r'^tally +(\\d+)[\\s\\S]*?^vals\\n([\\s\\S]*?)^tfc', read('mctal'), re.M)} if (base_dir / 'mctal').is_file() else {})(re, lambda p, _read=read: _read(p).replace('\\r\\n', '\\n').replace('\\r', '\\n'), grep, base_dir)",
+        "tally_relerr": "python://(lambda re, read, grep, base_dir: {m.group(1): float(m.group(2).split()[-1]) for m in re.finditer(r'^tally +(\\d+)[\\s\\S]*?^vals\\n([\\s\\S]*?)^tfc', read('mctal'), re.M)} if (base_dir / 'mctal').is_file() else {})(re, lambda p, _read=read: _read(p).replace('\\r\\n', '\\n').replace('\\r', '\\n'), grep, base_dir)"
     }
 }

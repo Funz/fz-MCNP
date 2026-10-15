@@ -1,0 +1,17 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+          [LANL copyright line removed]
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+ mcnp6 ver=6.3.0, ld=01/26/23  10/15/26 11:52:33                   
+Source version = release/6.3-55762725c4
+ m1    92235 -93.71  92238 -5.27  92234 -1.02  92235 -0.0  92238 -0.0  92234 -0.0  92235 -0.0  92238 -0.0  92234 -0.0  92235 -0.0  9
+ Expire parameter is input file data beyond column 128.
+
+ bad trouble in subroutine exemes of mcnp                             
+
+ input file data beyond column 128.

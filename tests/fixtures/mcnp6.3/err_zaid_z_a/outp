@@ -1,0 +1,48 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+  [LANL copyright and export-control notice removed]
+  
+1mcnp6 version 6.3.0 ld=01/26/23                     10/15/26 11:52:35 
+ *************************************************************************                 probid =  10/15/26 11:52:35 
+Source version = release/6.3-55762725c4
+ i=err_zaid_z_a.i o=outp tasks 8 xsdir=xsdir71
+
+ 
+  comment.  Physics models disabled.
+         1-       Godiva probe - Z and A mixed up in a ZAID
+         2-       c Hypothese: H21 ZAID inexistant (Cr de masse 28, skill v0.2): message et sous-programme du bad trouble
+         3-       c Attendu: cross-section tables missing for zaid = 24028.00c + bad trouble in subroutine rhoden
+         4-        1    1  -18.74  -1  imp:n=1   $ enriched uranium sphere (godiva)
+         5-        2    0           1  imp:n=0   $ all space outside the sphere
+         6-       
+         7-        1    so 8.7407
+         8-       
+         9-        kcode 5000 1.0 20 70
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+        10-        ksrc  0 0 0
+        11-        m1    92235 -93.71  92238 -5.27  92234 -1.02  24028.00c -0.01
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =       19073486328125 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+ 
+  comment.  total fission nubar data are being used.
+ 
+  fatal error.   cross-section tables missing for zaid = 24028.00c
+1material composition                                                                                   print table 40
+
+ bad trouble in subroutine rhoden of imcn                             
+
+ atomic weight of  24028 is zero.

@@ -1,0 +1,1146 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+  [LANL copyright and export-control notice removed]
+  
+1mcnp6 version 6.3.0 ld=01/26/23                     10/15/26 11:53:01 
+ *************************************************************************                 probid =  10/15/26 11:53:01 
+Source version = release/6.3-55762725c4
+ i=var_ksrc_nonfissile.i o=outp tasks 8 xsdir=xsdir71
+
+ 
+  comment.  Physics models disabled.
+         1-       Godiva probe - water-reflected sphere, KSRC in the reflector only
+         2-       c Hypothese: H20 point KSRC dans une cellule non fissile d'importance non nulle (skill v0.2 : non rejete)
+         3-       c Attendu: pas d'erreur; premiers cycles a k tres faible; keff final a comparer a var_ksrc_fuel
+         4-        1    1  -18.74  -1     imp:n=1   $ enriched uranium sphere (godiva)
+         5-        2    2  -1.0     1 -2  imp:n=1   $ water reflector 8.7407 - 20 cm
+         6-        3    0           2     imp:n=0   $ outside world
+         7-       
+         8-        1    so 8.7407
+         9-        2    so 20
+        10-       
+        11-        kcode 5000 1.0 20 70
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+        12-        ksrc  15 0 0
+        13-        m1    92235 -93.71  92238 -5.27  92234 -1.02
+        14-        m2    1001 2  8016 1
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =       19073486328125 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+ 
+  comment.  total fission nubar data are being used.
+ 
+  warning.  kcode usually needs s(a,b) physics (mt card)
+ 
+  warning.    2 materials had unnormalized fractions. print table 40.
+1cells                                                                                                  print table 60
+
+                               atom        gram                                            neutron                                     
+              cell      mat   density     density     volume       mass            pieces importance                                   
+
+        1        1        1  4.79838E-02 1.87400E+01 2.79722E+03 5.24200E+04           1  1.0000E+00                                   
+        2        2        2  1.00309E-01 1.00000E+00 3.07131E+04 3.07131E+04           1  1.0000E+00                                   
+        3        3        0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00           0  0.0000E+00                                   
+
+ total                                               3.35103E+04 8.31331E+04
+ 
+  comment.  threading will be used when possible in portions of mcnp6.
+ 
+  comment.  threading will be used for n/p/e table physics.
+ 
+  comment.  threading will generally not be used for model physics.
+
+         3 warning messages so far.
+1cross-section tables                                                                                   print table 100
+     XSDIR used: /path/to/MCNP_DATA/xsdir/xsdir71
+
+     table    length
+
+                        tables from file 71/293.6/10010_71.02c                                           
+
+   1001.02c    3652  10010  ENDF/B-VII.1 library at 293.6 K - NJOY 99.259                         mat 125      09/17/13
+                     Energy range:   1.00000E-11  to  2.00000E+01 MeV.
+                     particle-production data for deuterons being expunged from   1001.02c          
+
+                        tables from file 71/293.6/80160_71.02c                                           
+
+   8016.02c  171194  80160  ENDF/B-VII.1 library at 293.6 K - NJOY 99.259                         mat 825      09/17/13
+                     Energy range:   1.00000E-11  to  1.50000E+02 MeV.
+                     particle-production data for protons   being expunged from   8016.02c          
+                     particle-production data for deuterons being expunged from   8016.02c          
+                     particle-production data for tritons   being expunged from   8016.02c          
+                     particle-production data for alphas    being expunged from   8016.02c          
+
+                        tables from file 71/293.6/922340_71.02c                                          
+
+  92234.02c  346624  922340  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9225      09/17/13
+                     Energy range:   1.00000E-11  to  3.00000E+01 MeV.
+                     probability tables used from 1.5000E-03 to 1.0000E-01 mev.
+
+                        tables from file 71/293.6/922350_71.02c                                          
+
+  92235.02c  680795  922350  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9228      09/17/13
+                     Energy range:   1.00000E-11  to  2.00000E+01 MeV.
+                     probability tables used from 2.2500E-03 to 2.5000E-02 mev.
+
+                        tables from file 71/293.6/922380_71.02c                                          
+
+  92238.02c 1318483  922380  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9237      09/17/13
+                     Energy range:   1.00000E-11  to  3.00000E+01 MeV.
+                     probability tables used from 2.0000E-02 to 1.4903E-01 mev.
+
+  total     2520748
+
+1particles and energy limits                                                                            print table 101
+
+                         particle      maximum       smallest      largest       always        always
+                         cutoff        particle      table         table         use table     use model
+   particle type         energy        energy        maximum       maximum       below         above
+
+    1  n    neutron     0.0000E+00    1.0000E+36    2.0000E+01    1.5000E+02    1.0000E+36    1.0000E+36
+ 
+  comment.  setting up hash-based fast table search for xsec tables
+
+ ------------------------------------------------------------------------------------------
+ =====> Set up arrays for hash-based fast table search for xsec data
+
+    number of hash bins   =     8192
+    min hash table energy =  1.00000E-11
+    max hash table energy =  1.50000E+02
+
+           nuclide      ne      emin        emax     ave_bins  min_bins  max_bins
+            1001.02c     590 1.00000E-11 2.00000E+01       0.1       0.0       1.0
+            8016.02c    2917 1.00000E-11 1.50000E+02       0.4       0.0      33.0
+           92234.02c   25480 1.00000E-11 3.00000E+01       3.1       0.0     152.0
+           92235.02c   76525 1.00000E-11 2.00000E+01       9.3       0.0     199.0
+           92238.02c  157754 1.00000E-11 3.00000E+01      19.3       0.0     421.0
+
+ ------------------------------------------------------------------------------------------
+
+
+ ***********************************************************************************************************************
+
+ dump no.    1 on file runtpe.h5     nps =           0     coll =              0     ctm =        0.00   nrn =          
+       0
+
+ source distribution written to file srctp        cycle=     0
+
+         3 warning messages so far.
+
+ comment. 
+ comment. ----------------------------------------------------------------------
+ comment. The MESH (adaptive, axis-aligned, cartesian) to be used for computing  
+ comment. Shannon entropy, fission-matrix tallies (if used), and source 
+ comment. convergence checking is initially defined by:
+ comment.     max mesh spacing for automesh =  1.0779E+01
+ comment. 
+ comment.     total mesh cells = 27
+ comment. 
+ comment.     Xbins=    3   Xmin=-7.7138E+00   Xmax= 8.7300E+00   dx= 5.4813E+00
+ comment.     Ybins=    3   Ymin=-8.6493E+00   Ymax= 8.7088E+00   dy= 5.7860E+00
+ comment.     Zbins=    3   Zmin=-8.6380E+00   Zmax= 8.5800E+00   dz= 5.7394E+00
+ comment. 
+ comment. the mesh will be automatically extended if necessary,
+ comment. preserving the original mesh cells and spacing.
+ comment. ----------------------------------------------------------------------
+ comment. 
+
+1estimated keff results by cycle                                                                        print table 175
+
+ cycle     1    k(collision)  0.271518    prompt removal lifetime(abs)  5.9264E+03    source points generated   1390
+                                          source_entropy =      0.73918
+1     event log for lost particle no.   1          nps =        5773        ijk =      177668927897801
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.844+00  1.485+00 -6.424-01 -2.782-01  8.902-01  3.608-01 4.167+00 3.597+00   particle= neutron       4                   
+    sur    2  7.871+00 -3.739+00 -6.790-01  2.261-01 -9.703-01 -8.572-02 4.053+00 2.253+00   surf=     1             137                 
+    sur    3  9.927+00 -1.733+01 -1.039+00 -2.218-01 -8.881-01  4.027-01 1.583-02 2.253+00   surf=     2             219                 
+    ter    3  9.927+00 -1.733+01 -1.039+00 -2.218-01 -8.881-01  4.027-01 1.583-02 2.253+00   escape                  219                 
+1     event log for lost particle no.   1          nps =        5780        ijk =      105343940512205
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  2.193+00  7.914+00 -2.981+00  9.222-01  2.171-01 -3.200-01 3.367+00 3.597+00   particle= neutron       2                   
+    sur    2  2.201+00  7.915+00 -2.984+00  9.222-01  2.171-01 -3.200-01 3.367+00 3.597+00   surf=     1             3                   
+    sur    1  5.927+00  5.737+00 -2.892+00 -1.791-01 -9.544-01  2.388-01 8.543-01 3.596+00   surf=     1             43                  
+    sur    2  8.711+00 -3.489-01 -6.364-01  9.887-01  1.447-01 -3.935-02 8.438-01 2.444+00   surf=     1             134                 
+    sur    1  7.981+00 -3.254+00  1.451+00 -8.297-01 -5.315-01 -1.708-01 2.092-08 2.006+00   surf=     1             730                 
+    ter    1  7.952+00 -3.273+00  1.445+00 -8.297-01 -5.315-01 -1.708-01 2.092-08 3.917-02   weight cutoff           825                 
+1     event log for lost particle no.   1          nps =        5784        ijk =      118527559283229
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -6.716-01  1.519-01 -8.638+00  2.598-01  1.978-01  9.452-01 1.656+00 3.597+00   particle= neutron       2                   
+    sur    2  2.028+00  8.087+00 -2.623+00  1.601-01  9.721-01  1.715-01 1.646+00 1.880+00   surf=     1             135                 
+    sur    1  4.146+00  7.198+00 -2.722+00  2.800-01 -9.226-01 -2.652-01 4.691-01 1.880+00   surf=     1             175                 
+    ter    1 -1.176+00  1.847+00 -3.789+00 -4.391-01  2.069-01  8.743-01 3.907-01 2.353-01   weight cutoff           372                 
+1     event log for lost particle no.   1          nps =        5789        ijk =      111286490570505
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.769+00  8.065-02  5.515+00 -1.634-01  9.772-01  1.357-01 6.448+00 3.597+00   particle= neutron       2                   
+    sur    2  6.643+00  8.355-01  5.620+00 -1.634-01  9.772-01  1.357-01 6.448+00 3.597+00   surf=     1             3                   
+    sur    1  1.424+00  5.811+00  6.372+00 -7.832-01 -6.194-01 -5.385-02 4.257-07 3.553+00   surf=     1             338                 
+    ter    1  1.042+00  5.546+00  6.418+00  2.916-01  6.042-01  7.416-01 4.226-07 3.897-02   weight cutoff           520                 
+1     event log for lost particle no.   1          nps =        5792        ijk =      191337208596925
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.283+00 -2.762+00 -8.229-02 -3.252-01  9.404-01 -9.989-02 2.058+00 3.597+00   particle= neutron       4                   
+    sur    2  4.971+00 -5.827+00  4.211+00  1.518-01 -5.387-01  8.287-01 9.768-02 1.423+00   surf=     1             196                 
+    sur    3 -3.644-01 -1.861+01 -7.309+00 -9.155-01 -4.007-01 -3.506-02 5.293-08 4.234-01   surf=     2             5042                
+    ter    3 -3.644-01 -1.861+01 -7.309+00 -9.155-01 -4.007-01 -3.506-02 5.293-08 4.234-01   escape                  5042                
+1     event log for lost particle no.   1          nps =        5796        ijk =      238341955787021
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  5.284+00 -9.276-01  6.013+00  5.269-01  5.124-01 -6.781-01 1.064+00 3.597+00   particle= neutron       2                   
+    sur    2  8.323+00 -2.751-01  2.656+00  6.977-01 -2.255-01 -6.800-01 6.136-01 2.904+00   surf=     1             48                  
+    sur    3  1.892+01 -1.169+00 -6.377+00  7.792-01  6.004-01  1.801-01 3.317-08 1.812+00   surf=     2             1175                
+    ter    3  1.892+01 -1.169+00 -6.377+00  7.792-01  6.004-01  1.801-01 3.317-08 1.812+00   escape                  1175                
+1     event log for lost particle no.   1          nps =        5799        ijk =       26386394219537
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.632+00  8.678-01 -9.860-01  5.499-01 -8.336-01 -5.270-02 1.836+00 3.597+00   particle= neutron       2                   
+    sur    2  8.643+00  8.509-01 -9.871-01  5.499-01 -8.336-01 -5.270-02 1.836+00 3.597+00   surf=     1             3                   
+    sur    1  7.754+00  9.890-01 -3.911+00 -7.608-01  4.690-02  6.473-01 3.598-08 3.359+00   surf=     1             380                 
+    ter    1  7.607+00  9.981-01 -3.786+00 -7.608-01  4.690-02  6.473-01 3.598-08 8.824-02   weight cutoff           535                 
+1     event log for lost particle no.   1          nps =        5801        ijk =      168606941953081
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.221+00 -4.384+00 -1.948+00  3.813-01 -5.895-01  7.121-01 1.160+00 3.597+00   particle= neutron       2                   
+    sur    2  7.280+00 -4.475+00 -1.837+00  3.813-01 -5.895-01  7.121-01 1.160+00 3.597+00   surf=     1             3                   
+    sur    1  6.098+00 -6.097+00  1.426+00 -9.926-01 -9.867-02  7.057-02 9.123-02 3.597+00   surf=     1             36                  
+    sur    2 -2.376+00 -7.700+00  3.386+00 -6.068-01 -7.364-01  2.992-01 8.848-02 1.715+00   surf=     1             208                 
+    sur    3 -1.289+01 -7.201+00  1.349+01 -7.099-01 -2.387-01  6.627-01 1.378-07 1.414+00   surf=     2             825                 
+    ter    3 -1.289+01 -7.201+00  1.349+01 -7.099-01 -2.387-01  6.627-01 1.378-07 1.414+00   escape                  825                 
+1     event log for lost particle no.   1          nps =        5803        ijk =        6722831668897
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -4.282-01  4.328+00 -7.575+00  6.800-01 -1.994-01  7.056-01 3.917+00 3.597+00   particle= neutron       4                   
+    ter    1 -1.581+00 -3.290+00 -5.719-01  5.474-01 -7.100-01 -4.430-01 2.608-01 2.119-01   weight cutoff           404                 
+1     event log for lost particle no.   1          nps =        5808        ijk =      210032598832381
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  5.110+00 -1.414+00 -1.246+00  6.735-01  3.942-01 -6.254-01 4.172+00 3.597+00   particle= neutron       2                   
+    sur    2  7.585+00  1.896+00 -3.908+00  4.071-01  7.964-01 -4.472-01 4.169+00 2.634+00   surf=     1             93                  
+    sur    3  7.946+00  1.324+01 -1.271+01  3.385-01  8.408-01 -4.224-01 1.232-07 4.874-01   surf=     2             3349                
+    ter    3  7.946+00  1.324+01 -1.271+01  3.385-01  8.408-01 -4.224-01 1.232-07 4.874-01   escape                  3349                
+1     event log for lost particle no.   1          nps =        5815        ijk =      104032896357457
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  2.299+00 -2.439+00  8.043+00  5.528-01  2.601-01 -7.917-01 1.616+00 3.597+00   particle= neutron       2                   
+    sur    2  8.692+00 -5.335-01  7.475-01  9.954-01 -3.168-02 -9.041-02 4.711-01 1.875+00   surf=     1             144                 
+    sur    3  1.773+01 -6.943+00 -6.109+00  7.719-01 -4.585-01 -4.404-01 5.178-08 3.350-01   surf=     2             4822                
+    ter    3  1.773+01 -6.943+00 -6.109+00  7.719-01 -4.585-01 -4.404-01 5.178-08 3.350-01   escape                  4822                
+1     event log for lost particle no.   1          nps =        5824        ijk =       89202951958589
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.066+00 -4.893+00  1.587+00  7.016-01 -1.664-01  6.929-01 1.989-01 3.597+00   particle= neutron       2                   
+    sur    2  7.066+00 -4.894+00  1.587+00  7.016-01 -1.664-01  6.929-01 1.989-01 3.597+00   surf=     1             3                   
+    sur    1  8.198+00 -1.561+00  2.598+00 -1.341-01  9.337-01 -3.319-01 3.587-07 3.539+00   surf=     1             255                 
+    ter    1  8.198+00 -1.488+00  2.564+00  6.041-01  4.519-01 -6.564-01 3.510-07 2.013-02   weight cutoff           441                 
+1     event log for lost particle no.   1          nps =        5828        ijk =      112674378229645
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.164+00  4.006+00 -2.315-01 -3.290-02 -9.820-01 -1.859-01 4.571+00 3.597+00   particle= neutron       2                   
+    sur    2  8.125+00  2.777+00 -1.638+00  4.670-01  2.455-01 -8.495-01 5.704-01 2.640+00   surf=     1             105                 
+    sur    3  5.455+00 -7.734+00 -1.762+01  4.380-01 -6.816-01 -5.862-01 3.207-08 1.290+00   surf=     2             1941                
+    ter    3  5.455+00 -7.734+00 -1.762+01  4.380-01 -6.816-01 -5.862-01 3.207-08 1.290+00   escape                  1941                
+1     event log for lost particle no.   1          nps =        5829        ijk =      207822921760937
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.964+00  5.219+00  5.857-01 -4.416-01 -5.665-01  6.957-01 3.111+00 3.597+00   particle= neutron       8                   
+    sur    2  8.332+00  1.430+00 -2.220+00  6.601-01  2.690-03 -7.512-01 1.454-01 1.524+00   surf=     1             193                 
+    sur    1  8.335+00 -1.296+00 -2.291+00 -5.967-01  6.367-01  4.884-01 9.232-08 1.503+00   surf=     1             447                 
+    ter    1  8.271+00 -1.175+00 -2.135+00  7.904-01 -2.097-01  5.756-01 9.338-08 2.301-02   weight cutoff           554                 
+1     event log for lost particle no.   1          nps =        5847        ijk =       58521361671377
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.913+00  3.412+00 -9.600-01 -1.990-01 -6.051-01  7.709-01 7.130+00 3.597+00   particle= neutron       2                   
+    sur    2  8.080+00  3.269+00 -6.561-01  8.862-01  4.414-01 -1.406-01 7.036+00 2.725+00   surf=     1             89                  
+    sur    3  1.808+01  8.250+00 -2.243+00  8.862-01  4.414-01 -1.406-01 7.036+00 2.725+00   surf=     2             90                  
+    ter    3  1.808+01  8.250+00 -2.243+00  8.862-01  4.414-01 -1.406-01 7.036+00 2.725+00   escape                  90                  
+1     event log for lost particle no.   1          nps =        5854        ijk =      113204223161589
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.209+00  4.787+00 -1.138+00 -9.754-01  1.623-01 -1.489-01 2.890+00 3.597+00   particle= neutron       2                   
+    sur    2  6.424+00  5.920+00 -2.972-01  6.349-01  4.653-01  6.168-01 1.543-01 1.022+00   surf=     1             219                 
+    ter    2  1.677+01  2.857+00  4.094+00 -7.280-01 -3.993-01  5.573-01 6.926-08 2.491-01   weight cutoff           3897                
+1     event log for lost particle no.   1          nps =        5858        ijk =      190006778547141
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  1.209+00 -8.649+00 -5.118-02 -4.098-01 -3.337-01 -8.489-01 3.116+00 3.597+00   particle= neutron       2                   
+    sur    2  1.199+00 -8.658+00 -7.287-02 -4.098-01 -3.337-01 -8.489-01 3.116+00 3.597+00   surf=     1             3                   
+    sur    1  2.317-01 -8.484+00 -2.088+00 -1.177-01  9.095-01 -3.986-01 4.962-01 3.597+00   surf=     1             34                  
+    sur    2  1.074+00 -8.418+00 -2.095+00  6.164-01 -7.864-01 -4.067-02 4.872-01 2.548+00   surf=     1             113                 
+    sur    1  7.112+00 -4.136+00  2.952+00 -6.555-01  7.516-01  7.376-02 5.285-08 1.389+00   surf=     1             1554                
+    ter    1  7.101+00 -4.124+00  2.954+00 -6.183-01  3.947-01  6.797-01 5.182-08 1.618-02   weight cutoff           1669                
+1     event log for lost particle no.   1          nps =        5870        ijk =       43331001101877
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  4.848+00  7.131+00  1.142+00  7.838-01 -4.250-01  4.528-01 2.549+00 3.597+00   particle= neutron       2                   
+    sur    2  5.054+00  7.019+00  1.261+00  7.838-01 -4.250-01  4.528-01 2.549+00 3.597+00   surf=     1             3                   
+    sur    1  5.616+00  6.393+00  1.998+00 -2.668-01 -5.776-01  7.715-01 3.794-01 3.597+00   surf=     1             18                  
+    sur    2  6.115+00  5.730+00  2.483+00  8.874-01 -4.551-01  7.351-02 2.441-01 2.561+00   surf=     1             87                  
+    sur    1  7.322+00  4.607+00 -1.252+00 -9.759-01 -1.514-01  1.569-01 6.343-08 2.432+00   surf=     1             369                 
+    ter    1  7.314+00  4.606+00 -1.251+00 -9.759-01 -1.514-01  1.569-01 6.343-08 8.872-02   weight cutoff           482                 
+1     event log for lost particle no.   1          nps =        5881        ijk =       68116491714425
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.568+00  1.620+00  2.198-01 -9.230-01 -3.806-01 -5.692-02 5.163+00 3.597+00   particle= neutron       2                   
+    ter    1  7.247+00  1.131+00 -3.963+00  9.174-01 -3.976-01 -1.857-02 1.141-01 2.451-01   weight cutoff           494                 
+1     event log for lost particle no.   1          nps =        5884        ijk =      173797248471789
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -4.895-01 -2.491+00  3.348+00  3.436-01  6.659-01  6.622-01 2.315+00 3.597+00   particle= neutron       2                   
+    sur    2 -4.909+00  3.627+00  6.257+00 -4.921-01  8.652-01  9.626-02 2.235+00 2.430+00   surf=     1             101                 
+    sur    3 -1.187+01  1.297+01  9.540+00 -2.725-01  9.619-01  2.134-02 1.410-01 2.430+00   surf=     2             174                 
+    ter    3 -1.187+01  1.297+01  9.540+00 -2.725-01  9.619-01  2.134-02 1.410-01 2.430+00   escape                  174                 
+1     event log for lost particle no.   1          nps =        5882        ijk =       88360778288549
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.106+00 -1.604+00 -1.506+00  2.259-01  4.383-01  8.700-01 1.323+00 3.597+00   particle= neutron       2                   
+    sur    2  8.601+00 -1.258+00 -9.198-01  7.550-01 -6.329-01  1.715-01 1.152+00 2.323+00   surf=     1             99                  
+    sur    1  7.086+00 -4.415+00 -2.588+00 -8.899-01 -2.880-01 -3.538-01 2.501-02 2.323+00   surf=     1             144                 
+    sur    2  6.641+00 -4.585+00 -3.358+00 -7.860-02 -9.898-01  1.185-01 2.415-02 8.071-01   surf=     1             258                 
+    sur    1  6.543+00 -4.926+00 -3.053+00 -1.240-01  7.876-01  6.035-01 1.948-02 8.071-01   surf=     1             266                 
+    sur    2  6.592+00 -4.869+00 -3.040+00  6.983-01 -3.666-01 -6.149-01 1.919-02 6.573-01   surf=     1             287                 
+    sur    1  5.057+00 -7.124+00 -2.788-01 -5.598-01  8.269-01 -5.249-02 7.572-08 6.454-01   surf=     1             478                 
+    ter    1  5.040+00 -7.100+00 -2.765-01 -5.731-01  4.280-01  6.989-01 7.211-08 1.969-02   weight cutoff           555                 
+1     event log for lost particle no.   1          nps =        5896        ijk =      124885659531485
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.943+00  3.561+00 -7.915-01  6.668-01 -7.061-01 -2.385-01 3.265-01 3.597+00   particle= neutron       2                   
+    sur    2  7.943+00  3.560+00 -7.918-01  6.668-01 -7.061-01 -2.385-01 3.265-01 3.597+00   surf=     1             3                   
+    sur    1  8.308+00  2.685+00 -4.178-01 -3.909-01 -2.964-01  8.714-01 2.785-01 3.597+00   surf=     1             11                  
+    sur    2  7.939+00  3.641+00 -3.251-01 -2.351-01  9.391-01 -2.505-01 5.485-02 1.458+00   surf=     1             237                 
+    sur    1  6.605-01  8.659+00 -9.965-01 -5.740-01 -2.138-01  7.904-01 3.803-08 1.350+00   surf=     1             611                 
+    ter    1  6.511-01  8.655+00 -9.837-01 -5.740-01 -2.138-01  7.904-01 3.803-08 3.659-02   weight cutoff           676                 
+1     event log for lost particle no.   1          nps =        5909        ijk =       49245617934313
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  3.238+00 -4.958+00  3.211+00 -6.363-01  6.896-02 -7.683-01 1.496+00 3.597+00   particle= neutron       4                   
+    sur    2 -1.488+00 -8.437+00 -1.730+00 -4.493-01 -7.270-01 -5.192-01 1.507-01 1.623+00   surf=     1             187                 
+    ter    2  7.544+00 -1.145+01 -5.930+00  6.845-01  5.720-01  4.519-01 9.432-09 2.477-01   weight cutoff           3854                
+1     event log for lost particle no.   1          nps =        5916        ijk =      280210012901741
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  1.650+00 -1.450+00 -6.769+00 -1.582-01 -9.858-01 -5.685-02 2.320+00 3.597+00   particle= neutron       2                   
+    sur    2 -3.346-01 -3.773+00 -7.877+00 -6.422-01 -6.761-01 -3.613-01 1.603+00 2.380+00   surf=     1             101                 
+    sur    1 -4.557+00 -3.377+00 -6.651+00 -1.884-01  9.821-01  4.656-03 3.008-06 2.377+00   surf=     1             247                 
+    sur    2 -4.740+00 -3.276+00 -6.573+00 -3.222-01 -9.179-01  2.317-01 2.877-06 6.425-01   surf=     1             360                 
+    ter    2  7.771-01 -3.952+00 -1.275+01  6.176-01 -4.821-01 -6.214-01 3.715-08 2.489-01   weight cutoff           3332                
+1     event log for lost particle no.   1          nps =        5921        ijk =       27242634389273
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.835+00 -4.213+00 -2.831+00 -8.104-01 -4.519-01  3.728-01 2.351+00 3.597+00   particle= neutron       2                   
+    sur    2  1.634+00 -8.467+00 -1.429+00 -6.621-01 -7.489-01  2.675-02 2.348+00 2.961+00   surf=     1             54                  
+    ter    2 -4.218+00 -1.268+01  7.771+00 -3.791-01 -3.920-01  8.382-01 2.791-08 2.491-01   weight cutoff           5098                
+1     event log for lost particle no.   1          nps =        5930        ijk =      155114000346469
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  4.339+00  2.320+00 -4.179+00  6.084-01  7.719-01  1.846-01 3.728-02 3.597+00   particle= neutron       2                   
+    sur    2  7.344+00  4.481+00  1.546+00  4.128-01  5.548-01  7.223-01 3.459-02 6.540-01   surf=     1             257                 
+    ter    2  1.000+01  1.224+01 -4.305+00  5.759-01  8.175-01  4.618-03 5.847-08 2.487-01   weight cutoff           2289                
+1     event log for lost particle no.   1          nps =        5926        ijk =       72892321229973
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.576+00  2.264+00 -3.715+00 -3.513-01 -3.439-03 -9.363-01 1.433+00 3.597+00   particle= neutron       2                   
+    sur    2  7.562+00  2.264+00 -3.754+00 -3.513-01 -3.439-03 -9.363-01 1.433+00 3.597+00   surf=     1             3                   
+    sur    1  4.257+00  7.276+00 -2.310+00 -6.772-02 -9.806-01  1.839-01 5.048-08 8.216-01   surf=     1             2979                
+    ter    1  4.256+00  7.255+00 -2.306+00 -6.772-02 -9.806-01  1.839-01 5.048-08 2.619-02   weight cutoff           3020                
+1     event log for lost particle no.   1          nps =        5934        ijk =      257661208146741
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -1.225-01  6.975+00 -4.270+00  8.982-01 -4.317-01  8.285-02 3.177+00 3.597+00   particle= neutron       2                   
+    sur    2 -6.104-03  8.493+00 -2.066+00 -2.982-01  9.179-01  2.619-01 5.071-01 2.555+00   surf=     1             82                  
+    sur    1  2.269-01  8.667+00 -1.110+00  2.281-01 -5.553-01 -7.997-01 8.504-05 2.554+00   surf=     1             125                 
+    sur    2  5.462-01  8.612+00 -1.390+00  9.105-01  2.422-01 -3.352-01 8.456-05 4.665-01   surf=     1             256                 
+    ter    2 -5.244+00  5.741+00 -6.378+00  7.462-01  1.968-01 -6.360-01 3.705-08 2.487-01   weight cutoff           2706                
+1     event log for lost particle no.   1          nps =        5936        ijk =      181764700204797
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.262+00 -2.801+00 -1.528-01  4.023-01 -8.038-01  4.382-01 4.734-01 3.597+00   particle= neutron       4                   
+    sur    2  8.272+00 -2.821+00 -1.423-01  4.023-01 -8.038-01  4.382-01 4.734-01 3.597+00   surf=     1             5                   
+    sur    1  7.590+00 -4.330+00 -2.186-01 -7.505-01  2.232-01 -6.221-01 3.985-01 3.597+00   surf=     1             22                  
+    sur    2  8.394+00  1.399+00 -1.997+00  9.184-01 -3.902-01  6.530-02 2.656-01 1.273+00   surf=     1             198                 
+    sur    1  8.177+00 -8.350-01 -2.973+00 -8.774-01 -4.313-01  2.101-01 1.946-06 1.269+00   surf=     1             295                 
+    ter    1  7.948+00 -7.161-01 -2.763+00  5.171-01  8.173-01  2.542-01 1.913-06 1.724-01   weight cutoff           361                 
+1     event log for lost particle no.   1          nps =        5938        ijk =      206762078899717
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.346+00  1.854+00  1.713+00 -5.857-01 -7.908-01  1.777-01 2.578+00 3.597+00   particle= neutron       2                   
+    sur    2  1.909+00 -6.026+00  6.037+00  6.875-01 -6.396-01  3.439-01 2.464+00 8.023-01   surf=     1             258                 
+    sur    3  1.008+01 -1.346+01  1.082+01  4.717-01 -8.811-01  3.315-02 1.084-08 3.658-01   surf=     2             2051                
+    ter    3  1.008+01 -1.346+01  1.082+01  4.717-01 -8.811-01  3.315-02 1.084-08 3.658-01   escape                  2051                
+1     event log for lost particle no.   1          nps =        5947        ijk =      280275520400609
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.350+00 -2.126+00  7.406-01  3.764-02  9.704-01 -2.385-01 3.682+00 3.597+00   particle= neutron       2                   
+    sur    2  8.735+00  1.094-01  2.984-01  5.856-01  8.015-01 -1.211-01 3.677+00 2.613+00   surf=     1             84                  
+    sur    3  1.343+01  1.421+01  4.204+00  9.738-01  1.733-01 -1.474-01 5.173-03 2.611+00   surf=     2             258                 
+    ter    3  1.343+01  1.421+01  4.204+00  9.738-01  1.733-01 -1.474-01 5.173-03 2.611+00   escape                  258                 
+1     event log for lost particle no.   1          nps =        5958        ijk =      211921579736853
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.086+00 -2.062+00 -2.563+00 -5.593-01  1.714-02 -8.288-01 6.582-01 3.597+00   particle= neutron       2                   
+    sur    2  5.896+00 -2.091+00 -6.105+00  2.260-01 -4.051-01 -8.859-01 3.223-01 3.003+00   surf=     1             41                  
+    sur    1  4.996+00 -4.054+00 -5.917+00 -1.741-01  9.846-01  1.444-02 4.698-04 3.002+00   surf=     1             164                 
+    ter    1  6.565+00 -8.424-01 -3.958+00 -1.514-01  1.148-01  9.818-01 4.650-04 2.095-01   weight cutoff           338                 
+1     event log for lost particle no.   1          nps =        5970        ijk =      254428645382277
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.775+00 -9.856-01 -3.203+00 -6.604-01  1.661-01 -7.323-01 3.414+00 3.597+00   particle= neutron       2                   
+    sur    2  5.134+00 -2.884+00 -6.460+00  2.580-01 -7.024-01 -6.634-01 1.311-01 4.969-01   surf=     1             299                 
+    sur    1  6.455+00 -5.484+00 -2.157+00 -9.160-01  1.754-01 -3.608-01 9.524-08 4.819-01   surf=     1             601                 
+    ter    1  6.405+00 -5.475+00 -2.177+00 -9.160-01  1.754-01 -3.608-01 9.524-08 2.244-02   weight cutoff           624                 
+1     event log for lost particle no.   1          nps =        5977        ijk =      224256830598393
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  3.786+00 -4.475+00 -6.426+00  4.910-01 -5.756-01  6.539-01 1.036+00 3.597+00   particle= neutron       2                   
+    sur    2  4.111+00 -4.855+00 -5.994+00  4.910-01 -5.756-01  6.539-01 1.036+00 3.597+00   surf=     1             3                   
+    sur    1  2.499+00 -6.380+00 -5.426+00  7.027-02  9.925-01  1.004-01 1.164-08 2.462+00   surf=     1             868                 
+    ter    1  2.500+00 -6.356+00 -5.424+00  7.027-02  9.925-01  1.004-01 1.164-08 3.529-02   weight cutoff           983                 
+1     event log for lost particle no.   1          nps =        5984        ijk =      124945448431805
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.515+00  3.885+00  2.152+00  2.695-02 -9.514-01 -3.068-01 1.164+00 3.597+00   particle= neutron       2                   
+    sur    2  7.845+00  3.467+00  1.685+00  7.053-01  1.474-01 -6.934-01 1.155+00 2.898+00   surf=     1             54                  
+    sur    1  7.598+00  3.108+00 -3.001+00 -4.704-01 -7.894-01 -3.945-01 1.017-02 2.898+00   surf=     1             94                  
+    sur    2  7.337+00  1.955+00 -4.330+00  6.494-01  7.022-01  2.917-01 1.001-02 1.728+00   surf=     1             184                 
+    sur    1  8.032+00  5.278-01  3.406+00 -9.429-01 -3.331-01  3.739-03 6.969-09 5.178-01   surf=     1             2511                
+    ter    1  8.030+00  5.268-01  3.406+00 -9.429-01 -3.331-01  3.739-03 6.969-09 5.695-03   weight cutoff           2540                
+1     event log for lost particle no.   1          nps =        5990        ijk =       80058949128597
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.408+00  4.433+00  1.364+00  4.767-02 -8.023-01 -5.951-01 1.787+00 3.597+00   particle= neutron       2                   
+    sur    2  6.636+00 -3.543+00 -4.451+00  5.248-01 -7.952-01 -3.037-01 3.648-01 3.645-01   surf=     1             295                 
+    sur    1  1.001+00 -6.670+00 -5.559+00  4.015-01  8.878-01 -2.249-01 1.978-08 3.856-01   surf=     1             1688                
+    ter    1  1.017+00 -6.634+00 -5.569+00  4.015-01  8.878-01 -2.249-01 1.978-08 7.308-03   weight cutoff           1711                
+1     event log for lost particle no.   1          nps =        5999        ijk =       78973329927473
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.376+00  3.141+00 -3.480+00 -3.273-01 -6.658-01 -6.705-01 1.087+00 3.597+00   particle= neutron       2                   
+    sur    2  7.085+00  1.040+00 -5.012+00  8.478-02 -8.753-01 -4.761-01 1.085+00 2.903+00   surf=     1             47                  
+    sur    1  5.933+00 -4.034-01 -6.406+00 -3.009-01  7.619-01  5.735-01 8.440-01 2.903+00   surf=     1             62                  
+    sur    2  3.509-01  2.493+00 -8.370+00 -5.015-01 -7.564-02 -8.618-01 6.915-01 1.359+00   surf=     1             188                 
+    sur    1 -1.378+00  1.847+00 -8.432+00 -7.635-01 -5.861-02  6.432-01 7.162-03 1.359+00   surf=     1             251                 
+    sur    2 -4.183+00  2.061+00 -7.393+00 -5.094-01  2.626-01 -8.195-01 7.067-03 7.338-01   surf=     1             299                 
+    sur    1 -3.683+00  4.204+00 -6.721+00  1.156-01 -8.160-01  5.664-01 3.379-07 7.302-01   surf=     1             390                 
+    ter    1 -3.663+00  4.059+00 -6.621+00  1.156-01 -8.160-01  5.664-01 3.379-07 5.003-02   weight cutoff           427                 
+1     event log for lost particle no.   1          nps =        6000        ijk =      197337159285757
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.468+00 -2.114+00 -1.885-01 -9.817-01 -5.627-02  1.818-01 1.984+00 3.597+00   particle= neutron       2                   
+    sur    2 -2.242+00 -7.047+00 -4.659+00  1.254-01 -6.826-01 -7.200-01 1.184-01 3.597-01   surf=     1             363                 
+    sur    1 -1.723+00 -6.246+00 -5.867+00  2.918-01  9.545-01  6.192-02 1.608-02 3.597-01   surf=     1             401                 
+    sur    2 -2.287+00 -5.492+00 -6.404+00 -7.895-01  1.215-01 -6.016-01 1.592-02 2.858-01   surf=     1             415                 
+    ter    2 -5.198+00 -5.633+00 -1.381+01  5.536-01  3.388-01  7.607-01 3.251-08 2.491-01   weight cutoff           819                 
+1     event log for lost particle no.   1          nps =        6004        ijk =       89857577881421
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.578+00  1.346+00  8.320-01 -7.948-01  4.877-01 -3.613-01 3.056+00 3.597+00   particle= neutron       2                   
+    sur    2  7.079+00 -4.888+00 -1.547+00 -2.043-01 -9.178-01 -3.405-01 9.190-01 3.029+00   surf=     1             57                  
+    sur    1  2.161-01 -8.603+00 -1.531+00  7.290-01  4.203-01  5.403-01 1.124-01 3.029+00   surf=     1             127                 
+    sur    2 -4.417+00 -5.082+00  5.573+00 -7.757-01  1.095-01  6.215-01 5.331-02 7.007-01   surf=     1             315                 
+    sur    1 -5.389+00 -3.720+00  5.790+00 -1.968-01  8.406-01 -5.047-01 3.360-07 6.964-01   surf=     1             538                 
+    ter    1 -5.415+00 -3.610+00  5.723+00 -1.968-01  8.406-01 -5.047-01 3.360-07 4.723-02   weight cutoff           567                 
+1     event log for lost particle no.   1          nps =        6009        ijk =      184569529684345
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.461+00  3.652+00 -2.672+00 -5.787-01  5.882-01  5.649-01 1.678+00 3.597+00   particle= neutron       2                   
+    sur    2  3.884+00  7.574+00  1.988+00 -6.637-01  5.529-01  5.038-01 7.154-01 2.408+00   surf=     1             96                  
+    sur    3 -6.484+00  1.884+01 -1.744+00 -4.088-02  9.434-01  3.291-01 5.258-08 6.043-01   surf=     2             2902                
+    ter    3 -6.484+00  1.884+01 -1.744+00 -4.088-02  9.434-01  3.291-01 5.258-08 6.043-01   escape                  2902                
+1     event log for lost particle no.   1          nps =        6027        ijk =      180885754831393
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.551+00  2.800+00 -3.308+00 -6.430-01 -7.658-01  9.031-03 1.212+00 3.597+00   particle= neutron       2                   
+    sur    2 -7.992+00 -3.464+00  7.229-01 -6.910-01 -7.185-01 -7.911-02 4.183-01 5.823-01   surf=     1             269                 
+    ter    2 -7.713+00 -9.765+00 -1.723+00 -6.206-01  7.026-01 -3.481-01 1.364-08 2.490-01   weight cutoff           1972                
+1     event log for lost particle no.   1          nps =        6033        ijk =      237033271547609
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.026+00  5.237+00  3.327+00  4.177-01 -8.993-01 -1.296-01 3.195-01 3.597+00   particle= neutron       4                   
+    sur    2  7.661+00  3.396-01  4.194+00  2.755-01 -9.302-01  2.425-01 3.191-01 3.003+00   surf=     1             74                  
+    sur    1  6.925+00 -2.313+00  4.806+00 -5.299-01  8.479-01 -1.862-02 1.609-08 2.653+00   surf=     1             484                 
+    ter    1  6.925+00 -2.312+00  4.806+00 -5.299-01  8.479-01 -1.862-02 1.609-08 4.504-02   weight cutoff           609                 
+1     event log for lost particle no.   1          nps =        6035        ijk =       14490559416897
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -2.464-01 -2.831+00 -1.296+00 -8.364-01  4.819-01 -2.610-01 6.339+00 3.597+00   particle= neutron       2                   
+    sur    2 -5.477+00 -3.868+00 -5.607+00 -7.432-01 -2.231-01 -6.308-01 6.310+00 2.423+00   surf=     1             121                 
+    sur    3 -1.429+01  4.539-01 -1.399+01 -5.442-01  6.266-01 -5.579-01 3.603+00 2.420+00   surf=     2             161                 
+    ter    3 -1.429+01  4.539-01 -1.399+01 -5.442-01  6.266-01 -5.579-01 3.603+00 2.420+00   escape                  161                 
+1     event log for lost particle no.   1          nps =        6040        ijk =      167902462666269
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  3.875+00 -6.977+00  3.551+00 -1.535-01 -9.206-01  3.590-01 3.659-01 3.597+00   particle= neutron       2                   
+    sur    2  3.874+00 -6.983+00  3.554+00 -1.535-01 -9.206-01  3.590-01 3.659-01 3.597+00   surf=     1             3                   
+    sur    1  3.645+00 -6.616+00  4.398+00 -7.693-01  5.393-01 -3.425-01 5.765-03 3.597+00   surf=     1             82                  
+    sur    2  1.568+00 -7.456+00  4.284+00  6.454-01 -4.221-01  6.366-01 5.528-03 1.606+00   surf=     1             243                 
+    sur    1  2.584+00 -5.841+00  5.967+00 -7.919-01 -5.288-02 -6.084-01 1.926-04 1.605+00   surf=     1             327                 
+    sur    2  2.929+00 -3.277+00  7.555+00  6.047-01 -4.061-01  6.851-01 1.822-04 2.886-01   surf=     1             457                 
+    sur    1  4.566+00 -5.235+00  5.305+00 -5.709-02  7.798-01 -6.234-01 5.385-08 2.768-01   surf=     1             663                 
+    ter    1  4.564+00 -5.201+00  5.277+00 -5.709-02  7.798-01 -6.234-01 5.385-08 9.163-03   weight cutoff           680                 
+1     event log for lost particle no.   1          nps =        6048        ijk =       13093353815485
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.072+00 -4.445+00  4.050-01  9.726-02  9.486-01  3.013-01 2.082+00 3.597+00   particle= neutron       4                   
+    sur    2  7.721+00  3.777+00  1.590+00  3.529-01  9.356-01  5.589-03 2.081+00 1.944+00   surf=     1             139                 
+    sur    1  6.078+00  6.273+00  3.232-01 -4.416-01 -8.971-01 -1.736-02 3.811-02 1.943+00   surf=     1             238                 
+    ter    1  5.811+00  5.329+00  8.860-01  1.841-01 -9.623-01 -2.000-01 3.351-02 2.128-01   weight cutoff           522                 
+1     event log for lost particle no.   1          nps =        6055        ijk =      118691053176849
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.102+00 -2.484+00 -1.653+00 -3.102-01 -7.652-01 -5.642-01 1.932+00 3.597+00   particle= neutron       2                   
+    sur    2  6.942+00 -4.839+00 -2.191+00  3.030-01 -9.294-01  2.106-01 4.123-01 1.178+00   surf=     1             208                 
+    sur    1  6.612+00 -5.333+00 -2.060+00 -9.003-01  4.299-01 -6.745-02 3.332-01 1.178+00   surf=     1             216                 
+    sur    2  5.812+00  2.300+00 -6.110+00  7.580-01 -5.597-01 -3.348-01 3.136-01 3.518-01   surf=     1             358                 
+    sur    1  5.596+00  4.026+00 -5.374+00 -9.522-01 -2.969-01  7.190-02 3.408-07 3.496-01   surf=     1             552                 
+    ter    1  5.538+00  4.008+00 -5.370+00 -9.522-01 -2.969-01  7.190-02 3.408-07 2.435-02   weight cutoff           575                 
+1     event log for lost particle no.   1          nps =        6059        ijk =      199663459572385
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  3.757+00 -7.875+00 -4.228-01  7.738-02 -9.821-01  1.719-01 2.436+00 3.597+00   particle= neutron       4                   
+    sur    2  3.758+00 -7.880+00 -4.219-01  7.738-02 -9.821-01  1.719-01 2.436+00 3.597+00   surf=     1             5                   
+    sur    1  7.661+00 -4.119+00  8.631-01 -4.456-01  1.508-01  8.825-01 5.762-08 3.043+00   surf=     1             660                 
+    sur    2  7.660+00 -4.120+00  8.637-01 -2.550-01 -9.668-01 -1.770-02 5.555-08 2.552+00   surf=     1             818                 
+    sur    1  7.053+00 -4.757+00  2.007+00 -8.056-01 -5.719-01 -1.544-01 3.997-08 2.180+00   surf=     1             1083                
+    ter    1  7.050+00 -4.759+00  2.006+00 -8.056-01 -5.719-01 -1.544-01 3.997-08 6.076-02   weight cutoff           1184                
+1     event log for lost particle no.   1          nps =        6069        ijk =      277448408440425
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  5.637+00  5.906+00 -3.114+00 -8.001-01  5.574-01  2.218-01 1.663+00 3.597+00   particle= neutron       2                   
+    sur    2  4.154-01  7.943+00  3.625+00  8.615-02  9.963-01 -3.720-03 1.700-01 2.840-01   surf=     1             352                 
+    sur    3  1.027+01  1.484+01  8.622+00  9.953-01 -3.774-03 -9.632-02 4.329-08 4.794-01   surf=     2             936                 
+    ter    3  1.027+01  1.484+01  8.622+00  9.953-01 -3.774-03 -9.632-02 4.329-08 4.794-01   escape                  936                 
+1     event log for lost particle no.   1          nps =        6081        ijk =      145158115356057
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.501+00 -1.013+00 -9.067-01 -7.896-01  5.821-01 -1.940-01 3.289+00 3.597+00   particle= neutron       2                   
+    sur    2 -3.070+00  6.371-01 -8.159+00 -7.191-01 -3.496-01 -6.005-01 3.486-01 1.831+00   surf=     1             155                 
+    sur    1 -2.929+00  3.559-01 -8.228+00  8.558-01  8.318-02  5.105-01 2.626-01 1.831+00   surf=     1             170                 
+    sur    2 -2.312+00  5.362-01 -8.412+00  4.624-01  2.878-01 -8.387-01 2.603-01 1.552+00   surf=     1             200                 
+    sur    3 -1.667+01  1.339+00 -1.097+01 -7.730-01  2.200-01 -5.951-01 7.663-08 7.798-01   surf=     2             1690                
+    ter    3 -1.667+01  1.339+00 -1.097+01 -7.730-01  2.200-01 -5.951-01 7.663-08 7.798-01   escape                  1690                
+1     event log for lost particle no.   1          nps =        6080        ijk =       69843413361725
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.501+00 -1.013+00 -9.067-01 -3.439-01  2.774-01 -8.971-01 1.749+00 3.597+00   particle= neutron       2                   
+    sur    2  6.953+00  3.243-01 -5.286+00  8.048-01  5.099-02 -5.913-01 1.490+00 2.904+00   surf=     1             55                  
+    sur    1  3.384+00 -3.260+00 -7.371+00 -5.053-01  6.646-01  5.504-01 1.019-07 1.401+00   surf=     1             1879                
+    ter    1  3.369+00 -3.240+00 -7.354+00 -5.053-01  6.646-01  5.504-01 1.019-07 6.790-02   weight cutoff           1944                
+1     event log for lost particle no.   1          nps =        6089        ijk =      167435797226681
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  3.298+00 -1.343+00 -7.828+00  9.531-01 -2.320-01 -1.942-01 2.988+00 3.597+00   particle= neutron       2                   
+    sur    2  3.526+00 -1.399+00 -7.875+00  9.531-01 -2.320-01 -1.942-01 2.988+00 3.597+00   surf=     1             3                   
+    sur    1  5.026+00  3.118+00 -6.436+00 -2.551-01 -8.939-01  3.685-01 4.361-07 3.582+00   surf=     1             320                 
+    ter    1  4.915+00  2.963+00 -6.294+00 -6.494-01 -1.239-02  7.603-01 4.335-07 4.243-02   weight cutoff           508                 
+1     event log for lost particle no.   1          nps =        6086        ijk =      107956129745173
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -1.574+00  7.688+00  3.831+00  2.570-02  6.199-01  7.842-01 2.071-01 3.597+00   particle= neutron       2                   
+    sur    2 -1.573+00  7.694+00  3.838+00  2.570-02  6.199-01  7.842-01 2.071-01 3.597+00   surf=     1             3                   
+    sur    1 -5.864+00  4.319+00  4.834+00  3.754-01 -7.294-02 -9.240-01 3.687-08 1.733+00   surf=     1             1543                
+    ter    1 -5.863+00  4.319+00  4.833+00  3.754-01 -7.294-02 -9.240-01 3.687-08 4.615-02   weight cutoff           1626                
+1     event log for lost particle no.   1          nps =        6096        ijk =        3397823795069
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.254+00 -9.027-01 -2.701+00  8.752-01 -2.976-01 -3.814-01 6.313-01 3.597+00   particle= neutron       4                   
+    sur    2  8.262+00 -9.057-01 -2.705+00  8.752-01 -2.976-01 -3.814-01 6.313-01 3.597+00   surf=     1             5                   
+    sur    1  7.207+00  3.781+00  3.188+00 -7.718-01 -6.305-01  8.245-02 3.546-08 2.482+00   surf=     1             1018                
+    ter    1  7.204+00  3.779+00  3.188+00 -7.718-01 -6.305-01  8.245-02 3.546-08 6.468-02   weight cutoff           1133                
+1     event log for lost particle no.   1          nps =        6114        ijk =       71181030825925
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.561+00  1.343+00  1.093+00 -8.535-01  3.718-01  3.650-01 1.372+00 3.597+00   particle= neutron       2                   
+    ter    1  4.518+00  1.906+00 -1.463+00  2.741-01  1.693-01 -9.467-01 8.702-02 2.232-01   weight cutoff           345                 
+1     event log for lost particle no.   1          nps =        6113        ijk =       28619086176793
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.561+00  1.343+00  1.093+00  2.315-01 -4.897-01 -8.406-01 1.369+00 3.597+00   particle= neutron       2                   
+    sur    2  8.589+00  1.284+00  9.916-01  2.315-01 -4.897-01 -8.406-01 1.369+00 3.597+00   surf=     1             3                   
+    sur    1  8.611+00  1.188+00  9.156-01  1.288-01 -9.048-01 -4.060-01 1.337+00 3.597+00   surf=     1             11                  
+    sur    2  8.698+00  5.769-01  6.414-01  1.288-01 -9.048-01 -4.060-01 1.337+00 3.597+00   surf=     1             12                  
+    sur    1  7.472+00  4.842-01 -4.510+00 -1.934-01  9.208-01  3.387-01 1.317-01 3.597+00   surf=     1             114                 
+    sur    2  6.494+00  5.137+00 -2.799+00 -1.934-01  9.208-01  3.387-01 1.317-01 3.597+00   surf=     1             116                 
+    sur    1  6.492+00  5.141+00 -2.798+00 -7.379-01  6.676-01  9.875-02 1.282-01 3.597+00   surf=     1             126                 
+    sur    2  6.413+00  4.949+00 -3.284+00 -2.833-01 -1.815-02 -9.589-01 1.221-01 1.737+00   surf=     1             278                 
+    sur    1  6.818+00  4.104+00 -3.617+00 -5.839-02 -3.203-01  9.455-01 2.399-03 1.737+00   surf=     1             341                 
+    sur    2  8.095+00  3.156+00 -9.586-01  7.482-01  4.003-01  5.290-01 2.345-03 3.252-01   surf=     1             471                 
+    ter    2  1.654+01  3.787+00 -1.059+00  1.384-01 -5.451-01 -8.269-01 6.895-10 2.493-01   weight cutoff           1089                
+1     event log for lost particle no.   1          nps =        6116        ijk =       56567410125325
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -1.157+00  5.404+00 -6.527+00  2.156-01  6.084-01  7.638-01 7.259-01 3.597+00   particle= neutron       2                   
+    sur    2 -5.317+00 -5.919+00 -3.619+00 -7.655-01 -5.677-01  3.029-01 1.502-01 4.419-01   surf=     1             279                 
+    sur    1 -2.752+00 -7.912+00 -2.493+00  2.909-01 -2.871-01  9.126-01 3.299-08 3.776-01   surf=     1             1954                
+    ter    1 -2.752+00 -7.913+00 -2.492+00  2.909-01 -2.871-01  9.126-01 3.299-08 9.450-03   weight cutoff           1977                
+1     event log for lost particle no.   1          nps =        6117        ijk =       77538479874345
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.432+00  6.158-01  1.327+00  8.313-02  7.468-01  6.598-01 1.105+00 3.597+00   particle= neutron       2                   
+    sur    2  8.488+00  1.113+00  1.766+00  8.313-02  7.468-01  6.598-01 1.105+00 3.597+00   surf=     1             3                   
+    sur    1  8.423+00  1.079+00  2.070+00 -4.216-01 -8.175-01  3.923-01 8.362-01 3.597+00   surf=     1             18                  
+    sur    2  7.790+00  3.940+00 -4.423-01  6.232-01  4.164-01 -6.620-01 1.147-01 6.171-01   surf=     1             285                 
+    sur    1  8.095+00  2.798+00 -1.742+00 -4.631-01 -5.579-01 -6.887-01 3.863-03 6.170-01   surf=     1             362                 
+    ter    1  7.228+00  1.835+00 -1.810+00  5.553-01 -4.505-01 -6.991-01 3.748-03 1.625-01   weight cutoff           419                 
+1     event log for lost particle no.   1          nps =        6109        ijk =      256265075989513
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.028+00 -2.598+00  7.173-01 -9.535-01  2.161-01  2.100-01 3.445-01 3.597+00   particle= neutron       2                   
+    sur    2  7.992+00 -3.324+00  1.215+00  8.191-01 -3.098-01 -4.828-01 3.384-01 2.557+00   surf=     1             70                  
+    sur    1  7.721+00  1.010+00 -3.971+00 -2.824-01  9.223-01  2.637-01 2.235-05 2.557+00   surf=     1             203                 
+    sur    2  7.633+00  2.235+00 -3.624+00  6.761-01  7.112-01  1.922-01 2.226-05 1.532+00   surf=     1             257                 
+    sur    1 -1.425-02  5.076+00 -7.116+00 -1.431-01  3.326-01  9.322-01 2.923-08 4.737-01   surf=     1             2560                
+    ter    1 -1.566-02  5.079+00 -7.106+00 -1.431-01  3.326-01  9.322-01 2.923-08 1.109-02   weight cutoff           2589                
+1     event log for lost particle no.   1          nps =        6127        ijk =       44929200910129
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.086+00 -3.959+00 -3.004+00  8.964-02  8.750-01  4.758-01 2.360-01 3.597+00   particle= neutron       4                   
+    sur    2 -7.831+00 -1.369+00 -3.634+00 -5.676-01 -8.053-01 -1.715-01 1.767-01 8.072-01   surf=     1             222                 
+    sur    1 -8.594+00  3.815-01 -1.549+00  8.015-01 -1.076-01 -5.883-01 2.970-08 6.886-01   surf=     1             668                 
+    ter    1 -8.511+00  3.703-01 -1.610+00  8.015-01 -1.076-01 -5.883-01 2.970-08 1.626-02   weight cutoff           703                 
+1     event log for lost particle no.   1          nps =        6126        ijk =      174714862944821
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.086+00 -3.959+00 -3.004+00  7.873-02  3.538-01 -9.320-01 3.306-01 3.597+00   particle= neutron       2                   
+    sur    2  7.121+00 -3.936+00 -3.194+00  3.671-01 -4.645-01 -8.059-01 3.295-01 3.035+00   surf=     1             40                  
+    sur    1  3.828+00 -6.652+00 -4.183+00  2.419-01  9.356-01  2.573-01 5.377-08 2.542+00   surf=     1             571                 
+    ter    1  3.831+00 -6.641+00 -4.180+00  2.419-01  9.356-01  2.573-01 5.377-08 8.409-02   weight cutoff           690                 
+1     event log for lost particle no.   1          nps =        6134        ijk =      149598580751573
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.151+00 -6.238-01 -4.949+00 -2.055-01 -8.514-01  4.826-01 2.207+00 3.597+00   particle= neutron       2                   
+    sur    2  6.922+00  1.175-01 -5.336+00  9.710-01  1.436-01  1.914-01 3.740-02 1.578+00   surf=     1             141                 
+    sur    3  1.007+01  2.342+00 -1.712+01 -1.599-01 -7.952-01 -5.850-01 1.279-08 1.025+00   surf=     2             1173                
+    ter    3  1.007+01  2.342+00 -1.712+01 -1.599-01 -7.952-01 -5.850-01 1.279-08 1.025+00   escape                  1173                
+1     event log for lost particle no.   1          nps =        6135        ijk =       14420371011921
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.151+00 -6.238-01 -4.949+00 -2.200-01 -8.318-01  5.097-01 1.591+00 3.597+00   particle= neutron       2                   
+    sur    2  7.163+00 -1.664+00 -4.724+00  2.081-01 -9.757-01 -6.908-02 1.587+00 2.894+00   surf=     1             56                  
+    sur    1  7.847+00 -3.822+00 -4.693-01 -8.645-01  1.431-01 -4.818-01 1.269-07 2.790+00   surf=     1             373                 
+    ter    1  7.813+00 -3.817+00 -4.879-01 -8.645-01  1.431-01 -4.818-01 1.269-07 1.532-01   weight cutoff           498                 
+1     event log for lost particle no.   1          nps =        6144        ijk =      229628965122365
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  5.106+00 -2.228+00 -1.200+00  7.417-02 -9.764-01  2.027-01 4.092+00 3.597+00   particle= neutron       2                   
+    sur    2  6.378+00 -5.034+00 -3.222+00  3.644-01 -6.922-01 -6.230-01 3.974+00 3.077+00   surf=     1             48                  
+    sur    1  7.557+00 -3.195+00 -3.013+00 -8.656-01  1.166-01  4.870-01 1.945-08 2.527+00   surf=     1             646                 
+    ter    1  7.494+00 -3.187+00 -2.978+00 -8.656-01  1.166-01  4.870-01 1.945-08 4.746-02   weight cutoff           765                 
+1     event log for lost particle no.   1          nps =        6148        ijk =      105329754994829
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.068+00 -7.485-01  2.666+00  6.387-03 -8.570-02 -9.963-01 3.404+00 3.597+00   particle= neutron       2                   
+    sur    2  6.814+00 -3.147+00 -4.478+00  4.925-02 -5.585-01 -8.280-01 3.395+00 2.411+00   surf=     1             128                 
+    sur    1 -1.433+00 -7.806+00 -3.662+00 -8.563-01  5.160-01 -2.384-02 3.217-01 2.410+00   surf=     1             177                 
+    sur    2 -1.435+00 -7.785+00 -3.707+00  8.076-01 -2.258-01 -5.447-01 3.169-01 2.381+00   surf=     1             201                 
+    sur    1 -2.789-01 -7.945+00 -3.632+00  6.169-01  7.066-01  3.466-01 2.012-05 2.380+00   surf=     1             352                 
+    ter    1  1.013+00 -7.901+00 -2.891+00  4.708-01  8.343-01 -2.867-01 1.973-05 1.299-01   weight cutoff           488                 
+1     event log for lost particle no.   1          nps =        6151        ijk =      108203168848273
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.456+00  9.325-01 -1.862+00 -9.163-01  3.532-01  1.890-01 5.700-01 3.597+00   particle= neutron       2                   
+    sur    2  2.412+00 -4.336+00 -7.196+00  9.432-01 -2.123-01 -2.557-01 5.561-01 1.039+00   surf=     1             230                 
+    sur    1  2.823+00 -4.181+00 -7.138+00  8.736-01  4.433-01  2.010-01 5.339-01 1.039+00   surf=     1             238                 
+    sur    2  4.259+00 -3.452+00 -6.808+00  8.736-01  4.433-01  2.010-01 5.339-01 1.039+00   surf=     1             239                 
+    sur    3  3.759+00 -1.013+01 -1.683+01  5.690-01 -4.435-01 -6.925-01 5.029-08 4.707-01   surf=     2             1986                
+    ter    3  3.759+00 -1.013+01 -1.683+01  5.690-01 -4.435-01 -6.925-01 5.029-08 4.707-01   escape                  1986                
+1     event log for lost particle no.   1          nps =        6174        ijk =       72017298132469
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.100+00 -2.153+00  1.669+00  3.211-01 -2.069-01 -9.242-01 1.552-01 3.597+00   particle= neutron       4                   
+    sur    2  8.379+00 -2.333+00  8.649-01  3.211-01 -2.069-01 -9.242-01 1.552-01 3.597+00   surf=     1             5                   
+    sur    1  8.392+00 -2.376+00  5.776-01 -4.773-01 -5.732-03 -8.787-01 6.766-02 3.597+00   surf=     1             22                  
+    sur    2  8.396+00 -2.395+00  4.090-01  7.633-01 -2.082-01 -6.116-01 6.718-02 2.958+00   surf=     1             71                  
+    sur    1  3.087+00 -7.473+00 -3.319+00 -5.351-01  8.446-01  1.589-02 5.169-08 2.308+00   surf=     1             817                 
+    ter    1  3.086+00 -7.471+00 -3.319+00 -5.351-01  8.446-01  1.589-02 5.169-08 7.459-02   weight cutoff           924                 
+1     event log for lost particle no.   1          nps =        6182        ijk =       68725405745301
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  4.864+00  2.574+00 -1.529+00 -1.034-01 -9.076-01 -4.068-01 8.145-01 3.597+00   particle= neutron       2                   
+    sur    2  6.512+00 -5.524+00 -1.865+00  4.652-01 -8.122-01 -3.519-01 6.904-01 1.423+00   surf=     1             168                 
+    sur    1  2.686+00 -7.234+00 -4.105+00 -7.674-01  5.826-01 -2.678-01 2.356-05 1.420+00   surf=     1             328                 
+    ter    1  2.627+00 -7.189+00 -4.126+00 -7.674-01  5.826-01 -2.678-01 2.356-05 9.431-02   weight cutoff           382                 
+1     event log for lost particle no.   1          nps =        6183        ijk =      161069232966161
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.355+00 -2.627+00 -5.259+00 -8.153-01 -5.751-01  6.710-02 2.155+00 3.597+00   particle= neutron       2                   
+    sur    2  3.722+00 -4.835+00 -6.258+00 -3.594-01 -4.914-01 -7.933-01 1.159+00 2.939+00   surf=     1             57                  
+    sur    1  2.337+00 -6.839+00 -4.915+00  7.950-03  6.779-01  7.351-01 6.022-08 2.329+00   surf=     1             805                 
+    ter    1  2.338+00 -6.754+00 -4.810+00  2.286-02  4.698-01  8.825-01 6.038-08 1.771-02   weight cutoff           964                 
+1     event log for lost particle no.   1          nps =        6196        ijk =      251914447906381
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.298+00 -2.392+00 -1.269+00 -9.826-01  1.778-01 -5.339-02 1.160+00 3.597+00   particle= neutron       2                   
+    sur    2  6.300+00 -5.149+00 -3.192+00 -1.629-01 -8.858-02 -9.827-01 1.901-01 1.082+00   surf=     1             202                 
+    sur    1  6.545+00 -4.389+00 -3.781+00 -4.512-01  3.330-01  8.280-01 6.009-08 6.949-01   surf=     1             1316                
+    ter    1  6.489+00 -4.347+00 -3.679+00 -4.512-01  3.330-01  8.280-01 6.009-08 2.454-02   weight cutoff           1351                
+1     event log for lost particle no.   1          nps =        6198        ijk =      169287784817109
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  5.624+00 -5.638+00 -5.508-01 -4.618-01 -8.191-01  3.403-01 1.583+00 3.597+00   particle= neutron       4                   
+    sur    2  4.786+00 -7.312+00  1.623-01 -2.694-01 -8.754-01  4.014-01 1.583+00 2.894+00   surf=     1             56                  
+    sur    1  3.512+00 -8.002+00 -1.786-01  4.315-01  9.002-01 -5.865-02 6.116-05 2.892+00   surf=     1             202                 
+    ter    1  3.818+00 -7.305+00 -1.860-01 -6.479-01 -4.512-01  6.137-01 6.027-05 1.267-01   weight cutoff           349                 
+1     event log for lost particle no.   1          nps =        6206        ijk =      160408059105397
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.112+00 -2.353+00  1.389+00 -6.338-01  5.727-01 -5.200-01 3.227+00 3.597+00   particle= neutron       4                   
+    sur    2 -1.580+00  9.387-01  8.545+00  4.812-01  1.775-01  8.584-01 2.191-02 9.132-01   surf=     1             265                 
+    ter    2 -3.234+00  1.007+01  8.037+00 -9.135-01  3.915-01  1.110-01 5.087-08 2.494-01   weight cutoff           2736                
+1     event log for lost particle no.   1          nps =        6203        ijk =      134980190925025
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  4.574+00  4.525+00 -5.903+00  8.035-01  3.351-01  4.921-01 2.351+00 3.597+00   particle= neutron       2                   
+    sur    2  4.602+00  4.536+00 -5.886+00  8.035-01  3.351-01  4.921-01 2.351+00 3.597+00   surf=     1             3                   
+    sur    1  7.935+00 -3.369+00 -1.442+00 -7.339-01 -1.283-01  6.670-01 1.883-08 1.279+00   surf=     1             2118                
+    ter    1  7.919+00 -3.371+00 -1.428+00 -7.339-01 -1.283-01  6.670-01 1.883-08 2.361-02   weight cutoff           2183                
+1     event log for lost particle no.   1          nps =        6213        ijk =      272906117764777
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  3.997-01  2.872+00  5.441+00 -5.278-01 -8.437-01  9.829-02 4.472+00 3.597+00   particle= neutron       2                   
+    sur    2 -5.891+00 -4.568+00  4.564+00 -6.280-01 -7.290-01 -2.723-01 4.469+00 2.637+00   surf=     1             93                  
+    sur    1 -4.940+00 -6.454+00 -3.215+00  4.979-01  7.583-01  4.208-01 1.707-04 2.636+00   surf=     1             249                 
+    ter    1 -4.688+00 -6.025+00 -2.984+00 -8.257-01 -4.266-01 -3.692-01 1.680-04 1.941-01   weight cutoff           375                 
+1     event log for lost particle no.   1          nps =        6215        ijk =       64354014689937
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  4.893+00  8.089-01  5.853+00  6.738-01 -6.299-01 -3.863-01 1.548+00 3.597+00   particle= neutron       2                   
+    sur    2  7.423+00 -1.311+00  4.425+00  8.870-01  1.973-01 -4.174-01 1.441+00 2.893+00   surf=     1             62                  
+    sur    1  5.853+00 -3.745+00  5.302+00 -8.252-01  5.211-01 -2.177-01 4.514-03 2.892+00   surf=     1             116                 
+    sur    2  5.841+00 -4.140+00  5.015+00  7.622-01 -5.628-01 -3.198-01 4.447-03 1.277+00   surf=     1             197                 
+    sur    1  4.461+00 -7.350+00  1.572+00 -7.796-01  5.003-01  3.768-01 1.091-07 1.261+00   surf=     1             409                 
+    ter    1  4.458+00 -7.349+00  1.574+00 -7.796-01  5.003-01  3.768-01 1.091-07 6.365-02   weight cutoff           468                 
+1     event log for lost particle no.   1          nps =        6221        ijk =      151084785774537
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.920+00 -8.410-01 -1.427-01  1.173-01 -6.558-01 -7.457-01 1.082+00 3.597+00   particle= neutron       2                   
+    sur    2  7.710+00 -3.533+00 -2.115+00 -2.326-01 -8.889-01 -3.945-01 1.081+00 2.903+00   surf=     1             54                  
+    sur    1  6.904+00 -4.901+00 -2.171+00 -8.896-01 -3.135-01  3.321-01 2.558-01 2.903+00   surf=     1             89                  
+    sur    2  6.858+00 -4.934+00 -2.242+00  2.920-01 -5.495-02 -9.548-01 2.524-01 2.460+00   surf=     1             120                 
+    sur    1  6.960+00 -4.661+00 -2.495+00  2.476-01  9.382-01 -2.418-01 6.913-02 2.460+00   surf=     1             153                 
+    sur    2  7.360+00 -3.860+00 -2.708+00  9.870-01  1.438-01 -7.209-02 6.877-02 2.027+00   surf=     1             188                 
+    sur    3  1.257+01  9.342+00 -1.244+01  1.799-01  1.380-01 -9.740-01 5.125-08 5.793-01   surf=     2             2709                
+    ter    3  1.257+01  9.342+00 -1.244+01  1.799-01  1.380-01 -9.740-01 5.125-08 5.793-01   escape                  2709                
+1     event log for lost particle no.   1          nps =        6225        ijk =       86819265974745
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.001+00  4.269+00 -4.621+00 -5.899-01 -1.416-01  7.950-01 1.333+00 3.597+00   particle= neutron       2                   
+    sur    2  3.966+00  4.922+00  6.037+00  5.373-01  2.352-01  8.099-01 6.200-01 2.322+00   surf=     1             105                 
+    sur    1  3.883+00  4.839+00  6.157+00 -6.313-01 -6.616-01 -4.047-01 4.604-02 2.322+00   surf=     1             176                 
+    sur    2  3.301+00  5.080+00  6.301+00 -6.338-01  7.269-01  2.645-01 4.446-02 1.041+00   surf=     1             292                 
+    sur    1 -1.045+00  6.486+00  5.765+00 -3.731-01 -9.435-02 -9.230-01 6.896-05 1.040+00   surf=     1             403                 
+    sur    2 -1.326+00  7.114+00  4.902+00 -9.059-02  9.368-01 -3.380-01 6.671-05 3.388-01   surf=     1             461                 
+    ter    2  3.424-01  7.956+00  4.083+00  4.207-01 -6.301-02 -9.050-01 6.642-08 2.494-01   weight cutoff           1135                
+1     event log for lost particle no.   1          nps =        6240        ijk =       63876729676989
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.297+00 -2.728+00  3.919+00  3.142-01 -4.732-01 -8.230-01 7.080-01 3.597+00   particle= neutron       2                   
+    sur    2  7.403+00 -2.888+00  3.641+00  3.142-01 -4.732-01 -8.230-01 7.080-01 3.597+00   surf=     1             3                   
+    sur    1  7.258+00 -4.673+00  1.372+00 -8.969-01 -3.203-01 -3.050-01 9.702-02 3.597+00   surf=     1             36                  
+    sur    2  3.927+00 -7.755+00 -9.134-01  6.513-01 -6.682-01 -3.595-01 9.040-02 9.972-01   surf=     1             264                 
+    sur    3  1.602+01 -1.081+01 -5.166+00  8.746-01  3.710-01  3.121-01 1.479-08 3.010-01   surf=     2             2539                
+    ter    3  1.602+01 -1.081+01 -5.166+00  8.746-01  3.710-01  3.121-01 1.479-08 3.010-01   escape                  2539                
+1     event log for lost particle no.   1          nps =        6244        ijk =       55076909523981
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  4.509+00  1.056+00 -6.276+00 -3.801-02 -4.141-02  9.984-01 5.346+00 3.597+00   particle= neutron       2                   
+    sur    2  8.734+00  3.229-01 -7.653-02  9.719-01 -9.449-02 -2.158-01 1.459-01 2.655-01   surf=     1             402                 
+    sur    3  1.993+01 -1.675+00 -1.888-01  8.986-01 -3.015-01  3.187-01 3.274-08 3.424-01   surf=     2             1441                
+    ter    3  1.993+01 -1.675+00 -1.888-01  8.986-01 -3.015-01  3.187-01 3.274-08 3.424-01   escape                  1441                
+1     event log for lost particle no.   1          nps =        6256        ijk =      117382043070461
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.209+00 -4.368+00 -2.234+00 -4.015-01 -6.555-01  6.396-01 2.402+00 3.597+00   particle= neutron       2                   
+    sur    2  5.988+00 -6.361+00 -2.892-01 -4.015-01 -6.555-01  6.396-01 2.402+00 3.597+00   surf=     1             3                   
+    sur    1  5.914+00 -6.433+00 -2.065-01 -9.456-01  1.358-01  2.957-01 5.524-01 3.597+00   surf=     1             20                  
+    sur    2  5.429+00  3.085+00 -6.116+00  5.107-01  8.450-01 -1.587-01 3.379-01 6.320-01   surf=     1             313                 
+    sur    3  1.669+01  1.096+01 -1.184+00  7.713-01  1.099-01  6.269-01 3.096-08 2.678-01   surf=     2             2035                
+    ter    3  1.669+01  1.096+01 -1.184+00  7.713-01  1.099-01  6.269-01 3.096-08 2.678-01   escape                  2035                
+1     event log for lost particle no.   1          nps =        6264        ijk =      269745257890717
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.623+00 -4.155+00 -1.246-01 -1.447-01  3.837-01  9.120-01 1.286+00 3.597+00   particle= neutron       2                   
+    sur    2  2.627+00  6.633+00  5.049+00 -2.049-01  9.726-01 -1.099-01 3.741-01 5.121-01   surf=     1             280                 
+    ter    2  1.033+01  9.154+00  3.548+00  4.374-01 -8.537-01 -2.826-01 4.125-08 2.486-01   weight cutoff           1893                
+1     event log for lost particle no.   1          nps =        6265        ijk =      281202788988281
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.623+00 -4.155+00 -1.246-01 -1.521-01  9.760-01 -1.561-01 8.182-01 3.597+00   particle= neutron       2                   
+    sur    2  8.342+00 -1.275-01  2.606+00  1.609-01  4.311-01  8.878-01 5.190-01 2.031+00   surf=     1             128                 
+    sur    1  4.481+00 -1.614+00  7.329+00 -9.034-01  1.238-01 -4.105-01 2.611-06 2.025+00   surf=     1             427                 
+    ter    1  3.418+00 -5.300-01  6.976+00 -6.198-02  9.968-01  5.013-02 2.404-06 1.330-01   weight cutoff           593                 
+1     event log for lost particle no.   1          nps =        6270        ijk =      211547261703541
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.983+00  1.117+00  2.493+00 -3.982-02 -9.543-01  2.961-01 2.178+00 3.597+00   particle= neutron       2                   
+    sur    2  7.879+00 -1.421+00  3.509+00  1.054-02  1.469-01  9.891-01 3.879-01 2.941+00   surf=     1             57                  
+    sur    1  6.869+00 -1.364+00  5.230+00 -9.787-01 -1.980-01 -5.456-02 3.379-01 2.941+00   surf=     1             65                  
+    sur    2  5.344+00 -6.523+00  2.302+00  4.989-01 -4.304-01 -7.522-01 3.343-01 2.092+00   surf=     1             133                 
+    sur    1  5.348+00 -6.533+00  2.264+00 -5.512-01  1.310-01 -8.240-01 3.056-01 2.092+00   surf=     1             141                 
+    sur    2  3.809+00 -7.787+00 -1.121+00 -2.885-01 -6.718-01 -6.823-01 3.050-01 1.501+00   surf=     1             197                 
+    ter    2  6.891+00 -1.359+01 -7.929+00 -2.079-01 -2.210-01 -9.529-01 3.158-08 2.476-01   weight cutoff           3741                
+1     event log for lost particle no.   1          nps =        6271        ijk =       30775742974321
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  2.610+00  6.542+00  5.105+00 -8.597-01 -4.030-01  3.139-01 1.784+00 3.597+00   particle= neutron       2                   
+    sur    2  2.744+00  3.541+00  7.505+00  9.592-01  1.611-02  2.824-01 1.764+00 1.896+00   surf=     1             135                 
+    sur    3  8.795+00  1.065+01  1.447+01 -4.068-01  8.793-01  2.476-01 1.057-06 1.882+00   surf=     2             477                 
+    ter    3  8.795+00  1.065+01  1.447+01 -4.068-01  8.793-01  2.476-01 1.057-06 1.882+00   escape                  477                 
+1     event log for lost particle no.   1          nps =        6273        ijk =       87869320194201
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.638+00  5.475+00 -1.370+00  5.497-01 -8.149-01  1.838-01 2.180+00 3.597+00   particle= neutron       2                   
+    sur    2  7.286+00  4.795+00 -5.649-01  5.416-01  4.335-01 -7.202-01 4.540-01 2.083+00   surf=     1             124                 
+    ter    2  1.261+01 -4.019+00  2.550+00 -5.362-01 -8.418-01  6.263-02 1.641-08 2.495-01   weight cutoff           4126                
+1     event log for lost particle no.   1          nps =        6279        ijk =       89668391443345
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.616+00 -1.430+00  1.558-01 -3.374-02 -5.628-01 -8.259-01 6.188-01 3.597+00   particle= neutron       4                   
+    sur    2  8.613+00 -1.487+00  7.214-02 -3.374-02 -5.628-01 -8.259-01 6.188-01 3.597+00   surf=     1             5                   
+    sur    1  5.501+00 -5.440+00 -4.067+00 -9.383-01  2.671-01 -2.198-01 1.488-06 3.567+00   surf=     1             323                 
+    sur    2  5.670+00 -5.301+00 -4.018+00  9.484-01  1.236-01  2.920-01 1.436-06 5.407-01   surf=     1             509                 
+    ter    2  8.647+00 -8.696+00 -5.828+00 -2.868-01 -3.836-01  8.778-01 3.136-08 2.488-01   weight cutoff           1911                
+1     event log for lost particle no.   1          nps =        6283        ijk =      203433572181537
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.979+00 -3.376+00 -6.145-01 -4.017-02  9.186-01 -3.932-01 4.470-01 3.597+00   particle= neutron       2                   
+    sur    2  8.272+00  6.177-01 -2.756+00  5.116-01  8.269-01 -2.334-01 4.457-01 2.543+00   surf=     1             70                  
+    sur    3 -1.933+00  6.338+00 -1.887+01 -2.172-01  2.942-01 -9.307-01 1.175-07 5.516-01   surf=     2             3148                
+    ter    3 -1.933+00  6.338+00 -1.887+01 -2.172-01  2.942-01 -9.307-01 1.175-07 5.516-01   escape                  3148                
+1     event log for lost particle no.   1          nps =        6287        ijk =      186791986573745
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.511+00 -1.643+00 -1.561-01 -9.278-01  3.694-01  5.220-02 2.039+00 3.597+00   particle= neutron       2                   
+    sur    2  5.781+00 -1.270+00 -6.432+00  9.596-01 -2.726-01  6.969-02 5.533-01 1.143+00   surf=     1             249                 
+    sur    1  5.900+00 -6.545-01 -6.416+00 -2.761-01  9.611-01 -9.435-03 4.562-01 1.143+00   surf=     1             259                 
+    sur    2  5.812+00  7.471-02 -6.528+00  1.815-01  9.018-01 -3.922-01 4.093-01 9.611-01   surf=     1             279                 
+    sur    3  6.911+00  8.527+00 -1.672+01  8.567-01  2.427-02 -5.153-01 4.602-08 2.664-01   surf=     2             2813                
+    ter    3  6.911+00  8.527+00 -1.672+01  8.567-01  2.427-02 -5.153-01 4.602-08 2.664-01   escape                  2813                
+1     event log for lost particle no.   1          nps =        6300        ijk =       37027169795949
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  2.839+00 -1.050+00  3.162+00 -3.001-02  9.971-01  6.982-02 4.399+00 3.597+00   particle= neutron       2                   
+    sur    2  3.780+00  5.778+00  5.360+00  9.049-01 -1.901-01  3.809-01 2.198-01 2.178+00   surf=     1             179                 
+    sur    3 -3.644+00  4.466+00  1.915+01  6.595-01  4.860-01  5.735-01 1.792-08 4.002-01   surf=     2             4570                
+    ter    3 -3.644+00  4.466+00  1.915+01  6.595-01  4.860-01  5.735-01 1.792-08 4.002-01   escape                  4570                
+1     event log for lost particle no.   1          nps =        6309        ijk =      138873055300649
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.195+00 -6.909-01 -4.475+00 -8.452-01 -1.818-01  5.026-01 2.627-01 3.597+00   particle= neutron       2                   
+    ter    1  2.202-01  2.450-01 -3.517+00  2.208-01  9.062-01  3.605-01 1.251-01 2.109-01   weight cutoff           453                 
+1     event log for lost particle no.   1          nps =        6319        ijk =      133741214937649
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.358+00 -1.927+00 -1.670+00 -5.979-01  4.119-01  6.876-01 3.777-01 3.597+00   particle= neutron       2                   
+    sur    2  7.953-01 -8.605+00 -1.312+00  5.871-01 -6.878-01  4.270-01 2.209-01 8.901-01   surf=     1             282                 
+    sur    1  1.404+00 -7.970+00  3.303+00  3.269-01  8.613-01 -3.889-01 7.318-08 5.979-01   surf=     1             1331                
+    ter    1  1.431+00 -7.900+00  3.272+00  3.269-01  8.613-01 -3.889-01 7.318-08 2.376-02   weight cutoff           1366                
+1     event log for lost particle no.   1          nps =        6324        ijk =      277845577080909
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.306+00 -2.064+00  1.483+00 -5.122-01  8.168-01  2.657-01 1.473+00 3.597+00   particle= neutron       4                   
+    sur    2  7.078+00  3.314+00  3.914+00  6.942-01  2.716-01  6.666-01 1.394-01 1.569+00   surf=     1             175                 
+    ter    2  1.184+01  5.114+00 -6.835-01 -8.448-01 -1.578-01  5.113-01 1.034-08 2.476-01   weight cutoff           3732                
+1     event log for lost particle no.   1          nps =        6332        ijk =      200808809217517
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.595+00  4.129-01  1.159+00 -2.214-01 -9.536-01  2.043-01 3.584+00 3.597+00   particle= neutron       2                   
+    sur    2  7.226+00 -4.223+00 -2.520+00 -3.781-02 -1.309-01 -9.907-01 3.497+00 1.606+00   surf=     1             182                 
+    sur    3  7.430+00 -9.668+00 -1.585+01  6.247-01 -1.283-01 -7.703-01 1.019-07 5.765-01   surf=     2             2104                
+    ter    3  7.430+00 -9.668+00 -1.585+01  6.247-01 -1.283-01 -7.703-01 1.019-07 5.765-01   escape                  2104                
+1     event log for lost particle no.   1          nps =        6339        ijk =      248631027307265
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -2.805-01  8.641+00  1.280+00  4.382-01  1.657-01 -8.835-01 1.421+00 3.597+00   particle= neutron       4                   
+    sur    2 -2.546-01  8.650+00  1.228+00  4.382-01  1.657-01 -8.835-01 1.421+00 3.597+00   surf=     1             5                   
+    sur    1  5.533-02  8.719+00  6.082-01  2.971-01 -8.177-01 -4.930-01 1.323+00 3.597+00   surf=     1             13                  
+    sur    2  3.517+00  8.001+00 -1.252-01  5.671-01  7.377-01  3.664-01 1.305+00 2.890+00   surf=     1             65                  
+    sur    1  1.767+00  8.140+00 -2.648+00 -4.716-01 -5.477-01 -6.911-01 1.276-07 4.369-01   surf=     1             3902                
+    ter    1  1.674+00  8.032+00 -2.784+00 -4.716-01 -5.477-01 -6.911-01 1.276-07 2.407-02   weight cutoff           3925                
+1     event log for lost particle no.   1          nps =        6345        ijk =       42592627361977
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.819+00  5.163+00 -1.353-01 -2.843-01  2.009-01 -9.375-01 4.729+00 3.597+00   particle= neutron       2                   
+    sur    2  2.941+00  7.877+00 -2.390+00  2.291-02  6.189-01 -7.851-01 3.231+00 1.894+00   surf=     1             168                 
+    sur    3  1.190+00  1.734+01 -9.894+00  1.549-02  9.986-01  4.999-02 1.011-07 8.699-01   surf=     2             1842                
+    ter    3  1.190+00  1.734+01 -9.894+00  1.549-02  9.986-01  4.999-02 1.011-07 8.699-01   escape                  1842                
+1     event log for lost particle no.   1          nps =        6352        ijk =      259283081347965
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.343+00  2.503+00 -6.952-01 -9.843-01 -1.428-01  1.040-01 1.326+00 3.597+00   particle= neutron       2                   
+    sur    2  4.611+00 -7.027+00  2.400+00  5.714-01 -8.205-01  1.477-02 1.178+00 1.215+00   surf=     1             177                 
+    sur    1  3.656+00 -5.673+00  5.554+00 -5.921-01  1.508-01 -7.916-01 2.505-08 6.982-01   surf=     1             1484                
+    ter    1  3.625+00 -5.665+00  5.512+00 -5.921-01  1.508-01 -7.916-01 2.505-08 1.502-02   weight cutoff           1519                
+1     event log for lost particle no.   1          nps =        6356        ijk =      124012162207437
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  1.219+00 -4.958+00 -4.173+00 -8.703-01 -8.564-03  4.925-01 3.115+00 3.597+00   particle= neutron       2                   
+    sur    2  1.526+00  2.355+00 -8.278+00  2.319-01  9.052-01 -3.562-01 3.290-01 2.559+00   surf=     1             94                  
+    sur    1  3.706+00  1.355+00 -7.799+00  6.036-01  1.459-02  7.972-01 5.153-08 1.400+00   surf=     1             1355                
+    ter    1  3.735+00  1.356+00 -7.761+00  6.036-01  1.459-02  7.972-01 5.153-08 4.517-02   weight cutoff           1420                
+1     event log for lost particle no.   1          nps =        6357        ijk =      178767208062697
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  7.964+00 -3.539+00 -5.065-01 -4.958-01  5.875-02 -8.665-01 1.231+00 3.597+00   particle= neutron       2                   
+    sur    2  4.749+00 -3.596+00 -6.396+00 -2.915-01 -4.787-01 -8.282-01 1.229+00 2.893+00   surf=     1             54                  
+    sur    1 -5.845+00 -3.770+00 -5.294+00  2.550-01  9.658-01  4.725-02 1.837-08 8.062-01   surf=     1             2579                
+    ter    1 -5.843+00 -3.763+00 -5.293+00  2.550-01  9.658-01  4.725-02 1.837-08 1.468-02   weight cutoff           2620                
+1     event log for lost particle no.   1          nps =        6373        ijk =      258109307061545
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  8.502+00  9.071-01 -1.796+00 -9.595-01 -1.881-01  2.098-01 2.006+00 3.597+00   particle= neutron       2                   
+    sur    2 -8.672+00 -7.817-01  7.628-01 -9.781-01  1.629-01 -1.296-01 2.001+00 1.269+00   surf=     1             203                 
+    sur    1 -7.050+00  1.638-01  5.164+00  7.834-01  1.971-02  6.212-01 1.585+00 1.268+00   surf=     1             211                 
+    sur    2 -3.608+00  3.271-01  7.954+00  1.351-02  7.758-01  6.308-01 1.475+00 1.020+00   surf=     1             238                 
+    sur    1 -3.213+00  6.604-01  8.102+00  9.579-01  2.761-01 -7.864-02 4.642-02 1.020+00   surf=     1             257                 
+    sur    2 -1.876+00  8.863-02  8.537+00  4.040-01 -7.805-01  4.771-01 4.608-02 8.351-01   surf=     1             285                 
+    ter    2 -2.423+00  1.400+00  1.380+01  3.777-01 -5.300-01 -7.593-01 3.707-08 2.478-01   weight cutoff           3731                
+1     event log for lost particle no.   1          nps =        6388        ijk =      206596377361741
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  6.717+00  5.052+00 -2.355+00  3.624-01 -7.511-01 -5.519-01 4.805-01 3.597+00   particle= neutron       2                   
+    sur    2  6.910+00  4.652+00 -2.649+00  3.624-01 -7.511-01 -5.519-01 4.805-01 3.597+00   surf=     1             3                   
+    sur    1  7.174+00  2.858+00 -4.094+00 -3.208-01 -4.557-01  8.303-01 3.522-03 3.597+00   surf=     1             48                  
+    ter    1  1.764+00  2.650+00 -1.532+00 -1.395-01 -9.623-01  2.335-01 3.283-03 1.467-01   weight cutoff           315                 
+1     event log for lost particle no.   1          nps =        6393        ijk =      167248333047673
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -1.235+00 -2.468+00 -6.375+00 -8.792-02 -9.930-01  7.847-02 3.870+00 3.597+00   particle= neutron       6                   
+    sur    2 -2.290+00 -5.182+00 -6.656+00 -7.977-01 -3.909-01 -4.591-01 3.855+00 2.624+00   surf=     1             92                  
+    sur    3 -1.142+01 -8.915+00 -1.379+01 -3.905-01  8.163-02 -9.170-01 3.713+00 2.614+00   surf=     2             100                 
+    ter    3 -1.142+01 -8.915+00 -1.379+01 -3.905-01  8.163-02 -9.170-01 3.713+00 2.614+00   escape                  100                 
+1     event log for lost particle no.   1          nps =        6397        ijk =       66734327065737
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1  3.849+00  3.336+00 -7.067+00 -3.578-01  7.601-01 -5.425-01 8.714-01 3.597+00   particle= neutron       4                   
+    sur    2  3.831+00  3.375+00 -7.095+00 -3.578-01  7.601-01 -5.425-01 8.714-01 3.597+00   surf=     1             5                   
+    sur    1  2.217+00  3.235+00 -7.811+00 -5.471-01 -7.883-01  2.815-01 1.335-06 3.576+00   surf=     1             223                 
+    ter    1  1.577+00  1.643+00 -7.296+00  9.768-01  1.945-01  8.989-02 1.335-06 1.048-01   weight cutoff           433                 
+1     event log for lost particle no.   1          nps =        6400        ijk =      237345089365309
+
+        cell     x         y         z         u         v         w       erg      wgt                          nch nrn
+
+ source    1 -2.089+00  5.506+00  6.418+00 -6.289-01  4.992-01 -5.961-01 4.057+00 3.597+00   particle= neutron       2                   
+    sur    2 -2.420+00  5.768+00  6.105+00 -6.289-01  4.992-01 -5.961-01 4.057+00 3.597+00   surf=     1             3                   
+    sur    1 -4.061+00  7.663+00  1.092+00  5.104-01 -4.444-01 -7.362-01 1.391-04 3.596+00   surf=     1             129                 
+    ter    1 -3.992+00  7.224+00  5.693-01  4.822-02  6.342-01 -7.717-01 1.354-04 3.310-02   weight cutoff           259                 
+
+ bad trouble in subroutine colidk of mcrun                            
+
+ source particle no.         6400                                     
+
+                                                                      
+
+  the new source has overrun the old source.
+                                        extend mesh to:   4 x 3 x 4
+
+ cycle     2    k(collision)  1.005976    prompt removal lifetime(abs)  4.8779E+03    source points generated  10000
+                                          source_entropy =      0.73815
+1problem summary                                                                                                           
+
+      run terminated because of bad trouble.
++                                                                                                    10/15/26 11:53:02 
+
+ =====>     148.22 M histories/hr    (based on wall-clock time in mcrun)
+
+
+      Godiva probe - water-reflected sphere, KSRC in the reflector only     probid =  10/15/26 11:53:01 
+
+ neutron creation    tracks      weight        energy            neutron loss        tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source                6513    1.6288E+00    1.9707E+00          escape                4354    6.7061E-01    3.3004E-01
+ nucl. interaction        0    0.            0.                  energy cutoff            0    0.            0.        
+ particle decay           0    0.            0.                  time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    4.1453E-02    3.7841E-04          weight cutoff         2063    4.1256E-02    4.7065E-04
+ e or t importance        0    0.            0.                  e or t importance        0    0.            0.        
+ dxtran                   0    0.            0.                  dxtran                   0    0.            0.        
+ forced collisions        0    0.            0.                  forced collisions        0    0.            0.        
+ exp. transform           0    0.            0.                  exp. transform           0    0.            0.        
+ upscattering             0    0.            3.2298E-07          downscattering           0    0.            1.3716E+00
+ photonuclear             0    0.            0.                  capture                  0    4.9897E-01    1.7685E-02
+ (n,xn)                  12    4.3855E-03    1.6017E-03          loss to (n,xn)           6    2.1928E-03    1.1668E-02
+ prompt fission           0    0.            0.                  loss to fission          0    4.2000E-01    2.0613E-01
+ delayed fission          0    0.            0.                  nucl. interaction        0    0.            0.        
+ prompt photofis          0    0.            0.                  particle decay           0    0.            0.        
+ tabular boundary         0    0.            0.                  tabular boundary         0    0.            0.        
+ tabular sampling         0    0.            0.                  elastic scatter          0    0.            0.        
+     total             6525    1.6747E+00    1.9727E+00              total             6423    1.6330E+00    1.9376E+00
+
+   number of neutrons banked                       6        average time of (shakes)              cutoffs
+   neutron tracks per source particle     1.0178E+00          escape            4.3271E+03          tco   1.0000E+33
+   neutron collisions per source particle 6.9870E+01          capture           9.2759E+03          eco   0.0000E+00
+   total neutron collisions                   447939          capture or escape 6.4384E+03          wc1  -5.0000E-01
+   net multiplication              1.0014E+00 0.0006          any termination   5.7908E+03          wc2  -2.5000E-01
+
+ computer time so far in this run     0.06 minutes            maximum number ever in bank         1
+ computer time in mcrun               0.02 minutes            bank overflows to backup file       0
+ source particles per minute            3.6262E+05
+ random numbers generated                  7643294            most random numbers used was       11194 in history        6275
+
+ range of sampled source weights = 1.0000E+00 to 3.5971E+00
+
+ number of histories processed by each thread
+         801         828         879         796         741         769         811         786
+1neutron  activity in each cell                                                                         print table 126
+
+                       tracks     population   collisions   collisions     number        flux        average      average
+              cell    entering                               * weight     weighted     weighted   track weight   track mfp
+                                                          (per history)    energy       energy     (relative)      (cm)
+
+        1        1        3488         2507         8427    2.0742E+00   7.5170E-02   1.3286E+00   1.8542E+00   2.5245E+00
+        2        2        7027         6425       441408    6.1650E+01   1.1348E-04   4.4854E-01   1.0003E+00   1.2653E+00
+
+           total         10515         8932       449835    6.3724E+01
+1keff results for: Godiva probe - water-reflected sphere, KSRC in the reflector only                    probid =  10/15/26 11:53:01 
+
+ 
+  warning.  no final keff estimate made because no active cycles run.
+
+ the initial fission neutron source distribution used the   1 source points that were input on the ksrc card.
+ the criticality problem was scheduled to skip  20 cycles and run a total of   70 cycles with nominally     5000 neutrons per cycle.
+ this problem has run   2 inactive cycles with     6411 neutron histories and    0 active cycles with           0 neutron histories.
+
+
+ this calculation did not finish because only    2 of the requested   70 keff cycles were completed.
+ all cells with fissionable material were sampled and had fission neutron source points.
+
+
+1individual and average keff estimator results by cycle
+
+  keff     neutron    keff estimators by cycle           average keff estimators and deviations                average k(c/a/t)
+ cycle   histories   k(coll)  k(abs)  k(track)     k(coll)  st dev    k(abs)  st dev   k(track) st dev    k(c/a/t)  st dev    fom
+
+     1        5000 | 0.27152  0.27103  0.27868  | 
+     2        1390 | 1.00598  1.08837  1.15895  | 
+
+ ***********************************************************************************************************************
+
+ dump no.    2 on file runtpe.h5     nps =        6411     coll =         447939     ctm =        0.02   nrn =          
+ 7643294
+
+         4 warning messages so far.
+
+
+ run terminated because of bad trouble.
+
+ computer time =    0.06 minutes
+
+ mcnp6 version 6.3.0 01/26/23                     10/15/26 11:53:02                     probid =  10/15/26 11:53:01 
