@@ -2,8 +2,8 @@
 # MCNP calculator script for fz
 #
 # Runs MCNP6 on the input file given by fz, then decides success from the
-# MCNP output (outp), not from the executable exit code (not relied upon:
-# see tests/mcnp_probe, hypothesis H4).
+# MCNP output (outp), not from the executable exit code (MCNP 6.3.0 returns 0
+# even after a fatal error or a bad trouble: tests/mcnp_probe, hypothesis H4).
 #
 # Environment (all optional):
 #   MCNP_CMD    MCNP executable (default: mcnp6 on PATH, else
@@ -11,13 +11,13 @@
 #   MCNP_PATH   MCNP installation directory (legacy layout: MCNP_CODE/, MCNP_DATA/)
 #   DATAPATH    directory holding xsdir; kept if set, else $MCNP_PATH/MCNP_DATA if it exists
 #   MCNP_TASKS  number of threads (adds "tasks N")
-#   MCNP_OPTS   extra command-line options, appended as given
+#   MCNP_OPTS   extra command-line options, appended as given (e.g. xsdir=<file>)
 #
 # Input file: the first argument named *.inp, *.i, *.mcnp or *.mcn, else the
 # first regular file that is not an MCNP output file.
 #
 # Exit codes:
-#   0 normal end ("run terminated when ...")
+#   0 normal end ("run terminated when ..."; also when no final keff: warning on stderr)
 #   1 no input file           2 usage
 #   4 executable not found    5 no outp produced (executable/environment failure)
 #   6 abnormal end (fatal error, bad trouble, run terminated because ...; message on stderr)
@@ -98,10 +98,11 @@ if [ ! -f outp ]; then
   exit 5
 fi
 
-# Markers verified on MCNP 6.1 (tests/fixtures/mcnp6.1) and quoted from MCNP 6.3 runs
-# (MCNP skill); anchored so that the echoed input lines (numbered) never match.
+# Markers verified on MCNP 6.1 and 6.3.0 outputs (tests/fixtures/mcnp6.1, mcnp6.3);
+# anchored so that the echoed input lines (numbered) never match. The reason of a
+# "bad trouble" comes after a blank line, sometimes after "source particle no. N".
 FATAL=$(grep -m1 -E '^ *fatal error\.' outp)
-TROUBLE=$(grep -m1 -A1 -E '^ *bad trouble' outp)
+TROUBLE=$(grep -m1 -A6 -E '^ *bad trouble' outp | grep -v -E '^[[:space:]]*$' | head -3)
 STOPPED=$(grep -m1 -E '^ *run terminated because' outp)
 if [ -n "$FATAL$TROUBLE$STOPPED" ]; then
   echo "MCNP abnormal end (outp):" >&2
@@ -115,5 +116,7 @@ if ! grep -q -E '^ *run terminated when' outp; then
   exit 7
 fi
 
+# kcode without active cycle (kct <= ikz): normal end banner but no final keff
+grep -m1 -E '^ *warning\. +no final keff estimate' outp >&2
 [ "$RC" -ne 0 ] && echo "Warning: MCNP normal end but exit code $RC" >&2
 exit 0

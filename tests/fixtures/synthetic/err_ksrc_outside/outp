@@ -1,8 +1,0 @@
-          Code Name & Version = MCNP6, 6.3.0
-1mcnp     version 6.3.0                                                  probid =  10/02/26 10:00:00
- i=case.i  o=outp
-         1-       Jezebel - bare delta-phase Pu sphere
-        10-       ksrc  10 0 0
-  fatal error.  the entire source was rejected.
- bad trouble in subroutine skcode of imcn
- no source points in kcode

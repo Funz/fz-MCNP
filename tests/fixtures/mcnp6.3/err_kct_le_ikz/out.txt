@@ -1,0 +1,107 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+          [LANL copyright line removed]
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+ mcnp6 ver=6.3.0, ld=01/26/23  10/15/26 11:52:31                   
+Source version = release/6.3-55762725c4
+  comment.  Physics models disabled.
+  kcode 1000 1.0 50 40                                                
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+ comment. using random number generator  1, initial seed = 19073486328125      
+ 
+  comment.  total fission nubar data are being used.
+  warning.    1 materials had unnormalized fractions. print table 40.
+  comment.  threading will be used when possible in portions of mcnp6.
+  comment.  threading will be used for n/p/e table physics.
+  comment.  threading will generally not be used for model physics.
+ imcn   is done
+
+  comment.  setting up hash-based fast table search for xsec tables
+
+ ctm =        0.00   nrn =                 0
+ dump    1 on file runtpe.h5   nps =           0   coll =                0
+
+ source distribution written to file srctp        cycle=     0
+ xact   is done
+
+ cp0 =   0.06
+
+ comment. 
+ comment. ----------------------------------------------------------------------
+ comment. The MESH (adaptive, axis-aligned, cartesian) to be used for computing  
+ comment. Shannon entropy, fission-matrix tallies (if used), and source 
+ comment. convergence checking is initially defined by:
+ comment.     max mesh spacing for automesh =  4.6488E+00
+ comment. 
+ comment.     total mesh cells = 125
+ comment. 
+ comment.     Xbins=    5   Xmin=-8.0829E+00   Xmax= 8.1107E+00   dx= 3.2387E+00
+ comment.     Ybins=    5   Ymin=-8.2368E+00   Ymax= 8.4024E+00   dy= 3.3278E+00
+ comment.     Zbins=    5   Zmin=-8.6266E+00   Zmax= 8.0961E+00   dz= 3.3445E+00
+ comment. 
+ comment. the mesh will be automatically extended if necessary,
+ comment. preserving the original mesh cells and spacing.
+ comment. ----------------------------------------------------------------------
+ comment. 
+
+
+ cycle    k(col)       ctm   entropy    active     k(col)    std dev     chains
+     1   1.37878      0.00   0.74602                                        750
+                                        extend mesh to:   7 x 5 x 7
+     2   1.14103      0.00   0.75267                                        460
+                                        extend mesh to:   7 x 6 x 7
+     3   1.07981      0.00   0.74985                                        349
+     4   1.05743      0.00   0.75559                                        286
+                                        extend mesh to:   7 x 7 x 7
+     5   1.01344      0.00   0.74366                                        237
+     6   1.02557      0.00   0.74497                                        207
+     7   1.01114      0.00   0.74991                                        181
+     8   0.99004      0.00   0.74368                                        164
+     9   0.98269      0.00   0.73826                                        148
+    10   1.02143      0.00   0.74617                                        137
+    11   0.98356      0.00   0.74674                                        125
+    12   1.01649      0.00   0.73665                                        114
+    13   1.00662      0.00   0.74148                                        106
+    14   0.99055      0.00   0.74031                                        100
+    15   1.00438      0.00   0.74896                                         96
+    16   0.99372      0.00   0.74754                                         93
+    17   0.97153      0.00   0.74536                                         84
+    18   0.96034      0.00   0.74769                                         82
+    19   1.01069      0.00   0.74705                                         77
+    20   0.97835      0.00   0.74148                                         74
+    21   1.01336      0.00   0.74801                                         71
+    22   0.95995      0.00   0.74747                                         66
+    23   1.01921      0.00   0.74461                                         65
+    24   1.05831      0.00   0.74516                                         63
+    25   1.02040      0.00   0.74798                                         61
+    26   0.98252      0.00   0.74785                                         58
+    27   0.99038      0.00   0.74869                                         56
+    28   1.04134      0.01   0.74497                                         53
+    29   1.00706      0.01   0.74396                                         53
+    30   0.99682      0.01   0.74675                                         50
+    31   0.97682      0.01   0.75123                                         48
+    32   0.99521      0.01   0.75358                                         46
+    33   1.00834      0.01   0.74322                                         43
+    34   1.04934      0.01   0.74697                                         43
+    35   1.02309      0.01   0.74649                                         43
+    36   0.94749      0.01   0.74386                                         41
+    37   1.00291      0.01   0.74583                                         40
+    38   1.00047      0.01   0.74697                                         40
+    39   0.99541      0.01   0.74572                                         39
+    40   0.99206      0.01   0.75142                                         37
+      run terminated when      40 kcode cycles were done.
+
+ =====>    1517.19 M histories/hr    (based on wall-clock time in mcrun)
+
+
+  warning.  no final keff estimate made because no active cycles run.
+
+ ctm =        0.01   nrn =           2085910
+ dump    2 on file runtpe.h5   nps =       39805   coll =           166052
+ mcrun  is done
+

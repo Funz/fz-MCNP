@@ -1,6 +1,0 @@
-          Code Name & Version = MCNP6, 6.3.0
-1mcnp     version 6.3.0                                                  probid =  10/02/26 10:00:00
- i=case.i  o=outp
-         1-       Jezebel - bare delta-phase Pu sphere
- bad trouble in subroutine pass0 of imcn
- unexpected eof in file case.i

@@ -43,8 +43,10 @@ c sphere mass (g): @{round(18.74*4/3*3.141592653589793*%(r)**3)}
 ```
 
 ZAIDs without library suffix take the first table listed in `xsdir`, which depends on the
-installation; give explicit suffixes (e.g. `92235.00c` with MCNP 6.3 / ENDF/B-VIII.0) for
-production studies.
+installation: with MCNP 6.3.0, this input (r = 8.7407) gave keff = 0.99794 with a site
+ENDF/B-VII.1 `xsdir` (first table `92235.02c`, 293.6 K) and 1.00008 with a site ENDF/B-VIII.0
+`xsdir`. Suffixes are not universal either (`.00c` is the LANL distribution's; a site
+library may not have it): check `xsdir` and give explicit suffixes for production studies.
 
 ### Output
 
@@ -53,29 +55,33 @@ and fz's `out.txt` (MCNP terminal output) when `outp` is missing.
 
 | Variable | Content |
 |---|---|
-| `mcnp_status` | `NORMAL END`, `FATAL ERROR: <first fatal error>`, `BAD TROUBLE: <reason> (subroutine ...)`, `ABNORMAL END: run terminated because <reason>` (e.g. lost particles), `NO END BANNER` (interrupted run), `NO OUTPUT` |
+| `mcnp_status` | `NORMAL END`, `FATAL ERROR: <first fatal error>`, `BAD TROUBLE: <reason> (subroutine ...)`, `ABNORMAL END: run terminated because <reason>` (e.g. lost particles), `NO KEFF: no final keff estimate made ...` (end banner but no active cycle), `NO END BANNER` (interrupted run), `NO OUTPUT` |
 | `mean_keff`, `sigma_keff` | final combined collision/absorption/track-length keff and its standard deviation (`KCODE` only) |
 | `dkeff`, `sigma_dkeff` | keff change of each `PERTn` card (track-length estimator) and its standard deviation, flattened by fz into `dkeff_1`, `dkeff_2`, ... (absent without `PERT`) |
 | `tally`, `tally_relerr` | for each tally of `mctal`, the last value of its `vals` block (the total bin when the tally has one) and its relative error, flattened into `tally_4`, `tally_relerr_4`, ... (absent without `mctal`) |
 
-Example (real MCNP 6.1 output, `tests/fixtures/mcnp6.1/ok_godiva/outp`):
+Example (real MCNP 6.3.0 output of `examples/godiva.inp`, r = 8.7407, ENDF/B-VII.1):
 
 ```
- | the final estimated combined collision/absorption/track-length keff = 1.00248 with an estimated standard deviation of 0.00062   |
+ | the final estimated combined collision/absorption/track-length keff = 0.997944 with an estimated standard deviation of 0.000575 |
 ```
 
-gives `mean_keff` = 1.00248, `sigma_keff` = 0.00062. For a fixed-source run, `mean_keff`
-and `sigma_keff` are empty (fz reports them in `_output_error`).
+gives `mean_keff` = 0.997944, `sigma_keff` = 0.000575 (same line in MCNP 6.1). For a
+fixed-source run, `mean_keff` and `sigma_keff` are empty (fz reports them in `_output_error`).
 
-The `PERT` table and `MCTAL` formats are taken from the MCNP 6.3 documentation, not yet from
-real runs: see [tests/mcnp_probe](tests/mcnp_probe/README.md).
+All formats (status messages, keff line, `PERT` table, `MCTAL`) were checked on MCNP 6.1 and
+6.3.0 outputs: see [tests/mcnp_probe](tests/mcnp_probe/README.md) and `tests/fixtures/`.
+The "last pair" rule of `tally` gives the total bin of a tally with energy bins (`et`), but
+only the **last** cell/surface of a tally with several of them and no total bin.
 
 ### What `NORMAL END` does not tell
 
 `mcnp_status` = `NORMAL END` with a keff and a small σ does not prove that the fission source
 converged. According to the MCNP synthetic notice (skill v0.2): with loosely coupled units and
 `KSRC` points in one unit only, MCNP 6.3 returned k = 0.928 instead of 0.993 while the entropy
-check passed; a `KSRC` point in a non-fissile cell of non-zero importance is not rejected. In a
+check passed; a `KSRC` point in a non-fissile cell of non-zero importance is not rejected
+(with MCNP 6.3.0, a point in the water reflector of a reflected Godiva was accepted, then the
+run stopped in cycle 2 on `bad trouble`: `the new source has overrun the old source`). In a
 parametric study, check that `KSRC` points (or the `SDEF` volume) lie inside **every** fissile unit
 for **all** sampled values of the variables (e.g. points written with formulas of the geometric
 variables), give `HSRC` over the whole fissile region, and look at print table 126 (activity in
@@ -97,14 +103,15 @@ each cell) of a few cases.
 | `MCNP_PATH` | none | installation directory (layout of the Java plugin: `MCNP_CODE/`, `MCNP_DATA/`) |
 | `DATAPATH` | kept if set, else `$MCNP_PATH/MCNP_DATA` if it exists | directory holding `xsdir` |
 | `MCNP_TASKS` | none | number of threads (`tasks N`) |
-| `MCNP_OPTS` | none | extra command-line options, appended as given |
+| `MCNP_OPTS` | none | extra command-line options, appended as given (e.g. `xsdir=xsdir71` to pick one of several `xsdir` files of `DATAPATH`) |
 
 The script runs `mcnp6 i=<input> o=outp [tasks N] [MCNP_OPTS]` in the case directory,
 removes a previous `outp`/`mctal` first (MCNP would otherwise write `outq`/`mctam`), and
 sets `ulimit -s unlimited` when allowed. Exit codes: 0 normal end, 1 no input file,
 2 usage, 4 executable not found, 5 no `outp`, 6 abnormal end (message on stderr),
 7 `outp` without end banner. With `MCNP_OPTS=fatal` (transport despite fatal errors) the
-case is still reported as failed.
+case is still reported as failed. The exit code of `mcnp6` is not used: MCNP 6.3.0 returns 0
+after fatal errors and bad troubles too.
 
 ## Usage
 
@@ -155,7 +162,7 @@ fz-MCNP/
 │   ├── test_calculator.py              # MCNP.sh with a fake mcnp6
 │   ├── test_outputs.py                 # output extraction on reference outputs
 │   ├── test_fz_e2e.py                  # fzr end to end with a fake mcnp6
-│   ├── fixtures/                       # real MCNP 6.1 output + synthetic outputs
+│   ├── fixtures/                       # real MCNP 6.1 and 6.3.0 outputs
 │   └── mcnp_probe/                     # datasets to run with a real MCNP
 └── example_usage.ipynb
 ```
@@ -179,8 +186,10 @@ plugin and on MCNP behaviour) and `tests/mcnp_probe/run_fz_e2e.py` (fzr on `godi
 | `mcnp_status` = `BAD TROUBLE: data file xsdir... does not exist` | set `DATAPATH` to the directory holding `xsdir` |
 | `FATAL ERROR: cross-section tables missing for zaid = ...` | ZAID/library not in your `xsdir` (natural elements have no ENDF/B-VII.1/VIII.0 table: use isotopes) |
 | `FATAL ERROR: no m card for material ...` while the `M` card exists | a blank line inside the data block ends it: use `c` comment lines instead |
-| `ABNORMAL END: run terminated because 10 particles got lost.` | geometry gap or overlap |
-| `mean_keff` empty with `NORMAL END` | no `KCODE` (fixed source), or no active cycle |
+| `ABNORMAL END: run terminated because 17 particles got lost.` | geometry gap or overlap (default limit 10; MCNP 6.3.0 reported 10 with 1 thread, 17 with `tasks 8`) |
+| `BAD TROUBLE: input file data beyond column 128.` (exit 5, no `outp`) | line longer than 128 columns, e.g. after substituting a long value |
+| `NO KEFF: no final keff estimate made because no active cycles run.` | `KCODE` with total cycles ≤ skipped cycles |
+| `mean_keff` empty with `NORMAL END` | no `KCODE` (fixed source) |
 
 ## License
 

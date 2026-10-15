@@ -1,0 +1,78 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+          [LANL copyright line removed]
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+ mcnp6 ver=6.3.0, ld=01/26/23  10/15/26 11:53:01                   
+Source version = release/6.3-55762725c4
+  comment.  Physics models disabled.
+  kcode 5000 1.0 20 70                                                
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+ comment. using random number generator  1, initial seed = 19073486328125      
+ 
+  comment.  total fission nubar data are being used.
+  warning.  kcode usually needs s(a,b) physics (mt card)
+  warning.    2 materials had unnormalized fractions. print table 40.
+  comment.  threading will be used when possible in portions of mcnp6.
+  comment.  threading will be used for n/p/e table physics.
+  comment.  threading will generally not be used for model physics.
+ imcn   is done
+
+  comment.  setting up hash-based fast table search for xsec tables
+
+ ctm =        0.00   nrn =                 0
+ dump    1 on file runtpe.h5   nps =           0   coll =                0
+
+ source distribution written to file srctp        cycle=     0
+ xact   is done
+
+ cp0 =   0.04
+
+ comment. 
+ comment. ----------------------------------------------------------------------
+ comment. The MESH (adaptive, axis-aligned, cartesian) to be used for computing  
+ comment. Shannon entropy, fission-matrix tallies (if used), and source 
+ comment. convergence checking is initially defined by:
+ comment.     max mesh spacing for automesh =  1.0779E+01
+ comment. 
+ comment.     total mesh cells = 27
+ comment. 
+ comment.     Xbins=    3   Xmin=-7.7138E+00   Xmax= 8.7300E+00   dx= 5.4813E+00
+ comment.     Ybins=    3   Ymin=-8.6493E+00   Ymax= 8.7088E+00   dy= 5.7860E+00
+ comment.     Zbins=    3   Zmin=-8.6380E+00   Zmax= 8.5800E+00   dz= 5.7394E+00
+ comment. 
+ comment. the mesh will be automatically extended if necessary,
+ comment. preserving the original mesh cells and spacing.
+ comment. ----------------------------------------------------------------------
+ comment. 
+
+
+ cycle    k(col)       ctm   entropy    active     k(col)    std dev     chains
+     1   0.27152      0.01   0.73918                                        876
+ Expire parameter is 
+  the new source has overrun the old source.                          
+
+ bad trouble in subroutine colidk of mcrun                            
+
+ source particle no.         6400                                     
+
+                                                                      
+
+  the new source has overrun the old source.
+                                        extend mesh to:   4 x 3 x 4
+     2   1.00598      0.02   0.73815                                        374
+      run terminated because of bad trouble.
+
+ =====>     148.22 M histories/hr    (based on wall-clock time in mcrun)
+
+
+  warning.  no final keff estimate made because no active cycles run.
+
+ ctm =        0.02   nrn =           7643294
+ dump    2 on file runtpe.h5   nps =        6411   coll =           447939
+ mcrun  is done
+

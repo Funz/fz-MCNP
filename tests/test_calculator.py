@@ -119,15 +119,24 @@ def test_stale_outputs_removed(run, tmp_path):
 
 
 @pytest.mark.parametrize("case,message", [
-    ("synthetic/err_no_mcard", "fatal error.  no m card for material no. 1"),
-    ("synthetic/err_ksrc_outside", "no source points in kcode"),
-    ("synthetic/err_missing_blank", "unexpected eof"),
-    ("synthetic/err_lost", "run terminated because  10 particles got lost"),
+    ("mcnp6.3/err_no_mcard", "fatal error.  no m card for material no. 1"),
+    ("mcnp6.3/err_ksrc_outside", "the entire source was rejected"),
+    ("mcnp6.3/err_missing_blank", "unexpected eof"),
+    ("mcnp6.3/err_lost", "run terminated because  17 particles got lost"),
+    ("mcnp6.3/err_zaid_z_a", "cross-section tables missing for zaid = 24028.00c"),
+    ("mcnp6.3/var_ksrc_nonfissile", "the new source has overrun the old source"),
 ])
 def test_abnormal_end(run, case, message):
     proc, _ = run(case)
     assert proc.returncode == 6
     assert message in proc.stderr
+
+
+def test_no_active_cycle(run):
+    """kct <= ikz: normal end banner, no final keff (MCNP 6.3.0, hypothesis H17)."""
+    proc, _ = run("mcnp6.3/err_kct_le_ikz")
+    assert proc.returncode == 0
+    assert "no final keff estimate" in proc.stderr
 
 
 def test_echoed_input_is_not_an_error(run):

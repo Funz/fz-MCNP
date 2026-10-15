@@ -1,0 +1,19 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+  [LANL copyright and export-control notice removed]
+  
+1mcnp6 version 6.3.0 ld=01/26/23                     10/15/26 11:52:34 
+ *************************************************************************                 probid =  10/15/26 11:52:34 
+Source version = release/6.3-55762725c4
+ i=err_missing_blank.i o=outp tasks 8 xsdir=xsdir71
+
+
+ bad trouble in subroutine pass0 of imcn                              
+
+ unexpected eof in file err_missing_blank.i

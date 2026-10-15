@@ -1,0 +1,395 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+  [LANL copyright and export-control notice removed]
+  
+1mcnp6 version 6.3.0 ld=01/26/23                     10/15/26 11:52:31 
+ *************************************************************************                 probid =  10/15/26 11:52:31 
+Source version = release/6.3-55762725c4
+ i=err_kct_le_ikz.i o=outp tasks 8 xsdir=xsdir71
+
+ 
+  comment.  Physics models disabled.
+         1-       Godiva probe - bare HEU sphere
+         2-       c Hypothese: H17 kct <= ikz (aucun cycle actif)
+         3-       c Attendu: erreur fatale ou 'no final keff estimate'
+         4-        1    1  -18.74  -1  imp:n=1   $ enriched uranium sphere (godiva)
+         5-        2    0           1  imp:n=0   $ all space outside the sphere
+         6-       
+         7-        1    so 8.7407
+         8-       
+         9-        kcode 1000 1.0 50 40
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+        10-        ksrc  0 0 0
+        11-        m1    92235 -93.71  92238 -5.27  92234 -1.02
+
+ ***************************************************
+ * Random Number Generator  =                    1 *
+ * Random Number Seed       =       19073486328125 *
+ * Random Number Multiplier =       19073486328125 *
+ * Random Number Adder      =                    0 *
+ * Random Number Bits Used  =                   48 *
+ * Random Number Stride     =               152917 *
+ ***************************************************
+
+ 
+  comment.  total fission nubar data are being used.
+ 
+  warning.    1 materials had unnormalized fractions. print table 40.
+1cells                                                                                                  print table 60
+
+                               atom        gram                                            neutron                                     
+              cell      mat   density     density     volume       mass            pieces importance                                   
+
+        1        1        1  4.79838E-02 1.87400E+01 2.79722E+03 5.24200E+04           1  1.0000E+00                                   
+        2        2        0  0.00000E+00 0.00000E+00 0.00000E+00 0.00000E+00           0  0.0000E+00                                   
+
+ total                                               2.79722E+03 5.24200E+04
+ 
+  comment.  threading will be used when possible in portions of mcnp6.
+ 
+  comment.  threading will be used for n/p/e table physics.
+ 
+  comment.  threading will generally not be used for model physics.
+
+         2 warning messages so far.
+1cross-section tables                                                                                   print table 100
+     XSDIR used: /path/to/MCNP_DATA/xsdir/xsdir71
+
+     table    length
+
+                        tables from file 71/293.6/922340_71.02c                                          
+
+  92234.02c  346624  922340  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9225      09/17/13
+                     Energy range:   1.00000E-11  to  3.00000E+01 MeV.
+                     probability tables used from 1.5000E-03 to 1.0000E-01 mev.
+
+                        tables from file 71/293.6/922350_71.02c                                          
+
+  92235.02c  680795  922350  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9228      09/17/13
+                     Energy range:   1.00000E-11  to  2.00000E+01 MeV.
+                     probability tables used from 2.2500E-03 to 2.5000E-02 mev.
+
+                        tables from file 71/293.6/922380_71.02c                                          
+
+  92238.02c 1318483  922380  ENDF/B-VII.1 library at 293.6 K - NJOY 99.2total nu                  mat9237      09/17/13
+                     Energy range:   1.00000E-11  to  3.00000E+01 MeV.
+                     probability tables used from 2.0000E-02 to 1.4903E-01 mev.
+
+  total     2345902
+
+1particles and energy limits                                                                            print table 101
+
+                         particle      maximum       smallest      largest       always        always
+                         cutoff        particle      table         table         use table     use model
+   particle type         energy        energy        maximum       maximum       below         above
+
+    1  n    neutron     0.0000E+00    1.0000E+36    2.0000E+01    3.0000E+01    1.0000E+36    1.0000E+36
+ 
+  comment.  setting up hash-based fast table search for xsec tables
+
+ ------------------------------------------------------------------------------------------
+ =====> Set up arrays for hash-based fast table search for xsec data
+
+    number of hash bins   =     8192
+    min hash table energy =  1.00000E-11
+    max hash table energy =  3.00000E+01
+
+           nuclide      ne      emin        emax     ave_bins  min_bins  max_bins
+           92234.02c   25480 1.00000E-11 3.00000E+01       3.1       0.0     153.0
+           92235.02c   76525 1.00000E-11 2.00000E+01       9.3       0.0     185.0
+           92238.02c  157754 1.00000E-11 3.00000E+01      19.3       0.0     409.0
+
+ ------------------------------------------------------------------------------------------
+
+
+ ***********************************************************************************************************************
+
+ dump no.    1 on file runtpe.h5     nps =           0     coll =              0     ctm =        0.00   nrn =          
+       0
+
+ source distribution written to file srctp        cycle=     0
+
+         2 warning messages so far.
+
+ comment. 
+ comment. ----------------------------------------------------------------------
+ comment. The MESH (adaptive, axis-aligned, cartesian) to be used for computing  
+ comment. Shannon entropy, fission-matrix tallies (if used), and source 
+ comment. convergence checking is initially defined by:
+ comment.     max mesh spacing for automesh =  4.6488E+00
+ comment. 
+ comment.     total mesh cells = 125
+ comment. 
+ comment.     Xbins=    5   Xmin=-8.0829E+00   Xmax= 8.1107E+00   dx= 3.2387E+00
+ comment.     Ybins=    5   Ymin=-8.2368E+00   Ymax= 8.4024E+00   dy= 3.3278E+00
+ comment.     Zbins=    5   Zmin=-8.6266E+00   Zmax= 8.0961E+00   dz= 3.3445E+00
+ comment. 
+ comment. the mesh will be automatically extended if necessary,
+ comment. preserving the original mesh cells and spacing.
+ comment. ----------------------------------------------------------------------
+ comment. 
+
+1estimated keff results by cycle                                                                        print table 175
+
+ cycle     1    k(collision)  1.378784    prompt removal lifetime(abs)  9.1190E-01    source points generated   1384
+                                          source_entropy =      0.74602
+                                        extend mesh to:   7 x 5 x 7
+
+ cycle     2    k(collision)  1.141031    prompt removal lifetime(abs)  7.3896E-01    source points generated    823
+                                          source_entropy =      0.75267
+                                        extend mesh to:   7 x 6 x 7
+
+ cycle     3    k(collision)  1.079815    prompt removal lifetime(abs)  6.5719E-01    source points generated    901
+                                          source_entropy =      0.74985
+
+ cycle     4    k(collision)  1.057426    prompt removal lifetime(abs)  6.3540E-01    source points generated    967
+                                          source_entropy =      0.75559
+                                        extend mesh to:   7 x 7 x 7
+
+ cycle     5    k(collision)  1.013443    prompt removal lifetime(abs)  6.3917E-01    source points generated    982
+                                          source_entropy =      0.74366
+
+ cycle     6    k(collision)  1.025575    prompt removal lifetime(abs)  6.2952E-01    source points generated    989
+                                          source_entropy =      0.74497
+
+ cycle     7    k(collision)  1.011137    prompt removal lifetime(abs)  6.4531E-01    source points generated    956
+                                          source_entropy =      0.74991
+
+ cycle     8    k(collision)  0.990036    prompt removal lifetime(abs)  6.5215E-01    source points generated    991
+                                          source_entropy =      0.74368
+
+ cycle     9    k(collision)  0.982687    prompt removal lifetime(abs)  6.3320E-01    source points generated    991
+                                          source_entropy =      0.73826
+
+ cycle    10    k(collision)  1.021432    prompt removal lifetime(abs)  6.6493E-01    source points generated   1010
+                                          source_entropy =      0.74617
+
+ cycle    11    k(collision)  0.983557    prompt removal lifetime(abs)  6.0015E-01    source points generated    953
+                                          source_entropy =      0.74674
+
+ cycle    12    k(collision)  1.016492    prompt removal lifetime(abs)  6.2421E-01    source points generated   1019
+                                          source_entropy =      0.73665
+
+ cycle    13    k(collision)  1.006624    prompt removal lifetime(abs)  6.3445E-01    source points generated    989
+                                          source_entropy =      0.74148
+
+ cycle    14    k(collision)  0.990549    prompt removal lifetime(abs)  6.5528E-01    source points generated    973
+                                          source_entropy =      0.74031
+
+ cycle    15    k(collision)  1.004377    prompt removal lifetime(abs)  6.1338E-01    source points generated   1004
+                                          source_entropy =      0.74896
+
+ cycle    16    k(collision)  0.993717    prompt removal lifetime(abs)  6.5647E-01    source points generated    964
+                                          source_entropy =      0.74754
+
+ cycle    17    k(collision)  0.971533    prompt removal lifetime(abs)  6.2682E-01    source points generated    980
+                                          source_entropy =      0.74536
+
+ cycle    18    k(collision)  0.960343    prompt removal lifetime(abs)  5.9621E-01    source points generated    956
+                                          source_entropy =      0.74769
+
+ cycle    19    k(collision)  1.010691    prompt removal lifetime(abs)  6.3705E-01    source points generated   1085
+                                          source_entropy =      0.74705
+
+ cycle    20    k(collision)  0.978346    prompt removal lifetime(abs)  5.6974E-01    source points generated   1002
+                                          source_entropy =      0.74148
+
+ cycle    21    k(collision)  1.013365    prompt removal lifetime(abs)  6.3857E-01    source points generated   1006
+                                          source_entropy =      0.74801
+
+ cycle    22    k(collision)  0.959951    prompt removal lifetime(abs)  6.0125E-01    source points generated    966
+                                          source_entropy =      0.74747
+
+ cycle    23    k(collision)  1.019208    prompt removal lifetime(abs)  6.4716E-01    source points generated   1029
+                                          source_entropy =      0.74461
+
+ cycle    24    k(collision)  1.058311    prompt removal lifetime(abs)  6.3047E-01    source points generated   1048
+                                          source_entropy =      0.74516
+
+ cycle    25    k(collision)  1.020400    prompt removal lifetime(abs)  6.1328E-01    source points generated    969
+                                          source_entropy =      0.74798
+
+ cycle    26    k(collision)  0.982517    prompt removal lifetime(abs)  6.2889E-01    source points generated    900
+                                          source_entropy =      0.74785
+
+ cycle    27    k(collision)  0.990382    prompt removal lifetime(abs)  6.4100E-01    source points generated   1011
+                                          source_entropy =      0.74869
+
+ cycle    28    k(collision)  1.041340    prompt removal lifetime(abs)  6.3118E-01    source points generated   1050
+                                          source_entropy =      0.74497
+
+ cycle    29    k(collision)  1.007056    prompt removal lifetime(abs)  6.3666E-01    source points generated   1007
+                                          source_entropy =      0.74396
+
+ cycle    30    k(collision)  0.996823    prompt removal lifetime(abs)  6.1679E-01    source points generated    987
+                                          source_entropy =      0.74675
+
+ cycle    31    k(collision)  0.976818    prompt removal lifetime(abs)  6.0926E-01    source points generated    973
+                                          source_entropy =      0.75123
+
+ cycle    32    k(collision)  0.995208    prompt removal lifetime(abs)  6.0083E-01    source points generated   1032
+                                          source_entropy =      0.75358
+
+ cycle    33    k(collision)  1.008341    prompt removal lifetime(abs)  6.1353E-01    source points generated    996
+                                          source_entropy =      0.74322
+
+ cycle    34    k(collision)  1.049341    prompt removal lifetime(abs)  6.5191E-01    source points generated   1030
+                                          source_entropy =      0.74697
+
+ cycle    35    k(collision)  1.023090    prompt removal lifetime(abs)  6.4422E-01    source points generated    992
+                                          source_entropy =      0.74649
+
+ cycle    36    k(collision)  0.947489    prompt removal lifetime(abs)  6.1250E-01    source points generated    880
+                                          source_entropy =      0.74386
+
+ cycle    37    k(collision)  1.002907    prompt removal lifetime(abs)  6.5334E-01    source points generated   1027
+                                          source_entropy =      0.74583
+
+ cycle    38    k(collision)  1.000472    prompt removal lifetime(abs)  6.0293E-01    source points generated    996
+                                          source_entropy =      0.74697
+
+ cycle    39    k(collision)  0.995410    prompt removal lifetime(abs)  6.1089E-01    source points generated    987
+                                          source_entropy =      0.74572
+
+ cycle    40    k(collision)  0.992058    prompt removal lifetime(abs)  6.0306E-01    source points generated    962
+                                          source_entropy =      0.75142
+1problem summary                                                                                                           
+
+      run terminated when      40 kcode cycles were done.
++                                                                                                    10/15/26 11:52:32 
+
+ =====>    1517.19 M histories/hr    (based on wall-clock time in mcrun)
+
+
+      Godiva probe - bare HEU sphere     probid =  10/15/26 11:52:31 
+
+ neutron creation    tracks      weight        energy            neutron loss        tracks      weight        energy
+                                 (per source particle)                                           (per source particle)
+
+ source               39805    1.0049E+00    2.0295E+00          escape               33829    5.6651E-01    8.8544E-01
+ nucl. interaction        0    0.            0.                  energy cutoff            0    0.            0.        
+ particle decay           0    0.            0.                  time cutoff              0    0.            0.        
+ weight window            0    0.            0.                  weight window            0    0.            0.        
+ cell importance          0    0.            0.                  cell importance          0    0.            0.        
+ weight cutoff            0    3.4483E-02    1.2144E-02          weight cutoff         6133    3.5179E-02    1.2137E-02
+ e or t importance        0    0.            0.                  e or t importance        0    0.            0.        
+ dxtran                   0    0.            0.                  dxtran                   0    0.            0.        
+ forced collisions        0    0.            0.                  forced collisions        0    0.            0.        
+ exp. transform           0    0.            0.                  exp. transform           0    0.            0.        
+ upscattering             0    0.            0.                  downscattering           0    0.            5.3630E-01
+ photonuclear             0    0.            0.                  capture                  0    4.6377E-02    2.7737E-02
+ (n,xn)                 314    5.0987E-03    3.4952E-03          loss to (n,xn)         157    2.5493E-03    1.9420E-02
+ prompt fission           0    0.            0.                  loss to fission          0    3.9387E-01    5.6409E-01
+ delayed fission          0    0.            0.                  nucl. interaction        0    0.            0.        
+ prompt photofis          0    0.            0.                  particle decay           0    0.            0.        
+ tabular boundary         0    0.            0.                  tabular boundary         0    0.            0.        
+ tabular sampling         0    0.            0.                  elastic scatter          0    0.            0.        
+     total            40119    1.0445E+00    2.0451E+00              total            40119    1.0445E+00    2.0451E+00
+
+   number of neutrons banked                     157        average time of (shakes)              cutoffs
+   neutron tracks per source particle     1.0079E+00          escape            6.2786E-01          tco   1.0000E+33
+   neutron collisions per source particle 4.1716E+00          capture           1.0256E+00          eco   0.0000E+00
+   total neutron collisions                   166052          capture or escape 6.5795E-01          wc1  -5.0000E-01
+   net multiplication              1.0025E+00 0.0002          any termination   6.9481E-01          wc2  -2.5000E-01
+
+ computer time so far in this run     0.07 minutes            maximum number ever in bank         1
+ computer time in mcrun               0.01 minutes            bank overflows to backup file       0
+ source particles per minute            2.3883E+06
+ random numbers generated                  2085910            most random numbers used was         422 in history        2043
+
+ range of sampled source weights = 7.2254E-01 to 1.2151E+00
+
+ number of histories processed by each thread
+        4375        4736        5251        5279        5151        4585        5220        5208
+1neutron  activity in each cell                                                                         print table 126
+
+                       tracks     population   collisions   collisions     number        flux        average      average
+              cell    entering                               * weight     weighted     weighted   track weight   track mfp
+                                                          (per history)    energy       energy     (relative)      (cm)
+
+        1        1       39805        39962       166052    2.7121E+00   8.3660E-01   1.4474E+00   6.7356E-01   2.6400E+00
+
+           total         39805        39962       166052    2.7121E+00
+1keff results for: Godiva probe - bare HEU sphere                                                       probid =  10/15/26 11:52:31 
+
+ 
+  warning.  no final keff estimate made because no active cycles run.
+
+ the initial fission neutron source distribution used the   1 source points that were input on the ksrc card.
+ the criticality problem was scheduled to skip  50 cycles and run a total of   40 cycles with nominally     1000 neutrons per cycle.
+ this problem has run  40 inactive cycles with    39805 neutron histories and    0 active cycles with           0 neutron histories.
+
+
+ this calculation has completed the requested number of keff cycles using a total of       39805 fission neutron source histories.
+ all cells with fissionable material were sampled and had fission neutron source points.
+
+
+1individual and average keff estimator results by cycle
+
+  keff     neutron    keff estimators by cycle           average keff estimators and deviations                average k(c/a/t)
+ cycle   histories   k(coll)  k(abs)  k(track)     k(coll)  st dev    k(abs)  st dev   k(track) st dev    k(c/a/t)  st dev    fom
+
+     1        1000 | 1.37878  1.37450  1.35573  | 
+     2        1384 | 1.14103  1.14300  1.17564  | 
+     3         823 | 1.07981  1.07908  1.06941  | 
+     4         901 | 1.05743  1.06139  1.02406  | 
+     5         967 | 1.01344  1.00740  1.01957  | 
+     6         982 | 1.02557  1.03200  1.01170  | 
+     7         989 | 1.01114  1.00474  1.01397  | 
+     8         956 | 0.99004  0.99275  0.98411  | 
+     9         991 | 0.98269  0.97845  1.00472  | 
+    10         991 | 1.02143  1.02223  1.01895  | 
+ -----------------------------------------------------------------------------------------------------------------------------------
+    11        1010 | 0.98356  0.98326  0.97518  | 
+    12         953 | 1.01649  1.01786  1.00757  | 
+    13        1019 | 1.00662  1.01137  1.00412  | 
+    14         989 | 0.99055  0.99106  1.00730  | 
+    15         973 | 1.00438  1.00698  1.00028  | 
+    16        1004 | 0.99372  0.99518  1.01562  | 
+    17         964 | 0.97153  0.96756  0.98565  | 
+    18         980 | 0.96034  0.96144  0.98834  | 
+    19         956 | 1.01069  1.00864  1.01039  | 
+    20        1085 | 0.97835  0.98040  0.96263  | 
+ -----------------------------------------------------------------------------------------------------------------------------------
+    21        1002 | 1.01336  1.01051  1.00369  | 
+    22        1006 | 0.95995  0.96092  0.97270  | 
+    23         966 | 1.01921  1.01599  1.03796  | 
+    24        1029 | 1.05831  1.05953  1.02943  | 
+    25        1048 | 1.02040  1.01790  1.01703  | 
+    26         969 | 0.98252  0.98431  0.99050  | 
+    27         900 | 0.99038  0.99375  1.01057  | 
+    28        1011 | 1.04134  1.04341  1.00544  | 
+    29        1050 | 1.00706  1.01019  1.00622  | 
+    30        1007 | 0.99682  1.00178  1.00202  | 
+ -----------------------------------------------------------------------------------------------------------------------------------
+    31         987 | 0.97682  0.97786  0.97755  | 
+    32         973 | 0.99521  0.99519  0.99975  | 
+    33        1032 | 1.00834  1.00415  0.98609  | 
+    34         996 | 1.04934  1.04434  1.05487  | 
+    35        1030 | 1.02309  1.02546  1.01479  | 
+    36         992 | 0.94749  0.94766  0.98847  | 
+    37         880 | 1.00291  1.00316  1.00441  | 
+    38        1027 | 1.00047  1.00141  1.00746  | 
+    39         996 | 0.99541  0.99750  0.98539  | 
+    40         987 | 0.99206  0.99048  1.00948  | 
+ -----------------------------------------------------------------------------------------------------------------------------------
+
+ ***********************************************************************************************************************
+
+ dump no.    2 on file runtpe.h5     nps =       39805     coll =         166052     ctm =        0.01   nrn =          
+ 2085910
+
+         3 warning messages so far.
+
+
+ run terminated when      40 kcode cycles were done.
+
+ computer time =    0.07 minutes
+
+ mcnp6 version 6.3.0 01/26/23                     10/15/26 11:52:32                     probid =  10/15/26 11:52:31 

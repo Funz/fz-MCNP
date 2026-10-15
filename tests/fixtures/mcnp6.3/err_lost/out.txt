@@ -1,0 +1,44 @@
+          Code Name & Version = mcnp6, 6.3.0, production
+          [LANL copyright line removed]
+  
+     _/      _/        _/_/_/       _/      _/       _/_/_/         _/_/_/ 
+    _/_/  _/_/      _/             _/_/    _/       _/    _/     _/        
+   _/  _/  _/      _/             _/  _/  _/       _/_/_/       _/_/_/     
+  _/      _/      _/             _/    _/_/       _/           _/    _/    
+ _/      _/        _/_/_/       _/      _/       _/             _/_/       
+  
+ mcnp6 ver=6.3.0, ld=01/26/23  10/15/26 11:52:33                   
+Source version = release/6.3-55762725c4
+  comment.  Physics models disabled.
+  kcode 5000 1.0 20 70                                                
+  warning.  Using <10k neuts/cycle can give significant renormalization bias.
+ comment. using random number generator  1, initial seed = 19073486328125      
+ 
+  comment.  total fission nubar data are being used.
+  warning.    1 materials had unnormalized fractions. print table 40.
+  comment.  threading will be used when possible in portions of mcnp6.
+  comment.  threading will be used for n/p/e table physics.
+  comment.  threading will generally not be used for model physics.
+ imcn   is done
+
+  comment.  setting up hash-based fast table search for xsec tables
+
+ ctm =        0.00   nrn =                 0
+ dump    1 on file runtpe.h5   nps =           0   coll =                0
+
+ source distribution written to file srctp        cycle=     0
+ xact   is done
+
+ cp0 =   0.05
+      run terminated because  17 particles got lost.
+
+ =====>      30.08 M histories/hr    (based on wall-clock time in mcrun)
+
+
+  warning.         17 particles got lost
+  warning.  no final keff estimate made because no active cycles run.
+
+ ctm =        0.00   nrn =              1435
+ dump    2 on file runtpe.h5   nps =          21   coll =               41
+ mcrun  is done
+
