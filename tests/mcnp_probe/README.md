@@ -83,6 +83,10 @@ aussi été faite (tous les cas s'arrêtent sur `ixsdir`, sauf erreurs de lectur
 | H20 | **infirmé en partie** | point `KSRC` dans le réflecteur eau accepté, puis arrêt au cycle 2 : `bad trouble in subroutine colidk of mcrun` / `source particle no.         6400` / `the new source has overrun the old source.` → `run terminated because of bad trouble.` Référence (`var_ksrc_fuel`) : 1.205271 ± 0.001424. La raison suit `source particle no.` : extraction adaptée. |
 | H21 | confirmé, avec réserve | `  fatal error.   cross-section tables missing for zaid = 24028.00c` puis `bad trouble in subroutine rhoden of imcn` / `` / `atomic weight of  24028 is zero.` ; l'erreur fatale précède et l'emporte dans le statut. Réserve : `.00c` absent du `xsdir`, donc la table manque aussi pour une autre raison. |
 
+Extraction réécrite ensuite en Python (`python://`, sans bash ni awk) : valeurs identiques à la
+version awk sur les 64 répertoires de sorties (fixtures, sonde avec et sans données, bout en bout),
+avec fz 1.1 et 1.2, et identiques sur les fixtures converties en fins de ligne CRLF.
+
 Bout en bout (`run_fz_e2e.py`, fz 1.1 et 1.2, `xsdir71`, `tasks 8`) : `examples/godiva.inp`, r = 8,5 / 8,7407 / 9,0 →
 `done`, `NORMAL END`, keff = 0.976714 ± 0.000545 / 0.997944 ± 0.000575 / 1.022940 ± 0.000567.
 `fz list --check` (fz 1.2) : modèle `MCNP` et calculateur `localhost_MCNP` `passed` ; `fzr --model MCNP`

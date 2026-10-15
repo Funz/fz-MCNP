@@ -22,8 +22,6 @@ ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = ROOT / "tests" / "fixtures"
 MODEL = json.loads((ROOT / ".fz" / "models" / "MCNP.json").read_text())
 
-pytestmark = pytest.mark.skipif(shutil.which("bash") is None, reason="bash required")
-
 
 def outputs(path):
     return fz.fzo(str(path), MODEL).iloc[0].to_dict()
@@ -151,3 +149,14 @@ def test_tally_mctal_fixed_source_total_bin():
     assert missing(out["mean_keff"])
     tfc_last = [l.split() for l in (d / "mctal").read_text().splitlines() if l.startswith(" " * 9)]
     assert float(tfc_last[12][1]) == out["tally_2"]
+
+
+@pytest.mark.parametrize("case", ["ok_pert", "ok_fixed_source", "var_ksrc_nonfissile", "err_kct_le_ikz"])
+def test_crlf_line_ends(tmp_path, case):
+    """Same values from files with Windows line ends (CRLF)."""
+    src = FIXTURES / "mcnp6.3" / case
+    for f in src.iterdir():
+        (tmp_path / f.name).write_bytes(f.read_bytes().replace(b"\n", b"\r\n"))
+    def values(d):
+        return {k: None if missing(v) else v for k, v in outputs(d).items() if k != "path"}
+    assert values(tmp_path) == values(src)

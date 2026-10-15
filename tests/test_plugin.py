@@ -47,9 +47,9 @@ def test_model_files():
         assert len(model["output"]) > 0, f"No output variables in {model_file}"
         for name in expected_outputs:
             assert name in model["output"], f"Missing output variable '{name}'"
-        # gawk-only match(s, re, arr) fails with mawk (Debian/Ubuntu) and BSD awk (macOS)
+        # native Python extraction: no bash/awk needed to parse outputs (Windows)
         for name, cmd in model["output"].items():
-            assert "match(" not in cmd, f"Output '{name}' uses gawk-only match()"
+            assert cmd.startswith("python://"), f"Output '{name}' is not a python:// expression"
         
         print("✓")
     

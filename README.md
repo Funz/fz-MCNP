@@ -9,6 +9,8 @@ parametric criticality (`KCODE`) and fixed-source studies.
 - Extraction of the run status (with the first MCNP error message), keff and its standard
   deviation, `PERT` keff changes, and tally results from `MCTAL`
 - Success decided from the MCNP output (`outp`), not from the executable exit code
+- Output extraction in Python (fz `python://` expressions): no bash, awk or grep needed to
+  parse results, LF and CRLF line ends accepted
 
 ### Input
 
@@ -49,6 +51,10 @@ ENDF/B-VII.1 `xsdir` (first table `92235.02c`, 293.6 K) and 1.00008 with a site 
 library may not have it): check `xsdir` and give explicit suffixes for production studies.
 
 ### Output
+
+Extraction is written as fz `python://` expressions (regular expressions of Python's `re`),
+so `fz.fzo` works without bash, including on Windows; the calculator script `MCNP.sh` still
+needs bash to *run* MCNP (Git Bash, MSYS2 or WSL on Windows).
 
 Files read: `outp` (MCNP is run with `o=outp`), `mctal` (written only with `PRDMP j j 1`),
 and fz's `out.txt` (MCNP terminal output) when `outp` is missing.
